@@ -2,7 +2,7 @@ name: Post news to Telegram
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -15,7 +15,7 @@ concurrency:
 jobs:
   post:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 58
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,18 +29,20 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Post one news item
+      - name: Run posting loop (55 min window)
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
           OWNER_ID: ${{ secrets.OWNER_ID }}
           PYTHONUTF8: "1"
-        run: python run_once.py
+        run: python loop_window.py
 
       - name: Commit updated dedup database
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase --autostash || true
           git add posted.db
           if git diff --cached --quiet; then
             echo "No changes to posted.db"
