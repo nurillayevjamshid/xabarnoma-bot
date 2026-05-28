@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from typing import Optional
 from urllib.parse import urljoin
 from config import USER_AGENT
+from translit import to_latin, is_cyrillic
 
 
 @dataclass
@@ -158,15 +159,72 @@ async def _aniq_uz(session) -> list[Article]:
     return [r for r in results if isinstance(r, Article)]
 
 
+_TG_CHANNELS = ["Geointriga_uz"]
+
+
+async def _telegram_channel(session, username: str) -> list[Article]:
+    url = f"https://t.me/s/{username}"
+    html = await _fetch(session, url)
+    if not html:
+        return []
+    soup = BeautifulSoup(html, "lxml")
+    posts = soup.select("div.tgme_widget_message_wrap")
+    out: list[Article] = []
+    handle_re = re.compile(r"@\w+", re.I)
+    for post in posts:
+        msg = post.select_one("div.tgme_widget_message")
+        if not msg:
+            continue
+        post_id = msg.get("data-post")
+        if not post_id:
+            continue
+        text_el = post.select_one("div.tgme_widget_message_text")
+        if not text_el:
+            continue
+        for br in text_el.find_all("br"):
+            br.replace_with("\n")
+        raw = text_el.get_text("\n", strip=True)
+        lines = [ln.strip() for ln in raw.splitlines()]
+        lines = [ln for ln in lines if ln and not handle_re.fullmatch(ln) and "t.me/" not in ln.lower()]
+        if not lines:
+            continue
+
+        def _has_letters(s: str) -> bool:
+            return any(c.isalpha() for c in s)
+
+        title_idx = next((i for i, ln in enumerate(lines) if _has_letters(ln) and len(ln) > 5), 0)
+        title = lines[title_idx]
+        body_parts = lines[title_idx + 1:]
+        body = "\n\n".join(body_parts) if body_parts else title
+
+        if is_cyrillic(title):
+            title = to_latin(title)
+        if is_cyrillic(body):
+            body = to_latin(body)
+
+        img = None
+        photo_wrap = post.select_one("a.tgme_widget_message_photo_wrap")
+        if photo_wrap and photo_wrap.get("style"):
+            m = re.search(r"url\(['\"]?([^'\")]+)['\"]?\)", photo_wrap["style"])
+            if m:
+                img = m.group(1)
+
+        post_url = f"https://t.me/{post_id}"
+        out.append(Article(url=post_url, title=title, body=body, image_url=img))
+    return out
+
+
 async def fetch_all() -> list[Article]:
     connector = aiohttp.TCPConnector(limit=10, ssl=False)
     async with aiohttp.ClientSession(connector=connector) as session:
-        results = await asyncio.gather(
+        tasks = [
             _kun_uz(session),
             _qalampir_uz(session),
             _aniq_uz(session),
-            return_exceptions=True,
-        )
+        ]
+        for ch in _TG_CHANNELS:
+            tasks.append(_telegram_channel(session, ch))
+        results = await asyncio.gather(*tasks, return_exceptions=True)
     articles: list[Article] = []
     for r in results:
         if isinstance(r, list):
