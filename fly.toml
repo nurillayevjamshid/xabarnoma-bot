@@ -1,0 +1,22 @@
+app = "xabarnoma-bot"
+primary_region = "fra"
+
+[build]
+
+[env]
+  DB_PATH = "/data/posted.db"
+
+[[mounts]]
+  source = "xabarnoma_data"
+  destination = "/data"
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 256
+
+[processes]
+  app = "python main.py"
+
+[deploy]
+  strategy = "immediate"
