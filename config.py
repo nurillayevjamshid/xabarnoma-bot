@@ -1,8 +1,13 @@
 import os
 
-BOT_TOKEN = os.getenv("BOT_TOKEN", "8411386595:AAG_WffgEJ0ihe7gJZyifNexBZ1i0tHfPWg")
-CHANNEL_ID = os.getenv("CHANNEL_ID", "@xabarnomaofficial")
-OWNER_ID = int(os.getenv("OWNER_ID", "679291909"))
+
+def _clean(v: str) -> str:
+    return v.strip().lstrip("﻿") if v else v
+
+
+BOT_TOKEN = _clean(os.getenv("BOT_TOKEN", "8411386595:AAG_WffgEJ0ihe7gJZyifNexBZ1i0tHfPWg"))
+CHANNEL_ID = _clean(os.getenv("CHANNEL_ID", "@xabarnomaofficial"))
+OWNER_ID = int(_clean(os.getenv("OWNER_ID", "679291909")))
 
 FOOTER = "\n\nBizni kuzatib boring https://www.instagram.com/xabarnomauz/"
 
