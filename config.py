@@ -11,8 +11,8 @@ OWNER_ID = int(_clean(os.getenv("OWNER_ID", "679291909")))
 
 FOOTER = "@xabarnomaofficial"
 
-MIN_INTERVAL_SEC = 5 * 60
-MAX_INTERVAL_SEC = 10 * 60
+MIN_INTERVAL_SEC = 15 * 60
+MAX_INTERVAL_SEC = 25 * 60
 
 DB_PATH = os.getenv("DB_PATH", "posted.db")
 
