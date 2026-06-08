@@ -9,7 +9,7 @@ BOT_TOKEN = _clean(os.getenv("BOT_TOKEN", "8411386595:AAG_WffgEJ0ihe7gJZyifNexBZ
 CHANNEL_ID = _clean(os.getenv("CHANNEL_ID", "@xabarnomaofficial"))
 OWNER_ID = int(_clean(os.getenv("OWNER_ID", "679291909")))
 
-FOOTER = "\n\nBizni kuzatib boring https://www.instagram.com/xabarnomauz/"
+FOOTER = "@xabarnomaofficial"
 
 MIN_INTERVAL_SEC = 5 * 60
 MAX_INTERVAL_SEC = 10 * 60
