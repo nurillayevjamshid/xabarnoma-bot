@@ -19,7 +19,7 @@ CLEANUP_INTERVAL = 24 * 60 * 60  # 24 soat
 
 async def pick_and_publish(bot: Bot) -> bool:
     log.info("Yangiliklar yig'ilmoqda...")
-    articles = await fetch_all()
+    articles = await fetch_all(max_per_channel=1)
     log.info(f"Topildi: {len(articles)} ta maqola")
 
     random.shuffle(articles)

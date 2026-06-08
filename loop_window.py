@@ -46,7 +46,7 @@ async def main():
             log.info(f"Tozalandi: {deleted} ta eski yozuv o'chirildi")
 
         log.info("Yangiliklar yig'ilmoqda...")
-        articles = await fetch_all()
+        articles = await fetch_all(max_per_channel=1)
         log.info(f"Topildi: {len(articles)} ta maqola")
 
         for art in articles:

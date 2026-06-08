@@ -97,7 +97,8 @@ async def _telegram_channel(session, username: str) -> list[Article]:
     return out
 
 
-async def fetch_all() -> list[Article]:
+async def fetch_all(max_per_channel: int = 0) -> list[Article]:
+    """max_per_channel > 0 bo'lsa, har kanaldan shuncha post oladi."""
     connector = aiohttp.TCPConnector(limit=10, ssl=False)
     async with aiohttp.ClientSession(connector=connector) as session:
         tasks = [_telegram_channel(session, ch) for ch in TELEGRAM_CHANNELS]
@@ -105,5 +106,8 @@ async def fetch_all() -> list[Article]:
     articles: list[Article] = []
     for r in results:
         if isinstance(r, list):
-            articles.extend(r)
+            if max_per_channel > 0:
+                articles.extend(r[:max_per_channel])
+            else:
+                articles.extend(r)
     return articles
