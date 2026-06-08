@@ -1,6 +1,7 @@
 import asyncio
 import logging
 from aiogram import Bot
+from aiogram.exceptions import TelegramRetryAfter
 from config import BOT_TOKEN
 from dedup import init_db, is_posted, mark_posted, cleanup_old
 from scraper import fetch_all
@@ -11,6 +12,26 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
 )
 log = logging.getLogger("xabarnoma")
+
+POST_DELAY = 4  # soniya, postlar orasida pauza
+
+
+async def publish_with_retry(bot: Bot, art, retries: int = 3) -> bool:
+    for attempt in range(retries):
+        try:
+            ok = await publish(bot, art)
+            if ok:
+                return True
+            return False
+        except TelegramRetryAfter as e:
+            wait = int(e.retry_after) + 1
+            log.warning(f"Flood limit: {wait}s kutish kerak...")
+            await asyncio.sleep(wait)
+        except Exception as e:
+            log.warning(f"Xato (urinish {attempt + 1}): {e}")
+            if attempt < retries - 1:
+                await asyncio.sleep(5)
+    return False
 
 
 async def main():
@@ -31,11 +52,12 @@ async def main():
         for art in articles:
             if is_posted(art.url, art.title):
                 continue
-            ok = await publish(bot, art)
+            ok = await publish_with_retry(bot, art)
             if ok:
                 mark_posted(art.url, art.title)
                 log.info(f"Yuborildi: {art.title[:60]}")
                 posted_count += 1
+                await asyncio.sleep(POST_DELAY)
 
         log.info(f"Tugadi. Jami yuborildi: {posted_count}")
     finally:
