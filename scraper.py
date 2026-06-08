@@ -48,19 +48,22 @@ async def _telegram_channel(session, username: str) -> list[Article]:
         text_el = post.select_one("div.tgme_widget_message_text")
         if not text_el:
             continue
-        # Link preview va havolalarni olib tashlash
+        # Link preview widgetni olib tashlash
+        for preview in post.select("div.tgme_widget_message_link_preview"):
+            preview.decompose()
+        # <a> teglar ichidagi havolalarni olib tashlash
         for link_el in text_el.select("a[href]"):
-            href = link_el.get("href", "")
-            if href.startswith("http"):
-                link_el.decompose()
+            link_el.decompose()
         for br in text_el.find_all("br"):
             br.replace_with("\n")
         raw = text_el.get_text("\n", strip=True)
-        # Qolgan URL va havolalarni tozalash
+        # Barcha URL va domenlarni tozalash
         url_re = re.compile(r'https?://\S+', re.I)
+        bare_url_re = re.compile(r'\b\w+\.\w+\.[a-z]{2,}\S*', re.I)
         lines = [ln.strip() for ln in raw.splitlines()]
         lines = [url_re.sub('', ln).strip() for ln in lines]
-        lines = [ln for ln in lines if ln and not handle_re.fullmatch(ln) and "t.me/" not in ln.lower() and "instagram.com" not in ln.lower()]
+        lines = [bare_url_re.sub('', ln).strip() for ln in lines]
+        lines = [ln for ln in lines if ln and not handle_re.fullmatch(ln) and "t.me/" not in ln.lower() and ".uz" not in ln.lower() and ".com" not in ln.lower()]
         lines = [ln for ln in lines if ln]
         if not lines:
             continue
