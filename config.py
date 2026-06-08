@@ -16,7 +16,7 @@ MAX_INTERVAL_SEC = 10 * 60
 
 DB_PATH = os.getenv("DB_PATH", "posted.db")
 
-SOURCES = ["kun.uz", "qalampir.uz", "aniq.uz"]
+TELEGRAM_CHANNELS = ["aniquz", "Geointriga_uz"]
 
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "

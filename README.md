@@ -1,6 +1,6 @@
 # Xabarnoma Bot
 
-Avtomatik yangiliklarni `kun.uz`, `qalampir.uz`, `aniq.uz` saytlaridan olib, `@xabarnomaofficial` kanalga 5-10 daqiqa oralig'ida yuboradigan bot.
+Avtomatik yangiliklarni `@aniquz` va `@Geointriga_uz` Telegram kanallaridan olib, `@xabarnomaofficial` kanalga 5-10 daqiqa oralig'ida yuboradigan bot.
 
 ## O'rnatish
 
@@ -18,8 +18,8 @@ python main.py
 
 ## Fayllar
 
-- `config.py` — bot token, kanal, sozlamalar
-- `scraper.py` — yangiliklarni 3 ta saytdan olish
+- `config.py` — bot token, kanal, Telegram kanallar ro'yxati, sozlamalar
+- `scraper.py` — Telegram kanallardan yangiliklar olish
 - `dedup.py` — takroriy postlarni oldini olish (SQLite)
 - `publisher.py` — Telegram kanalga yuborish
 - `main.py` — asosiy tsikl
