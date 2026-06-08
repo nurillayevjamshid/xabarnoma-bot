@@ -56,6 +56,10 @@ async def _telegram_channel(session, username: str) -> list[Article]:
         if not lines:
             continue
 
+        # Reklama postlarini filtrlash
+        if re.search(r"#реклама|#reklama", raw, re.I):
+            continue
+
         def _has_letters(s: str) -> bool:
             return any(c.isalpha() for c in s)
 
