@@ -11,16 +11,21 @@ CAPTION_LIMIT = 1024
 SENTENCE_SPLIT = re.compile(r"(?<=[.!?…])\s+(?=[A-Z«„\"„'O‘O'A-Za-z])")
 
 
-def _first_two_sentences(text: str) -> str:
+def _first_paragraph(text: str) -> str:
+    """Matndan birinchi to'liq paragrafni oladi."""
     text = " ".join(text.split())
-    parts = SENTENCE_SPLIT.split(text)
-    parts = [p.strip() for p in parts if p.strip()]
-    return " ".join(parts[:2])
+    parts = text.split("\n\n")
+    for p in parts:
+        p = p.strip()
+        if len(p) > 30:
+            return p
+    # Agar paragraf topilmasa, birinchi 500 belgini qaytar
+    return text[:500].rsplit(" ", 1)[0] + "..." if len(text) > 500 else text
 
 
 def _build_caption(article: Article) -> str:
     title = escape(article.title.strip())
-    summary = _first_two_sentences(article.body)
+    summary = _first_paragraph(article.body)
     summary = escape(summary)
     footer = escape(FOOTER.strip())
 

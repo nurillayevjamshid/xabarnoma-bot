@@ -47,3 +47,12 @@ def mark_posted(url: str, title: str):
             "INSERT OR IGNORE INTO posted (url, title_hash) VALUES (?, ?)",
             (url, _norm_title(title)),
         )
+
+
+def cleanup_old(days: int = 30) -> int:
+    with _conn() as c:
+        cur = c.execute(
+            "DELETE FROM posted WHERE created_at < datetime('now', ?)",
+            (f'-{days} days',),
+        )
+        return cur.rowcount

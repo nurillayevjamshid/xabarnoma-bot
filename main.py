@@ -1,9 +1,10 @@
 import asyncio
 import random
+import time
 import logging
 from aiogram import Bot
 from config import BOT_TOKEN, MIN_INTERVAL_SEC, MAX_INTERVAL_SEC, OWNER_ID
-from dedup import init_db, is_posted, mark_posted
+from dedup import init_db, is_posted, mark_posted, cleanup_old
 from scraper import fetch_all
 from publisher import publish
 
@@ -12,6 +13,8 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
 )
 log = logging.getLogger("xabarnoma")
+
+CLEANUP_INTERVAL = 24 * 60 * 60  # 24 soat
 
 
 async def pick_and_publish(bot: Bot) -> bool:
@@ -35,6 +38,7 @@ async def pick_and_publish(bot: Bot) -> bool:
 async def main():
     init_db()
     bot = Bot(token=BOT_TOKEN)
+    last_cleanup = time.monotonic()
 
     try:
         await bot.send_message(OWNER_ID, "Bot ishga tushdi.")
@@ -43,6 +47,13 @@ async def main():
 
     try:
         while True:
+            # Kuniga bir marta eski yozuvlarni tozalash
+            if time.monotonic() - last_cleanup >= CLEANUP_INTERVAL:
+                deleted = cleanup_old(30)
+                if deleted:
+                    log.info(f"Tozalandi: {deleted} ta eski yozuv o'chirildi")
+                last_cleanup = time.monotonic()
+
             try:
                 await pick_and_publish(bot)
             except Exception as e:
