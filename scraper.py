@@ -51,8 +51,12 @@ async def _telegram_channel(session, username: str) -> list[Article]:
         for br in text_el.find_all("br"):
             br.replace_with("\n")
         raw = text_el.get_text("\n", strip=True)
+        # Barcha URL va havolalarni tozalash
+        url_re = re.compile(r'https?://\S+', re.I)
         lines = [ln.strip() for ln in raw.splitlines()]
-        lines = [ln for ln in lines if ln and not handle_re.fullmatch(ln) and "t.me/" not in ln.lower()]
+        lines = [url_re.sub('', ln).strip() for ln in lines]
+        lines = [ln for ln in lines if ln and not handle_re.fullmatch(ln) and "t.me/" not in ln.lower() and "instagram.com" not in ln.lower()]
+        lines = [ln for ln in lines if ln]
         if not lines:
             continue
 
