@@ -48,10 +48,15 @@ async def _telegram_channel(session, username: str) -> list[Article]:
         text_el = post.select_one("div.tgme_widget_message_text")
         if not text_el:
             continue
+        # Link preview va havolalarni olib tashlash
+        for link_el in text_el.select("a[href]"):
+            href = link_el.get("href", "")
+            if href.startswith("http"):
+                link_el.decompose()
         for br in text_el.find_all("br"):
             br.replace_with("\n")
         raw = text_el.get_text("\n", strip=True)
-        # Barcha URL va havolalarni tozalash
+        # Qolgan URL va havolalarni tozalash
         url_re = re.compile(r'https?://\S+', re.I)
         lines = [ln.strip() for ln in raw.splitlines()]
         lines = [url_re.sub('', ln).strip() for ln in lines]
