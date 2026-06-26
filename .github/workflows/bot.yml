@@ -6,6 +6,11 @@ on:
     - cron: "*/15 * * * *"
   # Telefondan/brauzerdan qo'lda ishga tushirish uchun (Actions -> Run workflow).
   workflow_dispatch:
+    inputs:
+      seed:
+        description: "Faqat eng oxirgi postdan boshlash (eski postlarni yubormaslik)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -40,6 +45,7 @@ jobs:
         env:
           RUN_SECONDS: "20400"   # ~5 soat 40 daqiqa, keyin tozalanib chiqadi
           COMMIT_DB: "1"
+          SEED: ${{ inputs.seed && '1' || '0' }}
           PYTHONUTF8: "1"
         run: python run_window.py
 
