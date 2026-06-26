@@ -1,0 +1,56 @@
+name: Run bot
+
+on:
+  # Heartbeat: joriy ish tugashi bilan keyingisi navbatdan ishga tushishi uchun.
+  schedule:
+    - cron: "*/15 * * * *"
+  # Telefondan/brauzerdan qo'lda ishga tushirish uchun (Actions -> Run workflow).
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: run-bot
+  cancel-in-progress: false   # ishlayotgan botni to'xtatmaymiz; keyingisi navbatda kutadi
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350       # ~5 soat 50 daqiqa (GitHub'ning 6 soatlik limitidan past)
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Run bot loop
+        env:
+          RUN_SECONDS: "20400"   # ~5 soat 40 daqiqa, keyin tozalanib chiqadi
+          COMMIT_DB: "1"
+          PYTHONUTF8: "1"
+        run: python run_window.py
+
+      - name: Final commit of posted.db
+        if: always()
+        run: |
+          git add posted.db
+          if git diff --cached --quiet; then
+            echo "No changes to posted.db"
+          else
+            git commit -m "chore: update posted.db [skip ci]"
+            git pull --rebase --autostash || true
+            git push || true
+          fi

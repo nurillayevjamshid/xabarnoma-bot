@@ -1,4 +1,5 @@
 import re
+import logging
 from aiogram import Bot
 from aiogram.types import URLInputFile
 from aiogram.enums import ParseMode
@@ -6,6 +7,8 @@ from html import escape
 from config import CHANNEL_ID, FOOTER
 from scraper import Article
 
+
+log = logging.getLogger("xabarnoma")
 
 CAPTION_LIMIT = 1024
 SENTENCE_SPLIT = re.compile(r"(?<=[.!?…])\s+(?=[A-Z«„\"„'O‘O'A-Za-z])")
@@ -39,10 +42,21 @@ def _build_caption(article: Article) -> str:
     return f"{head}{summary}\n\n{footer}"
 
 
+async def _send_text(bot: Bot, caption: str) -> None:
+    await bot.send_message(
+        chat_id=CHANNEL_ID,
+        text=caption,
+        parse_mode=ParseMode.HTML,
+        disable_web_page_preview=True,
+    )
+
+
 async def publish(bot: Bot, article: Article) -> bool:
     caption = _build_caption(article)
-    try:
-        if article.image_url:
+
+    # Rasm bo'lsa, avval rasm bilan yuborishga urinamiz.
+    if article.image_url:
+        try:
             photo = URLInputFile(article.image_url)
             await bot.send_photo(
                 chat_id=CHANNEL_ID,
@@ -50,14 +64,15 @@ async def publish(bot: Bot, article: Article) -> bool:
                 caption=caption,
                 parse_mode=ParseMode.HTML,
             )
-        else:
-            await bot.send_message(
-                chat_id=CHANNEL_ID,
-                text=caption,
-                parse_mode=ParseMode.HTML,
-                disable_web_page_preview=True,
-            )
+            return True
+        except Exception as e:
+            # Rasmni Telegram yuklay olmasa, post yo'qolib ketmasligi uchun
+            # matn ko'rinishida yuboramiz.
+            log.warning(f"Rasm bilan yuborilmadi, matn sifatida urinilmoqda: {e}")
+
+    try:
+        await _send_text(bot, caption)
         return True
     except Exception as e:
-        print(f"[publish] xato: {e}")
+        log.error(f"Yuborib bo'lmadi: {e}")
         return False
