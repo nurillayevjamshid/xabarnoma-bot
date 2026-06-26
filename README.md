@@ -1,6 +1,8 @@
 # Xabarnoma Bot
 
-Avtomatik yangiliklarni `@aniquz` va `@Geointriga_uz` Telegram kanallaridan olib, `@xabarnomaofficial` kanalga 5-10 daqiqa oralig'ida yuboradigan bot.
+Avtomatik yangiliklarni `@aniquz` va `@Geointriga_uz` Telegram kanallaridan olib, `@xabarnomaofficial` kanalga yuboradigan bot.
+
+Bot **doimiy ishlaydigan jarayon** (`python main.py`) sifatida ishlaydi: har 2-4 daqiqada kanallarni tekshiradi va eng eski yuborilmagan postni topib, **bir martada faqat bitta** postni xronologik (kelgan) tartibda yuboradi. Shu sababli postlar birvarakay emas, bitta-bittadan, teng oraliqda tarqatiladi.
 
 ## O'rnatish
 

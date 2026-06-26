@@ -14,6 +14,7 @@ class Article:
     title: str
     body: str
     image_url: Optional[str]
+    published: str = ""  # ISO format sana, xronologik saralash uchun
 
 
 HEADERS = {"User-Agent": USER_AGENT}
@@ -92,8 +93,15 @@ async def _telegram_channel(session, username: str) -> list[Article]:
             if m:
                 img = m.group(1)
 
+        published = ""
+        time_el = post.select_one("time[datetime]")
+        if time_el and time_el.get("datetime"):
+            published = time_el["datetime"]
+
         post_url = f"https://t.me/{post_id}"
-        out.append(Article(url=post_url, title=title, body=body, image_url=img))
+        out.append(
+            Article(url=post_url, title=title, body=body, image_url=img, published=published)
+        )
     return out
 
 

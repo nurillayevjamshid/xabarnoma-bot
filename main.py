@@ -18,11 +18,15 @@ CLEANUP_INTERVAL = 24 * 60 * 60  # 24 soat
 
 
 async def pick_and_publish(bot: Bot) -> bool:
+    """Har chaqiruvda eng eski yuborilmagan postni topadi va FAQAT bittasini
+    yuboradi. Shu tariqa postlar birvarakay emas, bitta-bittadan, kelgan
+    tartibida (FIFO) tarqatiladi."""
     log.info("Yangiliklar yig'ilmoqda...")
-    articles = await fetch_all(max_per_channel=1)
+    articles = await fetch_all()
     log.info(f"Topildi: {len(articles)} ta maqola")
 
-    random.shuffle(articles)
+    # Eng eski postdan boshlab tekshiramiz (chiqarilgan vaqt bo'yicha xronologik).
+    articles.sort(key=lambda a: a.published)
     for art in articles:
         if is_posted(art.url, art.title):
             continue
@@ -31,7 +35,7 @@ async def pick_and_publish(bot: Bot) -> bool:
             mark_posted(art.url, art.title)
             log.info(f"Yuborildi: {art.title[:60]}")
             return True
-    log.warning("Yangi yangilik topilmadi yoki yuborilmadi")
+    log.info("Yangi yuborilmagan post yo'q")
     return False
 
 
