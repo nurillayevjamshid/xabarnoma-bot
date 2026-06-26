@@ -1,12 +1,15 @@
 import asyncio
 import os
+import re
 import random
 import time
 import logging
 import subprocess
+from collections import defaultdict
 from aiogram import Bot
 from config import BOT_TOKEN, MIN_INTERVAL_SEC, MAX_INTERVAL_SEC, DB_PATH
-from dedup import init_db, cleanup_old
+from dedup import init_db, cleanup_old, is_posted, mark_posted
+from scraper import fetch_all
 from main import pick_and_publish
 
 logging.basicConfig(
@@ -21,6 +24,41 @@ RUN_SECONDS = int(os.getenv("RUN_SECONDS", 20400))      # ~5 soat 40 daqiqa
 COMMIT_INTERVAL = int(os.getenv("COMMIT_INTERVAL", 1800))  # 30 daqiqa
 # posted.db ni git'ga commit/push qilish kerakmi (Actions ichida = 1).
 COMMIT_DB = os.getenv("COMMIT_DB", "0") == "1"
+# SEED=1 bo'lsa: hozir kanallarda turgan postlar "yuborilgan" deb belgilanadi,
+# har kanaldan faqat ENG OXIRGISI qoldiriladi. Shunda eski postlar yuborilmaydi,
+# faqat eng so'nggi post va bundan keyingi yangilari yuboriladi. Bir martalik.
+SEED = os.getenv("SEED", "0") == "1"
+
+
+def _post_id(url: str) -> int:
+    m = re.search(r"/(\d+)$", url.rstrip("/"))
+    return int(m.group(1)) if m else 0
+
+
+def _channel(url: str) -> str:
+    parts = url.rstrip("/").split("/")
+    return parts[-2] if len(parts) >= 2 else "?"
+
+
+async def seed_baseline():
+    """Boshlang'ich nuqtani belgilaydi: hozir ko'rinib turgan barcha postlarni
+    'yuborilgan' deb belgilaydi, har kanaldan eng oxirgisidan tashqari."""
+    log.info("SEED: boshlang'ich nuqta belgilanmoqda...")
+    articles = await fetch_all()
+    by_ch = defaultdict(list)
+    for a in articles:
+        by_ch[_channel(a.url)].append(a)
+
+    marked = 0
+    for ch, arts in by_ch.items():
+        arts.sort(key=lambda a: _post_id(a.url))  # eng oxirgisi (katta id) oxirda
+        for a in arts[:-1]:  # eng oxirgisini qoldiramiz (u yuboriladi)
+            if not is_posted(a.url, a.title):
+                mark_posted(a.url, a.title)
+                marked += 1
+        if arts:
+            log.info(f"SEED: {ch} — eng oxirgisi qoldirildi: {arts[-1].url}")
+    log.info(f"SEED: {marked} ta eski post belgilandi (yuborilmaydi)")
 
 
 def _commit_db():
@@ -43,6 +81,12 @@ def _commit_db():
 async def main():
     init_db()
     cleanup_old(30)
+
+    if SEED:
+        await seed_baseline()
+        if COMMIT_DB:
+            _commit_db()
+
     bot = Bot(token=BOT_TOKEN)
     deadline = time.monotonic() + RUN_SECONDS
     last_commit = time.monotonic()
