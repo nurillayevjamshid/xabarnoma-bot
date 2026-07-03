@@ -1,19 +1,48 @@
 import asyncio
 import logging
+import os
+import tempfile
+from functools import partial
+from pathlib import Path
 import aiohttp
-from config import IG_ACCESS_TOKEN, IG_USER_ID, IG_GRAPH_VERSION, IG_FOOTER
+from config import IG_USERNAME, IG_PASSWORD, IG_SESSION_FILE, IG_FOOTER
 from scraper import Article
 from publisher import _first_paragraph
 
 log = logging.getLogger("xabarnoma")
 
-# Instagram caption limiti 2200 belgi.
 CAPTION_LIMIT = 2200
-GRAPH_BASE = f"https://graph.facebook.com/{IG_GRAPH_VERSION}"
+_client = None
+
+
+def _get_client():
+    """instagrapi Client — session fayli bo'lsa qayta login qilmaydi."""
+    global _client
+    if _client is not None:
+        return _client
+
+    from instagrapi import Client
+    cl = Client()
+    cl.delay_range = [2, 5]  # so'rovlar orasida tasodifiy pauza (soniya)
+
+    if Path(IG_SESSION_FILE).exists():
+        try:
+            cl.load_settings(IG_SESSION_FILE)
+            cl.login(IG_USERNAME, IG_PASSWORD)
+            log.info("Instagram: session faylidan kirilib olindi")
+            _client = cl
+            return _client
+        except Exception as e:
+            log.warning(f"Instagram session eskirgan, qayta login: {e}")
+
+    cl.login(IG_USERNAME, IG_PASSWORD)
+    cl.dump_settings(IG_SESSION_FILE)
+    log.info("Instagram: yangi login muvaffaqiyatli")
+    _client = cl
+    return _client
 
 
 def _build_caption(article: Article) -> str:
-    """Instagram caption — oddiy matn (HTML emas)."""
     title = article.title.strip()
     summary = _first_paragraph(article.body)
     footer = IG_FOOTER.strip()
@@ -28,69 +57,57 @@ def _build_caption(article: Article) -> str:
     return f"{head}{summary}{tail}"
 
 
-async def _post(session: aiohttp.ClientSession, url: str, data: dict) -> dict:
-    async with session.post(url, data=data, timeout=60) as resp:
-        try:
-            payload = await resp.json()
-        except Exception:
-            payload = {"_raw": await resp.text()}
-        if resp.status != 200:
-            log.error(f"Instagram API xatosi ({resp.status}): {payload}")
-        return payload
+async def _download_image(image_url: str) -> str | None:
+    """Rasmni vaqtinchalik faylga yuklab oladi va uning yo'lini qaytaradi."""
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(image_url, timeout=30) as resp:
+                if resp.status != 200:
+                    return None
+                data = await resp.read()
+        suffix = ".jpg"
+        if "png" in image_url.lower():
+            suffix = ".png"
+        tmp = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
+        tmp.write(data)
+        tmp.close()
+        return tmp.name
+    except Exception as e:
+        log.warning(f"Rasm yuklab olinmadi: {e}")
+        return None
 
 
-async def _wait_ready(session: aiohttp.ClientSession, creation_id: str) -> bool:
-    """Media konteyner tayyor bo'lishini kutadi (rasm uchun odatda darhol)."""
-    status_url = f"{GRAPH_BASE}/{creation_id}"
-    params = {"fields": "status_code", "access_token": IG_ACCESS_TOKEN}
-    for _ in range(10):
-        async with session.get(status_url, params=params, timeout=60) as resp:
-            data = await resp.json()
-        code = data.get("status_code")
-        if code == "FINISHED":
-            return True
-        if code == "ERROR":
-            log.error(f"Instagram konteyner xatosi: {data}")
-            return False
-        await asyncio.sleep(3)
-    log.warning("Instagram konteyner vaqtida tayyor bo'lmadi")
-    return False
-
-
-async def publish(session: aiohttp.ClientSession, article: Article) -> bool:
-    """Maqolani Instagramga joylaydi (2 bosqich: konteyner yaratish + e'lon).
-
-    Instagram faqat rasmli postni qabul qiladi; rasmsiz maqola o'tkazib
-    yuboriladi."""
+async def publish(article: Article) -> bool:
+    """Maqolani Instagramga joylaydi. Rasmsiz maqolalar o'tkazib yuboriladi."""
     if not article.image_url:
         return False
-    if not (IG_ACCESS_TOKEN and IG_USER_ID):
-        log.warning("Instagram sozlanmagan (token yoki user ID yo'q)")
+    if not (IG_USERNAME and IG_PASSWORD):
+        log.warning("Instagram sozlanmagan (username yoki password yo'q)")
+        return False
+
+    img_path = await _download_image(article.image_url)
+    if not img_path:
         return False
 
     caption = _build_caption(article)
 
-    # 1-bosqich: media konteyner yaratish
-    create = await _post(
-        session,
-        f"{GRAPH_BASE}/{IG_USER_ID}/media",
-        {
-            "image_url": article.image_url,
-            "caption": caption,
-            "access_token": IG_ACCESS_TOKEN,
-        },
-    )
-    creation_id = create.get("id")
-    if not creation_id:
-        return False
+    loop = asyncio.get_event_loop()
+    try:
+        def _upload():
+            cl = _get_client()
+            cl.photo_upload(img_path, caption)
 
-    if not await _wait_ready(session, creation_id):
+        await loop.run_in_executor(None, _upload)
+        log.info(f"Instagram: post yuborildi — {article.title[:60]}")
+        return True
+    except Exception as e:
+        log.error(f"Instagram post xatosi: {e}")
+        # Session muammosi bo'lsa, keyingi urinishda yangi login qilinadi.
+        global _client
+        _client = None
         return False
-
-    # 2-bosqich: konteynerni e'lon qilish
-    published = await _post(
-        session,
-        f"{GRAPH_BASE}/{IG_USER_ID}/media_publish",
-        {"creation_id": creation_id, "access_token": IG_ACCESS_TOKEN},
-    )
-    return bool(published.get("id"))
+    finally:
+        try:
+            os.unlink(img_path)
+        except OSError:
+            pass
