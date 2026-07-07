@@ -63,8 +63,9 @@ async def seed_baseline():
 
 
 def _commit_db():
-    """posted.db o'zgargan bo'lsa, git'ga saqlaydi. Keyingi run shu bazani
-    o'qib, allaqachon yuborilgan postlarni qayta yubormaydi."""
+    """posted.db va sayt fayllarini git'ga saqlaydi. Masofada parallel commit
+    bo'lsa, qayta asoslashda BIZNING (eng yangi) fayllar ustun turadi —
+    konflikt tufayli push to'xtab qolmasin."""
     try:
         subprocess.run(["git", "add", DB_PATH, "docs"], check=True)
         if subprocess.run(["git", "diff", "--cached", "--quiet"]).returncode == 0:
@@ -72,9 +73,16 @@ def _commit_db():
         subprocess.run(
             ["git", "commit", "-m", "chore: update posted.db [skip ci]"], check=True
         )
-        subprocess.run(["git", "pull", "--rebase", "--autostash"], check=False)
-        subprocess.run(["git", "push"], check=False)
-        log.info("posted.db saqlandi")
+        for _ in range(3):
+            if subprocess.run(["git", "push"]).returncode == 0:
+                log.info("posted.db saqlandi")
+                return
+            r = subprocess.run(
+                ["git", "pull", "--rebase", "--autostash", "-X", "theirs"]
+            )
+            if r.returncode != 0:
+                subprocess.run(["git", "rebase", "--abort"], check=False)
+        log.warning("posted.db push qilinmadi (keyingi urinishda qaytariladi)")
     except Exception as e:
         log.warning(f"posted.db saqlanmadi: {e}")
 
