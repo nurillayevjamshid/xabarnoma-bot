@@ -83,14 +83,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .search svg{width:14px;height:14px;flex:none;stroke:var(--muted);fill:none;stroke-width:2}
 .search input{border:0;background:none;outline:none;width:100%;font-size:14px;color:var(--ink)}
 .search input::placeholder{color:var(--muted)}
-.chips{display:flex;gap:6px}
-.chip{
-  font-size:12.5px;font-weight:600;color:var(--muted);
-  border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 13px;
-  transition:all .15s ease;
-}
-.chip:hover{border-color:var(--accent);color:var(--accent)}
-.chip.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 .theme-btn{
   flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);
   background:var(--surface);display:grid;place-items:center;font-size:15px;
@@ -137,8 +129,6 @@ main{max-width:1080px;margin:0 auto;padding:8px 20px 60px}
   font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;
   font-variant-numeric:tabular-nums;
 }
-.meta .src{color:var(--accent);font-weight:700}
-.meta .sep{opacity:.5}
 
 /* hero — kunning bosh yangiligi */
 .card.hero{grid-column:1/-1}
@@ -233,7 +223,6 @@ footer{border-top:1px solid var(--line);margin-top:20px}
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
       <input id="q" type="search" placeholder="Yangilik qidirish…" aria-label="Yangilik qidirish">
     </label>
-    <div class="chips" id="chips" role="tablist" aria-label="Manba tanlash"></div>
     <button class="theme-btn" id="theme" aria-label="Tungi/kunduzgi rejim">◐</button>
   </div>
 </div>
@@ -259,7 +248,6 @@ const DATA_SOURCES = [
   "https://raw.githubusercontent.com/nurillayevjamshid/xabarnoma-bot/main/docs/posts.json",
   "posts.json",
 ];
-const CHANNELS = { aniquz:"Aniq", Geointriga_uz:"Geointriga" };
 const PAGE = 24;
 
 /* namunaviy ma'lumot — faqat tarmoq bo'lmaganda (dizayn ko'rigi) */
@@ -273,7 +261,7 @@ const SAMPLE = [
 ];
 
 /* ======= holat ======= */
-let posts=[], query="", channel="all", shown=PAGE;
+let posts=[], query="", shown=PAGE;
 const $=s=>document.querySelector(s);
 const feed=$("#feed"), overlay=$("#overlay"), sheet=$("#sheet");
 
@@ -303,19 +291,8 @@ const hm=d=>String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padS
 
 /* ======= yordamchilar ======= */
 const esc=s=>{const e=document.createElement("i");e.textContent=s??"";return e.innerHTML};
-const srcName=c=>CHANNELS[c]||c||"Manba";
 const firstLetter=t=>(t||"•").trim().charAt(0).toUpperCase();
 
-/* ======= chiplar ======= */
-const chipDefs=[["all","Hammasi"],...Object.entries(CHANNELS)];
-$("#chips").innerHTML=chipDefs.map(([k,v])=>
-  `<button class="chip${k==="all"?" on":""}" data-ch="${k}" role="tab">${v}</button>`).join("");
-$("#chips").addEventListener("click",e=>{
-  const b=e.target.closest(".chip"); if(!b)return;
-  channel=b.dataset.ch; shown=PAGE;
-  document.querySelectorAll(".chip").forEach(c=>c.classList.toggle("on",c===b));
-  render();
-});
 let qt; $("#q").addEventListener("input",e=>{
   clearTimeout(qt); qt=setTimeout(()=>{query=e.target.value.trim().toLowerCase();shown=PAGE;render()},160);
 });
@@ -334,15 +311,14 @@ function cardHTML(p,i,hero){
     <div class="card-body">
       <h3 class="serif">${esc(p.title)}</h3>
       <p class="ex">${esc((p.body||"").replace(/\n+/g," "))}</p>
-      <div class="meta"><span class="src">${esc(srcName(p.channel))}</span><span class="sep">·</span><time datetime="${esc(p.published||"")}">${hm(d)}</time></div>
+      <div class="meta"><time datetime="${esc(p.published||"")}">${hm(d)}</time></div>
     </div></article>`;
 }
 
 /* ======= render ======= */
 function render(){
   const f=posts.filter(p=>
-    (channel==="all"||p.channel===channel)&&
-    (!query||(p.title+" "+p.body).toLowerCase().includes(query)));
+    !query||(p.title+" "+p.body).toLowerCase().includes(query));
   if(!f.length){
     feed.innerHTML=`<div class="empty"><div class="big">📰</div>
       <h3>${posts.length?"Hech narsa topilmadi":"Yangiliklar tez orada"}</h3>
@@ -381,19 +357,17 @@ function openSheet(p){
     :p.image?`<div class="sheet-media"><img src="${esc(p.image)}" alt="" onerror="this.parentElement.remove()"></div>`:"";
   sheet.innerHTML=`<button class="sheet-close" aria-label="Yopish">✕</button>${med}
     <div class="sheet-body">
-      <div class="meta"><span class="src">${esc(srcName(p.channel))}</span><span class="sep">·</span>
-        <time>${dayLabel(d)}, ${hm(d)}</time></div>
+      <div class="meta"><time>${dayLabel(d)}, ${hm(d)}</time></div>
       <h2 class="serif">${esc(p.title)}</h2>
       <div class="txt">${paras}</div>
       <div class="sheet-actions">
-        ${p.url&&p.url.startsWith("http")?`<a class="act primary" href="${esc(p.url)}" target="_blank" rel="noopener">Telegramda ochish</a>`:""}
-        <button class="act" id="share">Ulashish</button>
+        <button class="act primary" id="share">Ulashish</button>
       </div></div>`;
   overlay.classList.add("open");document.body.style.overflow="hidden";
   sheet.querySelector(".sheet-close").addEventListener("click",closeSheet);
   const sh=sheet.querySelector("#share");
   sh.addEventListener("click",async()=>{
-    const data={title:p.title,text:p.title,url:p.url&&p.url.startsWith("http")?p.url:location.href};
+    const data={title:p.title,text:p.title,url:location.href};
     if(navigator.share){try{await navigator.share(data)}catch(e){}}
     else{try{await navigator.clipboard.writeText(data.url);sh.textContent="Nusxalandi ✓"}catch(e){}}
   });

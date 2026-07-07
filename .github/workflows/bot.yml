@@ -52,7 +52,7 @@ jobs:
       - name: Final commit of posted.db
         if: always()
         run: |
-          git add posted.db docs/posts.json
+          git add posted.db docs
           if git diff --cached --quiet; then
             echo "No changes to posted.db"
           else
