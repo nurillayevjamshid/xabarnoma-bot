@@ -41,6 +41,31 @@ def _drop_image(image_url: str) -> None:
             pass
 
 
+def migrate_images() -> None:
+    """Lentadagi tashqi (Telegram CDN) rasm havolalarini repoga ko'chiradi.
+    Telegram CDN ba'zi provayderlarda ochilmaydi — repodagi nusxa doim ishlaydi."""
+    try:
+        if not os.path.exists(POSTS_PATH):
+            return
+        with open(POSTS_PATH, encoding="utf-8") as f:
+            posts = json.load(f)
+        changed = False
+        for p in posts:
+            img = p.get("image") or ""
+            if img and not img.startswith(RAW_BASE):
+                try:
+                    p["image"] = _save_image(img)
+                    changed = True
+                except Exception as e:
+                    log.warning(f"Migratsiya: rasm olinmadi: {e}")
+        if changed:
+            with open(POSTS_PATH, "w", encoding="utf-8") as f:
+                json.dump(posts, f, ensure_ascii=False, separators=(",", ":"))
+            log.info("Sayt rasmlari repoga ko'chirildi")
+    except Exception as e:
+        log.warning(f"Rasm migratsiyasi xatosi: {e}")
+
+
 def append_post(article) -> None:
     """Telegramga yuborilgan postni sayt lentasiga (docs/posts.json) qo'shadi.
     Xato bo'lsa botni to'xtatmaydi — sayt ikkilamchi kanal."""
