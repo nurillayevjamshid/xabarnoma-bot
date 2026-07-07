@@ -79,6 +79,15 @@ async def _telegram_channel(session, username: str) -> list[Article]:
             return True
 
         lines = [ln for ln in lines if _keep(ln)]
+        # Qator OXIRIDA gap tugagandan keyin yopishib qolgan "Ko'proq"/"Batafsil"
+        # kabi CTA qoldig'ini kesish (havola o'chirilgach shu so'z qolib ketadi).
+        trailing_cta_re = re.compile(
+            r"(?<=[.!?…»”\"])\s+(ko['’ʻʼ‘`]?proq|batafsil|davomi|подробнее|читать(\s+далее)?)"
+            r"\s*[👉👇➡▶🔗:…\-–—.!]*\s*$",
+            re.I,
+        )
+        lines = [trailing_cta_re.sub("", ln).rstrip() for ln in lines]
+        lines = [ln for ln in lines if ln]
         if not lines:
             continue
 
