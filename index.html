@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Xabarnoma — Kun yangiliklari</title>
+<meta name="description" content="O'zbekiston va dunyo yangiliklari — 24/7 avtomatik yangilanadigan lenta.">
+<meta property="og:title" content="Xabarnoma — Kun yangiliklari">
+<meta property="og:description" content="O'zbekiston va dunyo yangiliklari — 24/7 avtomatik yangilanadigan lenta.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a8fa6'/%3E%3Ccircle cx='16' cy='16' r='6' fill='white'/%3E%3C/svg%3E">
+<style>
+:root{
+  --paper:#f3f6f6; --surface:#ffffff; --ink:#0f1d20; --muted:#5d7276;
+  --line:#dbe4e5; --accent:#0a8fa6; --accent-soft:#e3f2f4; --on-accent:#ffffff;
+  --shadow:0 1px 2px rgba(15,29,32,.05),0 8px 28px rgba(15,29,32,.07);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0b1113; --surface:#111a1d; --ink:#e6edee; --muted:#8aa0a5;
+    --line:#202d31; --accent:#35c3da; --accent-soft:#12272c; --on-accent:#06181c;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 32px rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="light"]{
+  --paper:#f3f6f6; --surface:#ffffff; --ink:#0f1d20; --muted:#5d7276;
+  --line:#dbe4e5; --accent:#0a8fa6; --accent-soft:#e3f2f4; --on-accent:#ffffff;
+  --shadow:0 1px 2px rgba(15,29,32,.05),0 8px 28px rgba(15,29,32,.07);
+}
+:root[data-theme="dark"]{
+  --paper:#0b1113; --surface:#111a1d; --ink:#e6edee; --muted:#8aa0a5;
+  --line:#202d31; --accent:#35c3da; --accent-soft:#12272c; --on-accent:#06181c;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 32px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper); color:var(--ink);
+  font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.serif{font-family:Georgia,"Iowan Old Style","Times New Roman",serif}
+
+/* ---------- header ---------- */
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  max-width:1080px;margin:0 auto;padding:10px 20px;
+  font-size:12px;color:var(--muted);letter-spacing:.04em;
+}
+.live{display:inline-flex;align-items:center;gap:7px;font-weight:600;color:var(--accent);text-transform:uppercase;font-size:11px}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
+@media (prefers-reduced-motion:reduce){.live-dot{animation:none}}
+.masthead{
+  max-width:1080px;margin:0 auto;padding:6px 20px 22px;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:16px;
+  border-bottom:2px solid var(--ink);
+}
+.brand h1{font-size:clamp(30px,6vw,44px);line-height:1.05;letter-spacing:-.01em;font-weight:700}
+.brand h1 .dot{color:var(--accent)}
+.brand p{color:var(--muted);font-size:13px;margin-top:6px}
+.tg-btn{
+  flex:none;display:inline-flex;align-items:center;gap:8px;
+  background:var(--accent);color:var(--on-accent);font-weight:600;font-size:13px;
+  padding:9px 16px;border-radius:999px;transition:transform .15s ease,opacity .15s ease;
+}
+.tg-btn:hover{opacity:.92;transform:translateY(-1px)}
+.tg-btn svg{width:15px;height:15px;fill:currentColor}
+
+/* ---------- toolbar ---------- */
+.toolbar{
+  position:sticky;top:0;z-index:20;
+  background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.toolbar-in{max-width:1080px;margin:0 auto;padding:10px 20px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.search{
+  flex:1;min-width:170px;display:flex;align-items:center;gap:8px;
+  background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 14px;
+}
+.search svg{width:14px;height:14px;flex:none;stroke:var(--muted);fill:none;stroke-width:2}
+.search input{border:0;background:none;outline:none;width:100%;font-size:14px;color:var(--ink)}
+.search input::placeholder{color:var(--muted)}
+.theme-btn{
+  flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);
+  background:var(--surface);display:grid;place-items:center;font-size:15px;
+}
+
+/* ---------- feed ---------- */
+main{max-width:1080px;margin:0 auto;padding:8px 20px 60px}
+.day{margin-top:30px}
+.day-head{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.day-head h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);flex:none}
+.day-head::after{content:"";height:1px;background:var(--line);flex:1}
+.grid{display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:700px){.grid{grid-template-columns:1fr 1fr}}
+@media (min-width:1000px){.grid{grid-template-columns:1fr 1fr 1fr}}
+
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  display:flex;flex-direction:column;cursor:pointer;
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+.card:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:transparent}
+@media (prefers-reduced-motion:reduce){.card,.card:hover{transform:none;transition:none}}
+.thumb{position:relative;aspect-ratio:16/9;background:var(--accent-soft);overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb .mono{
+  position:absolute;inset:0;display:grid;place-items:center;
+  font-size:52px;font-weight:700;color:var(--accent);opacity:.5;
+  background:linear-gradient(135deg,var(--accent-soft),var(--surface));
+}
+.badge{
+  position:absolute;left:10px;bottom:10px;display:inline-flex;align-items:center;gap:5px;
+  background:rgba(10,20,22,.72);color:#fff;font-size:11px;font-weight:600;
+  padding:4px 10px;border-radius:999px;backdrop-filter:blur(4px);
+}
+.badge svg{width:9px;height:9px;fill:currentColor}
+.card-body{padding:15px 16px 16px;display:flex;flex-direction:column;gap:9px;flex:1}
+.card h3{font-size:17.5px;line-height:1.32;font-weight:700;letter-spacing:-.005em;text-wrap:balance}
+.card .ex{
+  color:var(--muted);font-size:13.5px;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+.meta{
+  margin-top:auto;display:flex;align-items:center;gap:8px;
+  font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;
+  font-variant-numeric:tabular-nums;
+}
+
+/* hero — kunning bosh yangiligi */
+.card.hero{grid-column:1/-1}
+@media (min-width:700px){
+  .card.hero{flex-direction:row;min-height:280px}
+  .card.hero .thumb{flex:1.2;aspect-ratio:auto}
+  .card.hero .card-body{flex:1;justify-content:center;padding:28px 30px;gap:13px}
+  .card.hero h3{font-size:clamp(22px,3vw,30px);line-height:1.22}
+  .card.hero .ex{font-size:15px;-webkit-line-clamp:4}
+}
+
+/* ---------- states ---------- */
+.skel .thumb,.skel h3,.skel .ex,.skel .meta{position:relative;overflow:hidden;color:transparent!important;background:var(--accent-soft);border-radius:6px}
+.skel h3{height:40px}.skel .ex{height:52px}.skel .meta{height:14px;width:60%}
+.skel .thumb::after,.skel h3::after,.skel .ex::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+  animation:shimmer 1.4s infinite;
+}
+@keyframes shimmer{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+@media (prefers-reduced-motion:reduce){.skel .thumb::after,.skel h3::after,.skel .ex::after{animation:none}}
+.empty{margin:70px auto;max-width:420px;text-align:center;color:var(--muted)}
+.empty .big{font-size:40px;margin-bottom:14px}
+.empty h3{color:var(--ink);font-size:18px;margin-bottom:8px}
+.more{display:block;margin:34px auto 0;border:1px solid var(--line);background:var(--surface);
+  border-radius:999px;padding:11px 30px;font-weight:600;font-size:14px;transition:all .15s ease}
+.more:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ---------- modal ---------- */
+.overlay{
+  position:fixed;inset:0;z-index:50;background:rgba(8,14,16,.6);
+  display:none;align-items:flex-end;justify-content:center;
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+}
+@media (min-width:700px){.overlay{align-items:center;padding:32px}}
+.overlay.open{display:flex}
+.sheet{
+  background:var(--surface);width:100%;max-width:660px;max-height:92vh;overflow-y:auto;
+  border-radius:18px 18px 0 0;animation:up .25s ease;
+}
+@media (min-width:700px){.sheet{border-radius:16px;animation:fade .2s ease}}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@keyframes fade{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.sheet{animation:none}}
+.sheet-media img,.sheet-media video{width:100%;max-height:400px;object-fit:cover;display:block;background:#000}
+.sheet-body{padding:24px 26px 30px}
+.sheet-body .meta{margin:0 0 14px}
+.sheet-body h2{font-size:clamp(21px,4vw,27px);line-height:1.25;letter-spacing:-.01em;margin-bottom:16px;text-wrap:balance}
+.sheet-body .txt p{margin-bottom:13px;font-size:15.5px;line-height:1.75;max-width:62ch}
+.sheet-actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.act{
+  display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;
+  border:1px solid var(--line);border-radius:999px;padding:9px 18px;transition:all .15s ease;
+}
+.act:hover{border-color:var(--accent);color:var(--accent)}
+.act.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.act.primary:hover{opacity:.9;color:var(--on-accent)}
+.sheet-close{
+  position:sticky;top:10px;margin:10px 10px -44px auto;z-index:2;
+  width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(8,14,16,.55);color:#fff;font-size:16px;
+}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);margin-top:20px}
+.foot-in{max-width:1080px;margin:0 auto;padding:26px 20px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  font-size:12.5px;color:var(--muted)}
+.foot-in a{color:var(--accent);font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span id="today-date">—</span>
+  <span class="live"><span class="live-dot"></span> Jonli — 24/7 yangilanadi</span>
+</div>
+
+<header class="masthead">
+  <div class="brand">
+    <h1 class="serif">Xabarnoma<span class="dot">.</span></h1>
+    <p id="tagline">Kun yangiliklari — bir joyda, o'z vaqtida</p>
+  </div>
+  <a class="tg-btn" id="tg-link" href="https://t.me/xabarnomaofficial" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24"><path d="M21.9 4.6 19 19.3c-.2 1-.8 1.2-1.6.8l-4.5-3.3-2.2 2.1c-.2.2-.4.4-.9.4l.3-4.6L18.5 7c.4-.3-.1-.5-.6-.2L7.6 13.4l-4.4-1.4c-1-.3-1-1 .2-1.4L20.6 3.3c.8-.3 1.5.2 1.3 1.3z"/></svg>
+    Kanalga obuna
+  </a>
+</header>
+
+<div class="toolbar">
+  <div class="toolbar-in">
+    <label class="search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      <input id="q" type="search" placeholder="Yangilik qidirish…" aria-label="Yangilik qidirish">
+    </label>
+    <button class="theme-btn" id="theme" aria-label="Tungi/kunduzgi rejim">◐</button>
+  </div>
+</div>
+
+<main id="feed" aria-live="polite"></main>
+
+<footer>
+  <div class="foot-in">
+    <span>© <span id="yr"></span> Xabarnoma — yangiliklar avtomatik yig'iladi</span>
+    <span>Manba: <a id="foot-tg" href="https://t.me/xabarnomaofficial" target="_blank" rel="noopener">@xabarnomaofficial</a></span>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Yangilik matni">
+  <article class="sheet" id="sheet"></article>
+</div>
+
+<script>
+"use strict";
+/* ======= sozlamalar — nom o'zgarsa faqat shu yerni yangilang ======= */
+const BRAND = { name:"Xabarnoma", tagline:"Kun yangiliklari — bir joyda, o'z vaqtida", channel:"xabarnomaofficial" };
+const DATA_SOURCES = [
+  "https://raw.githubusercontent.com/nurillayevjamshid/xabarnoma-bot/main/docs/posts.json",
+  "posts.json",
+];
+const PAGE = 24;
+
+/* namunaviy ma'lumot — faqat tarmoq bo'lmaganda (dizayn ko'rigi) */
+const SAMPLE = [
+ {url:"#1",title:"O'zbekistonda yangi tezyurar temir yo'l qurilishi boshlanadi",body:"Toshkent–Samarqand yo'nalishidagi yangi tezyurar liniya loyihasi tasdiqlandi. Qurilish uch bosqichda amalga oshiriladi va yakunida yo'l vaqti 40 daqiqagacha qisqaradi.\n\nLoyihaga xalqaro moliya institutlari ham jalb qilinadi.",image:null,video:null,published:new Date(Date.now()-42*60000).toISOString(),channel:"aniquz"},
+ {url:"#2",title:"Markaziy bank asosiy stavkani o'zgarishsiz qoldirdi",body:"Regulyator inflyatsiya bosimi pasayganini, ammo ehtiyotkor siyosat davom etishini ma'lum qildi. Keyingi qaror kuzda e'lon qilinadi.",image:null,video:null,published:new Date(Date.now()-3*3600000).toISOString(),channel:"aniquz"},
+ {url:"#3",title:"Jahon bozorlarida oltin narxi tarixiy cho'qqiga chiqdi",body:"Investorlar xavfsiz aktivlarga oqib o'tishi fonida oltin narxi yangi rekordni yangiladi. Tahlilchilar o'sish davom etishi mumkinligini aytmoqda.",image:null,video:"#",published:new Date(Date.now()-5*3600000).toISOString(),channel:"Geointriga_uz"},
+ {url:"#4",title:"Poytaxtda yangi metro bekatlari ochilishga tayyorlanmoqda",body:"Qurilish ishlari yakuniga yetgan uchta bekatda sinov qatnovlari boshlandi. Ochilish sanasi tez orada e'lon qilinadi.",image:null,video:null,published:new Date(Date.now()-26*3600000).toISOString(),channel:"aniquz"},
+ {url:"#5",title:"Xalqaro delegatsiya mintaqaviy hamkorlik masalalarini muhokama qildi",body:"Uchrashuvda savdo, transport va energetika sohasidagi qo'shma loyihalar ko'rib chiqildi. Tomonlar yo'l xaritasini imzoladi.",image:null,video:null,published:new Date(Date.now()-29*3600000).toISOString(),channel:"Geointriga_uz"},
+ {url:"#6",title:"Olimlar yangi energiya saqlash texnologiyasini taqdim etdi",body:"Yangi akkumulyator texnologiyasi mavjudlaridan ikki baravar ko'p quvvatni saqlay oladi va tezroq quvvatlanadi.",image:null,video:null,published:new Date(Date.now()-49*3600000).toISOString(),channel:"Geointriga_uz"},
+];
+
+/* ======= holat ======= */
+let posts=[], query="", shown=PAGE;
+const $=s=>document.querySelector(s);
+const feed=$("#feed"), overlay=$("#overlay"), sheet=$("#sheet");
+
+/* ======= tema ======= */
+const root=document.documentElement;
+const savedTheme=localStorage.getItem("theme");
+if(savedTheme) root.dataset.theme=savedTheme;
+$("#theme").addEventListener("click",()=>{
+  const dark=(root.dataset.theme||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"))==="dark";
+  root.dataset.theme=dark?"light":"dark";
+  localStorage.setItem("theme",root.dataset.theme);
+});
+
+/* ======= sana/vaqt (o'zbekcha) ======= */
+const MONTHS=["yanvar","fevral","mart","aprel","may","iyun","iyul","avgust","sentabr","oktabr","noyabr","dekabr"];
+const WD=["yakshanba","dushanba","seshanba","chorshanba","payshanba","juma","shanba"];
+const dayKey=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+function dayLabel(d){
+  const now=new Date(), t=dayKey(now);
+  const y=dayKey(new Date(now-864e5));
+  const k=dayKey(d);
+  if(k===t) return "Bugun";
+  if(k===y) return "Kecha";
+  return d.getDate()+"-"+MONTHS[d.getMonth()]+", "+WD[d.getDay()];
+}
+const hm=d=>String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
+
+/* ======= yordamchilar ======= */
+const esc=s=>{const e=document.createElement("i");e.textContent=s??"";return e.innerHTML};
+const firstLetter=t=>(t||"•").trim().charAt(0).toUpperCase();
+
+let qt; $("#q").addEventListener("input",e=>{
+  clearTimeout(qt); qt=setTimeout(()=>{query=e.target.value.trim().toLowerCase();shown=PAGE;render()},160);
+});
+
+/* ======= kartochka ======= */
+function media(p,hero){
+  if(p.image) return `<div class="thumb"><img src="${esc(p.image)}" alt="" loading="${hero?"eager":"lazy"}"
+      onerror="this.outerHTML='<div class=&quot;mono serif&quot;>${esc(firstLetter(p.title))}</div>'">${p.video?vbadge():""}</div>`;
+  return `<div class="thumb"><div class="mono serif">${esc(firstLetter(p.title))}</div>${p.video?vbadge():""}</div>`;
+}
+const vbadge=()=>`<span class="badge"><svg viewBox="0 0 10 10"><path d="M1 0l8 5-8 5z"/></svg>Video</span>`;
+function cardHTML(p,i,hero){
+  const d=new Date(p.published||Date.now());
+  return `<article class="card${hero?" hero":""}" data-i="${i}" tabindex="0" role="button" aria-label="${esc(p.title)}">
+    ${media(p,hero)}
+    <div class="card-body">
+      <h3 class="serif">${esc(p.title)}</h3>
+      <p class="ex">${esc((p.body||"").replace(/\n+/g," "))}</p>
+      <div class="meta"><time datetime="${esc(p.published||"")}">${hm(d)}</time></div>
+    </div></article>`;
+}
+
+/* ======= render ======= */
+function render(){
+  const f=posts.filter(p=>
+    !query||(p.title+" "+p.body).toLowerCase().includes(query));
+  if(!f.length){
+    feed.innerHTML=`<div class="empty"><div class="big">📰</div>
+      <h3>${posts.length?"Hech narsa topilmadi":"Yangiliklar tez orada"}</h3>
+      <p>${posts.length?"Qidiruv so'zini o'zgartirib ko'ring.":"Bot birinchi xabarni joylashi bilan shu yerda ko'rasiz."}</p></div>`;
+    return;
+  }
+  const slice=f.slice(0,shown);
+  const groups=new Map();
+  slice.forEach((p,i)=>{
+    const d=new Date(p.published||Date.now());
+    const k=dayKey(d);
+    if(!groups.has(k))groups.set(k,{label:dayLabel(d),items:[]});
+    groups.get(k).items.push([p,i]);
+  });
+  let html="",first=true;
+  for(const g of groups.values()){
+    html+=`<section class="day"><div class="day-head"><h2>${g.label}</h2></div><div class="grid">`;
+    for(const [p,i] of g.items){html+=cardHTML(p,i,first);first=false;}
+    html+="</div></section>";
+  }
+  if(f.length>shown)html+=`<button class="more" id="more">Yana ko'rsatish (${f.length-shown})</button>`;
+  feed.innerHTML=html;
+  feed.querySelectorAll(".card").forEach(c=>{
+    const open=()=>openSheet(slice[+c.dataset.i]);
+    c.addEventListener("click",open);
+    c.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open();}});
+  });
+  const m=$("#more"); if(m)m.addEventListener("click",()=>{shown+=PAGE;render()});
+}
+
+/* ======= modal ======= */
+function openSheet(p){
+  const d=new Date(p.published||Date.now());
+  const paras=(p.body||"").split(/\n+/).filter(Boolean).map(t=>`<p>${esc(t)}</p>`).join("");
+  const med=p.video?`<div class="sheet-media"><video controls preload="metadata" src="${esc(p.video)}" ${p.image?`poster="${esc(p.image)}"`:""}></video></div>`
+    :p.image?`<div class="sheet-media"><img src="${esc(p.image)}" alt="" onerror="this.parentElement.remove()"></div>`:"";
+  sheet.innerHTML=`<button class="sheet-close" aria-label="Yopish">✕</button>${med}
+    <div class="sheet-body">
+      <div class="meta"><time>${dayLabel(d)}, ${hm(d)}</time></div>
+      <h2 class="serif">${esc(p.title)}</h2>
+      <div class="txt">${paras}</div>
+      <div class="sheet-actions">
+        <button class="act primary" id="share">Ulashish</button>
+      </div></div>`;
+  overlay.classList.add("open");document.body.style.overflow="hidden";
+  sheet.querySelector(".sheet-close").addEventListener("click",closeSheet);
+  const sh=sheet.querySelector("#share");
+  sh.addEventListener("click",async()=>{
+    const data={title:p.title,text:p.title,url:location.href};
+    if(navigator.share){try{await navigator.share(data)}catch(e){}}
+    else{try{await navigator.clipboard.writeText(data.url);sh.textContent="Nusxalandi ✓"}catch(e){}}
+  });
+  sheet.querySelector(".sheet-close").focus();
+}
+function closeSheet(){overlay.classList.remove("open");document.body.style.overflow="";sheet.querySelector("video")?.pause();}
+overlay.addEventListener("click",e=>{if(e.target===overlay)closeSheet()});
+addEventListener("keydown",e=>{if(e.key==="Escape"&&overlay.classList.contains("open"))closeSheet()});
+
+/* ======= yuklash ======= */
+function skeleton(){
+  feed.innerHTML=`<section class="day"><div class="day-head"><h2>Yuklanmoqda</h2></div><div class="grid">`+
+    Array.from({length:6},()=>`<article class="card skel"><div class="thumb"></div><div class="card-body"><h3>&nbsp;</h3><p class="ex">&nbsp;</p><div class="meta">&nbsp;</div></div></article>`).join("")+
+    `</div></section>`;
+}
+async function load(){
+  skeleton();
+  for(const src of DATA_SOURCES){
+    try{
+      const r=await fetch(src,{cache:"no-store"});
+      if(!r.ok)continue;
+      const j=await r.json();
+      if(Array.isArray(j)){posts=j;render();return;}
+    }catch(e){}
+  }
+  posts=SAMPLE;render(); /* tarmoq yo'q — dizayn namunasi */
+}
+
+/* ======= boshlash ======= */
+document.title=`${BRAND.name} — ${BRAND.tagline.split("—")[0].trim()}`;
+$("#tagline").textContent=BRAND.tagline;
+$("#tg-link").href=$("#foot-tg").href=`https://t.me/${BRAND.channel}`;
+$("#foot-tg").textContent="@"+BRAND.channel;
+$("#yr").textContent=new Date().getFullYear();
+const now=new Date();
+$("#today-date").textContent=`${now.getDate()}-${MONTHS[now.getMonth()]} ${now.getFullYear()}, ${WD[now.getDay()]}`;
+load();
+</script>
+</body>
+</html>
