@@ -83,6 +83,8 @@ async def main():
     init_db()
     cleanup_old(30)
     migrate_images()  # eski CDN rasm havolalarini repoga ko'chirish
+    if COMMIT_DB:
+        _commit_db()  # ko'chirilgan rasmlar darhol saytga chiqsin
 
     if SEED:
         await seed_baseline()
