@@ -10,6 +10,7 @@ from aiogram import Bot
 from config import BOT_TOKEN, MIN_INTERVAL_SEC, MAX_INTERVAL_SEC, DB_PATH
 from dedup import init_db, cleanup_old, is_posted, mark_posted
 from scraper import fetch_all
+from sitefeed import migrate_images
 from main import pick_and_publish
 
 logging.basicConfig(
@@ -81,6 +82,7 @@ def _commit_db():
 async def main():
     init_db()
     cleanup_old(30)
+    migrate_images()  # eski CDN rasm havolalarini repoga ko'chirish
 
     if SEED:
         await seed_baseline()
