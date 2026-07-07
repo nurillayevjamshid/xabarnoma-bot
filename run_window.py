@@ -65,7 +65,7 @@ def _commit_db():
     """posted.db o'zgargan bo'lsa, git'ga saqlaydi. Keyingi run shu bazani
     o'qib, allaqachon yuborilgan postlarni qayta yubormaydi."""
     try:
-        subprocess.run(["git", "add", DB_PATH, "docs/posts.json"], check=True)
+        subprocess.run(["git", "add", DB_PATH, "docs"], check=True)
         if subprocess.run(["git", "diff", "--cached", "--quiet"]).returncode == 0:
             return  # o'zgarish yo'q
         subprocess.run(
