@@ -54,7 +54,22 @@ async def _send_text(bot: Bot, caption: str) -> None:
 async def publish(bot: Bot, article: Article) -> bool:
     caption = _build_caption(article)
 
-    # Rasm bo'lsa, avval rasm bilan yuborishga urinamiz.
+    # Video bo'lsa, avval video bilan yuborishga urinamiz.
+    if article.video_url:
+        try:
+            video = URLInputFile(article.video_url)
+            await bot.send_video(
+                chat_id=CHANNEL_ID,
+                video=video,
+                caption=caption,
+                parse_mode=ParseMode.HTML,
+            )
+            return True
+        except Exception as e:
+            # Video yuklanmasa (masalan, hajmi katta), rasm/matnga o'tamiz.
+            log.warning(f"Video bilan yuborilmadi, rasm/matnga o'tilmoqda: {e}")
+
+    # Rasm bo'lsa, rasm bilan yuborishga urinamiz.
     if article.image_url:
         try:
             photo = URLInputFile(article.image_url)

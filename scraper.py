@@ -15,6 +15,7 @@ class Article:
     body: str
     image_url: Optional[str]
     published: str = ""  # ISO format sana, xronologik saralash uchun
+    video_url: Optional[str] = None
 
 
 HEADERS = {"User-Agent": USER_AGENT}
@@ -105,6 +106,20 @@ async def _telegram_channel(session, username: str) -> list[Article]:
             if m:
                 img = m.group(1)
 
+        # Video: t.me/s sahifasi kichik videolarni <video src="..."> qilib beradi.
+        video = None
+        video_el = post.select_one("video[src]")
+        if video_el:
+            video = video_el["src"]
+        if not img:
+            # Katta videolarda faqat thumbnail bo'ladi — uni rasm sifatida olamiz,
+            # video yuborilmasa post hech bo'lmaganda rasm bilan chiqadi.
+            thumb = post.select_one("i.tgme_widget_message_video_thumb")
+            if thumb and thumb.get("style"):
+                m = re.search(r"url\(['\"]?([^'\")]+)['\"]?\)", thumb["style"])
+                if m:
+                    img = m.group(1)
+
         published = ""
         time_el = post.select_one("time[datetime]")
         if time_el and time_el.get("datetime"):
@@ -112,7 +127,14 @@ async def _telegram_channel(session, username: str) -> list[Article]:
 
         post_url = f"https://t.me/{post_id}"
         out.append(
-            Article(url=post_url, title=title, body=body, image_url=img, published=published)
+            Article(
+                url=post_url,
+                title=title,
+                body=body,
+                image_url=img,
+                published=published,
+                video_url=video,
+            )
         )
     return out
 
