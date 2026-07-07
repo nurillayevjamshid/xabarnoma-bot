@@ -7,6 +7,7 @@ from config import BOT_TOKEN, MIN_INTERVAL_SEC, MAX_INTERVAL_SEC, OWNER_ID
 from dedup import init_db, is_posted, mark_posted, cleanup_old
 from scraper import fetch_all
 from publisher import publish
+from sitefeed import append_post
 
 logging.basicConfig(
     level=logging.INFO,
@@ -33,6 +34,7 @@ async def pick_and_publish(bot: Bot) -> bool:
         ok = await publish(bot, art)
         if ok:
             mark_posted(art.url, art.title)
+            append_post(art)
             log.info(f"Yuborildi: {art.title[:60]}")
             return True
     log.info("Yangi yuborilmagan post yo'q")
