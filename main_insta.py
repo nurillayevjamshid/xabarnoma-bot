@@ -4,7 +4,7 @@ import sys
 from telegram_client import TelegramMonitor
 from instagram_client import InstagramClient
 from utils import logger, clean_downloads
-from config_insta import DOWNLOAD_DIR
+from config_insta import DOWNLOAD_DIR, OLD_USERNAME, NEW_USERNAME
 
 class XabarnomaBot:
     def __init__(self):
@@ -14,6 +14,12 @@ class XabarnomaBot:
 
     async def handle_new_post(self, caption: str, media_paths: list[str]):
         logger.info(f"New post received from Telegram. Media count: {len(media_paths)}")
+        
+        # Replace old username with new username in caption
+        if caption:
+            caption = caption.replace(OLD_USERNAME, NEW_USERNAME)
+            logger.info(f"Caption updated: {OLD_USERNAME} -> {NEW_USERNAME}")
+
         try:
             if not await self.insta.check_login():
                 logger.warning("Instagram session expired. Attempting re-login...")

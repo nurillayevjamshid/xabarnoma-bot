@@ -7,7 +7,9 @@ load_dotenv()
 API_ID = int(os.getenv("API_ID", 0))
 API_HASH = os.getenv("API_HASH", "")
 SESSION_NAME = os.getenv("SESSION_NAME", "xabarnoma_session")
-SOURCE_CHANNEL = os.getenv("SOURCE_CHANNEL", "")
+SOURCE_CHANNEL = os.getenv("SOURCE_CHANNEL", "tezkorofficial_uz")
+OLD_USERNAME = "@xabarnomaofficial"
+NEW_USERNAME = "@tezkorofficial_uz"
 
 # Instagram Config
 INSTAGRAM_USERNAME = os.getenv("INSTAGRAM_USERNAME", "")
