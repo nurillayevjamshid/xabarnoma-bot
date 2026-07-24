@@ -6,10 +6,10 @@ def _clean(v: str) -> str:
 
 
 BOT_TOKEN = _clean(os.getenv("BOT_TOKEN", "8411386595:AAG_WffgEJ0ihe7gJZyifNexBZ1i0tHfPWg"))
-CHANNEL_ID = _clean(os.getenv("CHANNEL_ID", "@xabarnomaofficial"))
+CHANNEL_ID = _clean(os.getenv("CHANNEL_ID", "@tezkorofficial_uz"))
 OWNER_ID = int(_clean(os.getenv("OWNER_ID", "679291909")))
 
-FOOTER = "➖ Bizga obuna bo'ling: @xabarnomaofficial"
+FOOTER = "➖ Bizga obuna bo'ling: @tezkorofficial_uz"
 
 MIN_INTERVAL_SEC = int(os.getenv("MIN_INTERVAL_SEC", 2 * 60))
 MAX_INTERVAL_SEC = int(os.getenv("MAX_INTERVAL_SEC", 4 * 60))
