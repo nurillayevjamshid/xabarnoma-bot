@@ -69,7 +69,11 @@ class InstagramClient:
             await page.goto("https://www.instagram.com/")
             
             # Click 'Create' button
-            await page.click('svg[aria-label="New post"]')
+            try:
+                await page.click('svg[aria-label="New post"]', timeout=10000)
+            except:
+                # Alternative selector for Create button
+                await page.click('div[role="button"]:has(svg[aria-label="New post"])', timeout=10000)
             await asyncio.sleep(2)
 
             # Upload files
@@ -82,21 +86,26 @@ class InstagramClient:
             await asyncio.sleep(3)
             
             # Click 'Next' (Crop)
+            await page.wait_for_selector('div[role="button"]:has-text("Next")', timeout=10000)
             await page.click('div[role="button"]:has-text("Next")')
-            await asyncio.sleep(1)
+            await asyncio.sleep(2)
             
             # Click 'Next' (Edit/Filters)
+            await page.wait_for_selector('div[role="button"]:has-text("Next")', timeout=10000)
             await page.click('div[role="button"]:has-text("Next")')
-            await asyncio.sleep(1)
+            await asyncio.sleep(2)
 
             # Add Caption
+            await page.wait_for_selector('div[aria-label="Write a caption..."]', timeout=10000)
             await page.fill('div[aria-label="Write a caption..."]', caption)
             
             # Click 'Share'
+            await page.wait_for_selector('div[role="button"]:has-text("Share")', timeout=10000)
             await page.click('div[role="button"]:has-text("Share")')
             
             # Wait for success message
-            await page.wait_for_selector('text="Your post has been shared."', timeout=60000)
+            logger.info("Waiting for sharing confirmation...")
+            await page.wait_for_selector('text="Your post has been shared."', timeout=90000)
             logger.info("Post successfully shared on Instagram!")
             
         except Exception as e:
