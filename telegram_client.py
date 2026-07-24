@@ -38,7 +38,14 @@ class TelegramMonitor:
                 await self.process_single_message(event.message)
 
         logger.info(f"Monitoring channel: {SOURCE_CHANNEL}")
-        await self.client.run_until_disconnected()
+        while True:
+            try:
+                await self.client.run_until_disconnected()
+            except Exception as e:
+                logger.error(f"Telegram connection lost: {e}. Reconnecting in 10s...")
+                await asyncio.sleep(10)
+                if not self.client.is_connected():
+                    await self.client.connect()
 
     async def process_media_group(self, gid):
         await asyncio.sleep(2)  # Wait for all messages in the group

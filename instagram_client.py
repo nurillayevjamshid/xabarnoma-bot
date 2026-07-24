@@ -21,17 +21,40 @@ class InstagramClient:
             self.context = await self.browser.new_context()
             logger.warning("No session found. Manual login required.")
 
+    async def handle_popups(self, page: Page):
+        """Closes common Instagram pop-ups like 'Save Info' or 'Turn on Notifications'."""
+        popups = [
+            'button:has-text("Not Now")',
+            'button:has-text("Save Info")',
+            'button:has-text("Save info")',
+            'button:has-text("Turn On")',
+            'button:has-text("Maybe Later")'
+        ]
+        for selector in popups:
+            try:
+                if await page.is_visible(selector, timeout=2000):
+                    await page.click(selector)
+                    logger.info(f"Closed popup: {selector}")
+                    await asyncio.sleep(1)
+            except:
+                continue
+
     async def check_login(self) -> bool:
         page = await self.context.new_page()
-        await page.goto("https://www.instagram.com/")
-        await asyncio.sleep(3)
-        
-        if await page.query_selector('svg[aria-label="Home"]'):
+        try:
+            await page.goto("https://www.instagram.com/", timeout=60000)
+            await asyncio.sleep(5)
+            await self.handle_popups(page)
+            
+            # Check for Home or Create icon as login indicator
+            if await page.query_selector('svg[aria-label="Home"]') or await page.query_selector('svg[aria-label="New post"]'):
+                return True
+            return False
+        except Exception as e:
+            logger.error(f"Check login failed: {e}")
+            return False
+        finally:
             await page.close()
-            return True
-        
-        await page.close()
-        return False
 
     async def login(self):
         page = await self.context.new_page()
@@ -66,7 +89,9 @@ class InstagramClient:
 
         page = await self.context.new_page()
         try:
-            await page.goto("https://www.instagram.com/")
+            await page.goto("https://www.instagram.com/", timeout=60000)
+            await asyncio.sleep(5)
+            await self.handle_popups(page)
             
             # Click 'Create' button
             try:
