@@ -68,14 +68,18 @@ async def _telegram_channel(session, username: str) -> list[Article]:
         lines = [ln for ln in lines if ln and not handle_re.fullmatch(ln) and "t.me/" not in ln.lower() and ".uz" not in ln.lower() and ".com" not in ln.lower()]
         # "Ko'proq 👉", "Batafsil" kabi havolaga chaqiriq footer qatorlari va
         # faqat emoji/belgidan iborat ("📱 - ▣ -") qatorlarni olib tashlash
-        cta_re = re.compile(r"ko['’ʻ`]?proq|batafsil|подроб|читать", re.I)
+        cta_re = re.compile(r"ko['’ʻʼ‘`]?proq|batafsil|подроб|читать|davomi", re.I)
         arrow_re = re.compile(r"[👉👇➡▶🔗]")
 
         def _keep(ln: str) -> bool:
             if not any(c.isalpha() for c in ln):
                 return False  # faqat emoji/belgi/raqam — matn emas
-            if cta_re.search(ln) and (arrow_re.search(ln) or len(ln) <= 25):
+            # Agar qatorda 'Ko'proq' yoki 'Batafsil' so'zi bo'lsa va u qisqa bo'lsa (footer)
+            if cta_re.search(ln) and (arrow_re.search(ln) or len(ln) <= 35):
                 return False  # havolaga chaqiruvchi footer
+            # Agar qator faqat kanal handle (@username) bo'lsa
+            if handle_re.fullmatch(ln):
+                return False
             return True
 
         lines = [ln for ln in lines if _keep(ln)]
