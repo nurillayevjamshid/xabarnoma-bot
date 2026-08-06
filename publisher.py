@@ -67,7 +67,7 @@ async def publish(bot: Bot, article: Article) -> bool:
             return True
         except Exception as e:
             # Video yuklanmasa (masalan, hajmi katta), rasm/matnga o'tamiz.
-            log.warning(f"Video bilan yuborilmadi, rasm/matnga o'tilmoqda: {e}")
+            log.warning(f"Video send failed, trying photo/text: {e}")
 
     # Rasm bo'lsa, rasm bilan yuborishga urinamiz.
     if article.image_url:
@@ -83,7 +83,7 @@ async def publish(bot: Bot, article: Article) -> bool:
         except Exception as e:
             # Rasmni Telegram yuklay olmasa, post yo'qolib ketmasligi uchun
             # matn ko'rinishida yuboramiz.
-            log.warning(f"Rasm bilan yuborilmadi, matn sifatida urinilmoqda: {e}")
+            log.warning(f"Photo send failed, trying text only: {e}")
 
     try:
         await _send_text(bot, caption)

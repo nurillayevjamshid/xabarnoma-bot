@@ -30,14 +30,18 @@ async def pick_and_publish(bot: Bot) -> bool:
     articles.sort(key=lambda a: a.published)
     for art in articles:
         if is_posted(art.url, art.title):
+            log.debug(f"Skip (already posted): {art.title[:30]}")
             continue
+        log.info(f"Publishing: {art.title[:60]}")
         ok = await publish(bot, art)
         if ok:
             mark_posted(art.url, art.title)
             append_post(art)
-            log.info(f"Yuborildi: {art.title[:60]}")
+            log.info(f"Successfully sent: {art.title[:60]}")
             return True
-    log.info("Yangi yuborilmagan post yo'q")
+        else:
+            log.error(f"Failed to publish: {art.title[:60]}")
+    log.info("No new unposted articles found.")
     return False
 
 
