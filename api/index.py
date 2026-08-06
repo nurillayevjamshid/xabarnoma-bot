@@ -1,8 +1,11 @@
 import asyncio
+import logging
 from http.server import BaseHTTPRequestHandler
 from main import pick_and_publish
 from aiogram import Bot
 from config import BOT_TOKEN
+
+log = logging.getLogger("xabarnoma")
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -11,19 +14,26 @@ class handler(BaseHTTPRequestHandler):
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         
+        import io
+        log_capture = io.StringIO()
+        ch = logging.StreamHandler(log_capture)
+        ch.setLevel(logging.INFO)
+        log.addHandler(ch)
+        
         bot = Bot(token=BOT_TOKEN)
         try:
             # Run the pick_and_publish logic once
             success = loop.run_until_complete(pick_and_publish(bot))
             
             self.send_response(200)
-            self.send_header('Content-type', 'text/plain')
+            self.send_header('Content-type', 'text/plain; charset=utf-8')
             self.end_headers()
             
+            output = log_capture.getvalue()
             if success:
-                self.wfile.write("Success: New post published.".encode())
+                self.wfile.write(f"Success: New post published.\n\nLogs:\n{output}".encode())
             else:
-                self.wfile.write("No new posts to publish.".encode())
+                self.wfile.write(f"No new posts to publish.\n\nLogs:\n{output}".encode())
                 
         except Exception as e:
             self.send_response(500)
