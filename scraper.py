@@ -39,7 +39,18 @@ async def _telegram_channel(session, username: str) -> list[Article]:
     soup = BeautifulSoup(html, "lxml")
     posts = soup.select("div.tgme_widget_message_wrap")
     out: list[Article] = []
+    
     handle_re = re.compile(r"@\w+", re.I)
+    url_re = re.compile(r'https?://\S+', re.I)
+    bare_url_re = re.compile(r'\b\w+\.\w+\.[a-z]{2,}\S*', re.I)
+    cta_re = re.compile(r"ko['’ʻʼ‘`]?proq|batafsil|podrob|chitat|davomi", re.I)
+    arrow_re = re.compile(r"[👉👇➡▶🔗]")
+    trailing_cta_re = re.compile(
+        r"(?<=[.!?…»”\"])\s+(ko['’ʻʼ‘`]?proq|batafsil|davomi|podrobnee|chitat(\s+dalee)?)"
+        r"\s*[👉👇➡▶🔗:…\-–—.!]*\s*$",
+        re.I,
+    )
+
     for post in posts:
         msg = post.select_one("div.tgme_widget_message")
         if not msg:
@@ -50,53 +61,54 @@ async def _telegram_channel(session, username: str) -> list[Article]:
         text_el = post.select_one("div.tgme_widget_message_text")
         if not text_el:
             continue
+
         # Link preview widgetni olib tashlash
         for preview in post.select("div.tgme_widget_message_link_preview"):
             preview.decompose()
+        
         # <a> teglar ichidagi havolalarni olib tashlash
         for link_el in text_el.select("a[href]"):
             link_el.decompose()
+        
         for br in text_el.find_all("br"):
             br.replace_with("\n")
-        raw = text_el.get_text("\n", strip=True)
-        # Barcha URL va domenlarni tozalash
-        url_re = re.compile(r'https?://\S+', re.I)
-        bare_url_re = re.compile(r'\b\w+\.\w+\.[a-z]{2,}\S*', re.I)
-        lines = [ln.strip() for ln in raw.splitlines()]
+        
+        raw_text = text_el.get_text("\n", strip=True)
+        
+        # Transliterate early
+        if is_cyrillic(raw_text):
+            raw_text = to_latin(raw_text)
+        
+        lines = [ln.strip() for ln in raw_text.splitlines() if ln.strip()]
+        
+        # Clean URLs and domains
         lines = [url_re.sub('', ln).strip() for ln in lines]
         lines = [bare_url_re.sub('', ln).strip() for ln in lines]
-        lines = [ln for ln in lines if ln and not handle_re.fullmatch(ln) and "t.me/" not in ln.lower() and ".uz" not in ln.lower() and ".com" not in ln.lower()]
-        # "Ko'proq 👉", "Batafsil" kabi havolaga chaqiriq footer qatorlari va
-        # faqat emoji/belgidan iborat ("📱 - ▣ -") qatorlarni olib tashlash
-        cta_re = re.compile(r"ko['’ʻʼ‘`]?proq|batafsil|подроб|читать|davomi", re.I)
-        arrow_re = re.compile(r"[👉👇➡▶🔗]")
-
+        
         def _keep(ln: str) -> bool:
+            if not ln:
+                return False
             if not any(c.isalpha() for c in ln):
-                return False  # faqat emoji/belgi/raqam — matn emas
-            # Agar qatorda 'Ko'proq' yoki 'Batafsil' so'zi bo'lsa va u qisqa bo'lsa (footer)
-            if cta_re.search(ln) and (arrow_re.search(ln) or len(ln) <= 35):
-                return False  # havolaga chaqiruvchi footer
-            # Agar qator faqat kanal handle (@username) bo'lsa
-            if handle_re.fullmatch(ln):
+                return False
+            # Remove footer CTA lines
+            if cta_re.search(ln) and (arrow_re.search(ln) or len(ln) <= 45):
+                return False
+            # Remove channel handles and short links
+            if handle_re.fullmatch(ln) or (handle_re.search(ln) and len(ln) < 20):
+                return False
+            if "t.me/" in ln.lower():
                 return False
             return True
 
         lines = [ln for ln in lines if _keep(ln)]
-        # Qator OXIRIDA gap tugagandan keyin yopishib qolgan "Ko'proq"/"Batafsil"
-        # kabi CTA qoldig'ini kesish (havola o'chirilgach shu so'z qolib ketadi).
-        trailing_cta_re = re.compile(
-            r"(?<=[.!?…»”\"])\s+(ko['’ʻʼ‘`]?proq|batafsil|davomi|подробнее|читать(\s+далее)?)"
-            r"\s*[👉👇➡▶🔗:…\-–—.!]*\s*$",
-            re.I,
-        )
         lines = [trailing_cta_re.sub("", ln).rstrip() for ln in lines]
         lines = [ln for ln in lines if ln]
+        
         if not lines:
             continue
 
         # Reklama postlarini filtrlash
-        if re.search(r"#реклама|#reklama", raw, re.I):
+        if re.search(r"#reklama|#reklama", raw_text, re.I):
             continue
 
         def _has_letters(s: str) -> bool:
@@ -107,11 +119,6 @@ async def _telegram_channel(session, username: str) -> list[Article]:
         body_parts = lines[title_idx + 1:]
         body = "\n\n".join(body_parts) if body_parts else title
 
-        if is_cyrillic(title):
-            title = to_latin(title)
-        if is_cyrillic(body):
-            body = to_latin(body)
-
         img = None
         photo_wrap = post.select_one("a.tgme_widget_message_photo_wrap")
         if photo_wrap and photo_wrap.get("style"):
@@ -119,14 +126,11 @@ async def _telegram_channel(session, username: str) -> list[Article]:
             if m:
                 img = m.group(1)
 
-        # Video: t.me/s sahifasi kichik videolarni <video src="..."> qilib beradi.
         video = None
         video_el = post.select_one("video[src]")
         if video_el:
             video = video_el["src"]
         if not img:
-            # Katta videolarda faqat thumbnail bo'ladi — uni rasm sifatida olamiz,
-            # video yuborilmasa post hech bo'lmaganda rasm bilan chiqadi.
             thumb = post.select_one("i.tgme_widget_message_video_thumb")
             if thumb and thumb.get("style"):
                 m = re.search(r"url\(['\"]?([^'\")]+)['\"]?\)", thumb["style"])
@@ -153,7 +157,6 @@ async def _telegram_channel(session, username: str) -> list[Article]:
 
 
 async def fetch_all(max_per_channel: int = 0) -> list[Article]:
-    """max_per_channel > 0 bo'lsa, har kanaldan shuncha post oladi."""
     connector = aiohttp.TCPConnector(limit=10, ssl=False)
     async with aiohttp.ClientSession(connector=connector) as session:
         tasks = [_telegram_channel(session, ch) for ch in TELEGRAM_CHANNELS]
