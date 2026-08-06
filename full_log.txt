@@ -1,0 +1,836 @@
+run	UNKNOWN STEP	﻿2026-07-24T08:19:54.2561457Z Current runner version: '2.335.1'
+run	UNKNOWN STEP	2026-07-24T08:19:54.2586380Z ##[group]Runner Image Provisioner
+run	UNKNOWN STEP	2026-07-24T08:19:54.2587301Z Hosted Compute Agent
+run	UNKNOWN STEP	2026-07-24T08:19:54.2587911Z Version: 20260707.563
+run	UNKNOWN STEP	2026-07-24T08:19:54.2588527Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+run	UNKNOWN STEP	2026-07-24T08:19:54.2589380Z Build Date: 2026-07-07T19:33:50Z
+run	UNKNOWN STEP	2026-07-24T08:19:54.2590078Z Worker ID: {26cfca43-f9cc-4973-8564-3e0274f635da}
+run	UNKNOWN STEP	2026-07-24T08:19:54.2590846Z Azure Region: eastus2
+run	UNKNOWN STEP	2026-07-24T08:19:54.2591461Z ##[endgroup]
+run	UNKNOWN STEP	2026-07-24T08:19:54.2593230Z ##[group]Operating System
+run	UNKNOWN STEP	2026-07-24T08:19:54.2594285Z Ubuntu
+run	UNKNOWN STEP	2026-07-24T08:19:54.2595030Z 24.04.4
+run	UNKNOWN STEP	2026-07-24T08:19:54.2595734Z LTS
+run	UNKNOWN STEP	2026-07-24T08:19:54.2596551Z ##[endgroup]
+run	UNKNOWN STEP	2026-07-24T08:19:54.2597334Z ##[group]Runner Image
+run	UNKNOWN STEP	2026-07-24T08:19:54.2598028Z Image: ubuntu-24.04
+run	UNKNOWN STEP	2026-07-24T08:19:54.2598648Z Version: 20260720.247.2
+run	UNKNOWN STEP	2026-07-24T08:19:54.2600007Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+run	UNKNOWN STEP	2026-07-24T08:19:54.2601562Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+run	UNKNOWN STEP	2026-07-24T08:19:54.2602872Z ##[endgroup]
+run	UNKNOWN STEP	2026-07-24T08:19:54.2604005Z ##[group]GITHUB_TOKEN Permissions
+run	UNKNOWN STEP	2026-07-24T08:19:54.2606292Z Contents: write
+run	UNKNOWN STEP	2026-07-24T08:19:54.2606925Z Metadata: read
+run	UNKNOWN STEP	2026-07-24T08:19:54.2607532Z ##[endgroup]
+run	UNKNOWN STEP	2026-07-24T08:19:54.2609700Z Secret source: Actions
+run	UNKNOWN STEP	2026-07-24T08:19:54.2610905Z Prepare workflow directory
+run	UNKNOWN STEP	2026-07-24T08:19:54.2935226Z Prepare all required actions
+run	UNKNOWN STEP	2026-07-24T08:19:54.2973178Z Getting action download info
+run	UNKNOWN STEP	2026-07-24T08:19:54.5138089Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+run	UNKNOWN STEP	2026-07-24T08:19:54.7570929Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+run	UNKNOWN STEP	2026-07-24T08:19:54.9389382Z Complete job name: run
+run	UNKNOWN STEP	2026-07-24T08:19:55.0112705Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+run	UNKNOWN STEP	2026-07-24T08:19:55.0121542Z ##[group]Run actions/checkout@v4
+run	UNKNOWN STEP	2026-07-24T08:19:55.0122462Z with:
+run	UNKNOWN STEP	2026-07-24T08:19:55.0122932Z   repository: nurillayevjamshid/xabarnoma-bot
+run	UNKNOWN STEP	2026-07-24T08:19:55.0126717Z   token: ***
+run	UNKNOWN STEP	2026-07-24T08:19:55.0127140Z   ssh-strict: true
+run	UNKNOWN STEP	2026-07-24T08:19:55.0127567Z   ssh-user: git
+run	UNKNOWN STEP	2026-07-24T08:19:55.0128002Z   persist-credentials: true
+run	UNKNOWN STEP	2026-07-24T08:19:55.0128471Z   clean: true
+run	UNKNOWN STEP	2026-07-24T08:19:55.0128900Z   sparse-checkout-cone-mode: true
+run	UNKNOWN STEP	2026-07-24T08:19:55.0129404Z   fetch-depth: 1
+run	UNKNOWN STEP	2026-07-24T08:19:55.0129819Z   fetch-tags: false
+run	UNKNOWN STEP	2026-07-24T08:19:55.0130245Z   show-progress: true
+run	UNKNOWN STEP	2026-07-24T08:19:55.0130669Z   lfs: false
+run	UNKNOWN STEP	2026-07-24T08:19:55.0131105Z   submodules: false
+run	UNKNOWN STEP	2026-07-24T08:19:55.0131540Z   set-safe-directory: true
+run	UNKNOWN STEP	2026-07-24T08:19:55.0132023Z   allow-unsafe-pr-checkout: false
+run	UNKNOWN STEP	2026-07-24T08:19:55.0132835Z ##[endgroup]
+run	UNKNOWN STEP	2026-07-24T08:19:55.1131356Z Syncing repository: nurillayevjamshid/xabarnoma-bot
+run	UNKNOWN STEP	2026-07-24T08:19:55.1134580Z ##[group]Getting Git version info
+run	UNKNOWN STEP	2026-07-24T08:19:55.1135923Z Working directory is '/home/runner/work/xabarnoma-bot/xabarnoma-bot'
+run	UNKNOWN STEP	2026-07-24T08:19:55.1137538Z [command]/usr/bin/git version
+run	UNKNOWN STEP	2026-07-24T08:19:55.1173692Z git version 2.54.0
+run	UNKNOWN STEP	2026-07-24T08:19:55.1193738Z ##[endgroup]
+run	UNKNOWN STEP	2026-07-24T08:19:55.1207882Z Temporarily overriding HOME='/home/runner/work/_temp/0eb66203-950d-46a7-a98e-bba95ffa1fc1' before making global git config changes
+run	UNKNOWN STEP	2026-07-24T08:19:55.1210166Z Adding repository directory to the temporary git global config as a safe directory
+run	UNKNOWN STEP	2026-07-24T08:19:55.1213038Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/xabarnoma-bot/xabarnoma-bot
+run	UNKNOWN STEP	2026-07-24T08:19:55.1255157Z Deleting the contents of '/home/runner/work/xabarnoma-bot/xabarnoma-bot'
+run	UNKNOWN STEP	2026-07-24T08:19:55.1258588Z ##[group]Initializing the repository
+run	UNKNOWN STEP	2026-07-24T08:19:55.1263301Z [command]/usr/bin/git init /home/runner/work/xabarnoma-bot/xabarnoma-bot
+run	UNKNOWN STEP	2026-07-24T08:19:55.1336219Z hint: Using 'master' as the name for the initial branch. This default branch name
+run	UNKNOWN STEP	2026-07-24T08:19:55.1338584Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+run	UNKNOWN STEP	2026-07-24T08:19:55.1339908Z hint: to use in all of your new repositories, which will suppress this warning,
+run	UNKNOWN STEP	2026-07-24T08:19:55.1340657Z hint: call:
+run	UNKNOWN STEP	2026-07-24T08:19:55.1341061Z hint:
+run	UNKNOWN STEP	2026-07-24T08:19:55.1341568Z hint: 	git config --global init.defaultBranch <name>
+run	UNKNOWN STEP	2026-07-24T08:19:55.1342359Z hint:
+run	UNKNOWN STEP	2026-07-24T08:19:55.1343143Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+run	UNKNOWN STEP	2026-07-24T08:19:55.1344463Z hint: 'development'. The just-created branch can be renamed via this command:
+run	UNKNOWN STEP	2026-07-24T08:19:55.1345263Z hint:
+run	UNKNOWN STEP	2026-07-24T08:19:55.1345921Z hint: 	git branch -m <name>
+run	UNKNOWN STEP	2026-07-24T08:19:55.1346564Z hint:
+run	UNKNOWN STEP	2026-07-24T08:19:55.1347174Z hint: Disable this message with "git config set advice.defaultBranchName false"
+run	UNKNOWN STEP	2026-07-24T08:19:55.1348623Z Initialized empty Git repository in /home/runner/work/xabarnoma-bot/xabarnoma-bot/.git/
+run	UNKNOWN STEP	2026-07-24T08:19:55.1353784Z [command]/usr/bin/git remote add origin https://github.com/nurillayevjamshid/xabarnoma-bot
+run	UNKNOWN STEP	2026-07-24T08:19:55.1393087Z ##[endgroup]
+run	UNKNOWN STEP	2026-07-24T08:19:55.1393879Z ##[group]Disabling automatic garbage collection
+run	UNKNOWN STEP	2026-07-24T08:19:55.1398297Z [command]/usr/bin/git config --local gc.auto 0
+run	UNKNOWN STEP	2026-07-24T08:19:55.1430575Z ##[endgroup]
+run	UNKNOWN STEP	2026-07-24T08:19:55.1431297Z ##[group]Setting up auth
+run	UNKNOWN STEP	2026-07-24T08:19:55.1438361Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+run	UNKNOWN STEP	2026-07-24T08:19:55.1475426Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+run	UNKNOWN STEP	2026-07-24T08:19:55.1807972Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+run	UNKNOWN STEP	2026-07-24T08:19:55.1852901Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+run	UNKNOWN STEP	2026-07-24T08:19:55.2107060Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+run	UNKNOWN STEP	2026-07-24T08:19:55.2147220Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+run	UNKNOWN STEP	2026-07-24T08:19:55.2401801Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+run	UNKNOWN STEP	2026-07-24T08:19:55.2441980Z ##[endgroup]
+run	UNKNOWN STEP	2026-07-24T08:19:55.2442956Z ##[group]Fetching the repository
+run	UNKNOWN STEP	2026-07-24T08:19:55.2451918Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +386ad748009e4a93128d44337ded356d5d5d62bd:refs/remotes/origin/main
+run	UNKNOWN STEP	2026-07-24T08:19:56.6700766Z From https://github.com/nurillayevjamshid/xabarnoma-bot
+run	UNKNOWN STEP	2026-07-24T08:19:56.6703750Z  * [new ref]         386ad748009e4a93128d44337ded356d5d5d62bd -> origin/main
+run	UNKNOWN STEP	2026-07-24T08:19:56.6735400Z ##[endgroup]
+run	UNKNOWN STEP	2026-07-24T08:19:56.6736582Z ##[group]Determining the checkout info
+run	UNKNOWN STEP	2026-07-24T08:19:56.6738156Z ##[endgroup]
+run	UNKNOWN STEP	2026-07-24T08:19:56.6744154Z [command]/usr/bin/git sparse-checkout disable
+run	UNKNOWN STEP	2026-07-24T08:19:56.6803636Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+run	UNKNOWN STEP	2026-07-24T08:19:56.6833326Z ##[group]Checking out the ref
+run	UNKNOWN STEP	2026-07-24T08:19:56.6837016Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+run	UNKNOWN STEP	2026-07-24T08:19:56.7496069Z Switched to a new branch 'main'
+run	UNKNOWN STEP	2026-07-24T08:19:56.7497256Z branch 'main' set up to track 'origin/main'.
+run	UNKNOWN STEP	2026-07-24T08:19:56.7510219Z ##[endgroup]
+run	UNKNOWN STEP	2026-07-24T08:19:56.7559334Z [command]/usr/bin/git log -1 --format=%H
+run	UNKNOWN STEP	2026-07-24T08:19:56.7588357Z 386ad748009e4a93128d44337ded356d5d5d62bd
+run	UNKNOWN STEP	2026-07-24T08:19:56.7904845Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+run	UNKNOWN STEP	2026-07-24T08:19:56.7910185Z ##[group]Run actions/setup-python@v5
+run	UNKNOWN STEP	2026-07-24T08:19:56.7910898Z with:
+run	UNKNOWN STEP	2026-07-24T08:19:56.7911370Z   python-version: 3.13
+run	UNKNOWN STEP	2026-07-24T08:19:56.7911915Z   cache: pip
+run	UNKNOWN STEP	2026-07-24T08:19:56.7912546Z   check-latest: false
+run	UNKNOWN STEP	2026-07-24T08:19:56.7920645Z   token: ***
+run	UNKNOWN STEP	2026-07-24T08:19:56.7921140Z   update-environment: true
+run	UNKNOWN STEP	2026-07-24T08:19:56.7921782Z   allow-prereleases: false
+run	UNKNOWN STEP	2026-07-24T08:19:56.7922487Z   freethreaded: false
+run	UNKNOWN STEP	2026-07-24T08:19:56.7923020Z ##[endgroup]
+run	UNKNOWN STEP	2026-07-24T08:19:56.9204394Z ##[group]Installed versions
+run	UNKNOWN STEP	2026-07-24T08:19:56.9286179Z (node:2231) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+run	UNKNOWN STEP	2026-07-24T08:19:56.9288837Z (Use `node --trace-deprecation ...` to show where the warning was created)
+run	UNKNOWN STEP	2026-07-24T08:19:56.9290104Z Successfully set up CPython (3.13.14)
+run	UNKNOWN STEP	2026-07-24T08:19:56.9291313Z ##[endgroup]
+run	UNKNOWN STEP	2026-07-24T08:19:57.0013904Z [command]/opt/hostedtoolcache/Python/3.13.14/x64/bin/pip cache dir
+run	UNKNOWN STEP	2026-07-24T08:19:58.6943487Z /home/runner/.cache/pip
+run	UNKNOWN STEP	2026-07-24T08:19:58.7856856Z Cache hit for: setup-python-Linux-x64-24.04-Ubuntu-python-3.13.14-pip-7ec29e5a561398ff67bcb3c5605f228bb31680d40339284b8ad43f669ea9101a
+run	UNKNOWN STEP	2026-07-24T08:19:58.7960810Z (node:2231) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+run	UNKNOWN STEP	2026-07-24T08:19:58.9732956Z Received 15402648 of 15402648 (100.0%), 94.2 MBs/sec
+run	UNKNOWN STEP	2026-07-24T08:19:58.9733709Z Cache Size: ~15 MB (15402648 B)
+run	UNKNOWN STEP	2026-07-24T08:19:58.9759757Z [command]/usr/bin/tar -xf /home/runner/work/_temp/10257303-26d0-4da9-a753-d784eedbbf0d/cache.tzst -P -C /home/runner/work/xabarnoma-bot/xabarnoma-bot --use-compress-program unzstd
+run	UNKNOWN STEP	2026-07-24T08:19:59.0150898Z Cache restored successfully
+run	UNKNOWN STEP	2026-07-24T08:19:59.0163904Z Cache restored from key: setup-python-Linux-x64-24.04-Ubuntu-python-3.13.14-pip-7ec29e5a561398ff67bcb3c5605f228bb31680d40339284b8ad43f669ea9101a
+run	UNKNOWN STEP	2026-07-24T08:19:59.0415898Z ##[group]Run pip install -r requirements.txt
+run	UNKNOWN STEP	2026-07-24T08:19:59.0416452Z ^[[36;1mpip install -r requirements.txt^[[0m
+run	UNKNOWN STEP	2026-07-24T08:19:59.0471578Z shell: /usr/bin/bash -e {0}
+run	UNKNOWN STEP	2026-07-24T08:19:59.0471878Z env:
+run	UNKNOWN STEP	2026-07-24T08:19:59.0472385Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.14/x64
+run	UNKNOWN STEP	2026-07-24T08:19:59.0472852Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.14/x64/lib/pkgconfig
+run	UNKNOWN STEP	2026-07-24T08:19:59.0473299Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.14/x64
+run	UNKNOWN STEP	2026-07-24T08:19:59.0473704Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.14/x64
+run	UNKNOWN STEP	2026-07-24T08:19:59.0474100Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.14/x64
+run	UNKNOWN STEP	2026-07-24T08:19:59.0474493Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.14/x64/lib
+run	UNKNOWN STEP	2026-07-24T08:19:59.0474850Z ##[endgroup]
+run	UNKNOWN STEP	2026-07-24T08:20:00.2121056Z Collecting aiogram==3.13.1 (from -r requirements.txt (line 1))
+run	UNKNOWN STEP	2026-07-24T08:20:00.2133586Z   Using cached aiogram-3.13.1-py3-none-any.whl.metadata (7.5 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:00.6905992Z Collecting aiohttp==3.10.10 (from -r requirements.txt (line 2))
+run	UNKNOWN STEP	2026-07-24T08:20:00.6920160Z   Using cached aiohttp-3.10.10-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.6 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:00.7086031Z Collecting beautifulsoup4==4.12.3 (from -r requirements.txt (line 3))
+run	UNKNOWN STEP	2026-07-24T08:20:00.7097311Z   Using cached beautifulsoup4-4.12.3-py3-none-any.whl.metadata (3.8 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:00.8891820Z Collecting lxml==5.3.0 (from -r requirements.txt (line 4))
+run	UNKNOWN STEP	2026-07-24T08:20:00.8905103Z   Using cached lxml-5.3.0-cp313-cp313-manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:00.9037203Z Collecting aiofiles<24.2,>=23.2.1 (from aiogram==3.13.1->-r requirements.txt (line 1))
+run	UNKNOWN STEP	2026-07-24T08:20:00.9050153Z   Using cached aiofiles-24.1.0-py3-none-any.whl.metadata (10 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:00.9229153Z Collecting certifi>=2023.7.22 (from aiogram==3.13.1->-r requirements.txt (line 1))
+run	UNKNOWN STEP	2026-07-24T08:20:00.9869396Z   Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:01.0016581Z Collecting magic-filter<1.1,>=1.0.12 (from aiogram==3.13.1->-r requirements.txt (line 1))
+run	UNKNOWN STEP	2026-07-24T08:20:01.0027534Z   Using cached magic_filter-1.0.12-py3-none-any.whl.metadata (1.5 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:01.0919020Z Collecting pydantic<2.10,>=2.4.1 (from aiogram==3.13.1->-r requirements.txt (line 1))
+run	UNKNOWN STEP	2026-07-24T08:20:01.0931671Z   Using cached pydantic-2.9.2-py3-none-any.whl.metadata (149 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:01.1147055Z Collecting typing-extensions<=5.0,>=4.7.0 (from aiogram==3.13.1->-r requirements.txt (line 1))
+run	UNKNOWN STEP	2026-07-24T08:20:01.1217533Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:01.1392708Z Collecting aiohappyeyeballs>=2.3.0 (from aiohttp==3.10.10->-r requirements.txt (line 2))
+run	UNKNOWN STEP	2026-07-24T08:20:01.1460780Z   Downloading aiohappyeyeballs-2.7.1-py3-none-any.whl.metadata (5.9 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:01.1610280Z Collecting aiosignal>=1.1.2 (from aiohttp==3.10.10->-r requirements.txt (line 2))
+run	UNKNOWN STEP	2026-07-24T08:20:01.1621503Z   Using cached aiosignal-1.4.0-py3-none-any.whl.metadata (3.7 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:01.1769586Z Collecting attrs>=17.3.0 (from aiohttp==3.10.10->-r requirements.txt (line 2))
+run	UNKNOWN STEP	2026-07-24T08:20:01.1780660Z   Using cached attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:01.2326380Z Collecting frozenlist>=1.1.1 (from aiohttp==3.10.10->-r requirements.txt (line 2))
+run	UNKNOWN STEP	2026-07-24T08:20:01.2339164Z   Using cached frozenlist-1.8.0-cp313-cp313-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (20 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:01.4196719Z Collecting multidict<7.0,>=4.5 (from aiohttp==3.10.10->-r requirements.txt (line 2))
+run	UNKNOWN STEP	2026-07-24T08:20:01.4210371Z   Using cached multidict-6.7.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (5.3 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:01.6264994Z Collecting yarl<2.0,>=1.12.0 (from aiohttp==3.10.10->-r requirements.txt (line 2))
+run	UNKNOWN STEP	2026-07-24T08:20:01.6341769Z   Downloading yarl-1.24.5-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (103 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:01.6717862Z Collecting soupsieve>1.2 (from beautifulsoup4==4.12.3->-r requirements.txt (line 3))
+run	UNKNOWN STEP	2026-07-24T08:20:01.6784687Z   Downloading soupsieve-2.9.1-py3-none-any.whl.metadata (4.6 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:01.6934097Z Collecting annotated-types>=0.6.0 (from pydantic<2.10,>=2.4.1->aiogram==3.13.1->-r requirements.txt (line 1))
+run	UNKNOWN STEP	2026-07-24T08:20:01.7020399Z   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.2458488Z Collecting pydantic-core==2.23.4 (from pydantic<2.10,>=2.4.1->aiogram==3.13.1->-r requirements.txt (line 1))
+run	UNKNOWN STEP	2026-07-24T08:20:02.2472794Z   Using cached pydantic_core-2.23.4-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.2650609Z Collecting idna>=2.0 (from yarl<2.0,>=1.12.0->aiohttp==3.10.10->-r requirements.txt (line 2))
+run	UNKNOWN STEP	2026-07-24T08:20:02.2662403Z   Using cached idna-3.18-py3-none-any.whl.metadata (6.1 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3169136Z Collecting propcache>=0.2.1 (from yarl<2.0,>=1.12.0->aiohttp==3.10.10->-r requirements.txt (line 2))
+run	UNKNOWN STEP	2026-07-24T08:20:02.3182030Z   Using cached propcache-0.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (16 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3249602Z Using cached aiogram-3.13.1-py3-none-any.whl (588 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3263388Z Using cached aiohttp-3.10.10-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.3 MB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3279330Z Using cached beautifulsoup4-4.12.3-py3-none-any.whl (147 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3290524Z Using cached lxml-5.3.0-cp313-cp313-manylinux_2_28_x86_64.whl (4.9 MB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3319024Z Using cached aiofiles-24.1.0-py3-none-any.whl (15 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3329487Z Using cached magic_filter-1.0.12-py3-none-any.whl (11 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3340589Z Using cached multidict-6.7.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (254 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3351811Z Using cached pydantic-2.9.2-py3-none-any.whl (434 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3364647Z Using cached pydantic_core-2.23.4-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3441349Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3532702Z Downloading yarl-1.24.5-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (110 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3672357Z Downloading aiohappyeyeballs-2.7.1-py3-none-any.whl (15 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3702586Z Using cached aiosignal-1.4.0-py3-none-any.whl (7.5 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3771368Z Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3800242Z Using cached attrs-26.1.0-py3-none-any.whl (67 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3870144Z Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3912632Z Using cached frozenlist-1.8.0-cp313-cp313-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (234 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3923720Z Using cached idna-3.18-py3-none-any.whl (65 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.3934895Z Using cached propcache-0.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (61 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.4006599Z Downloading soupsieve-2.9.1-py3-none-any.whl (37 kB)
+run	UNKNOWN STEP	2026-07-24T08:20:02.5034868Z Installing collected packages: typing-extensions, soupsieve, propcache, multidict, magic-filter, lxml, idna, frozenlist, certifi, attrs, annotated-types, aiohappyeyeballs, aiofiles, yarl, pydantic-core, beautifulsoup4, aiosignal, pydantic, aiohttp, aiogram
+run	UNKNOWN STEP	2026-07-24T08:20:03.8502323Z 
+run	UNKNOWN STEP	2026-07-24T08:20:03.8527397Z Successfully installed aiofiles-24.1.0 aiogram-3.13.1 aiohappyeyeballs-2.7.1 aiohttp-3.10.10 aiosignal-1.4.0 annotated-types-0.8.0 attrs-26.1.0 beautifulsoup4-4.12.3 certifi-2026.7.22 frozenlist-1.8.0 idna-3.18 lxml-5.3.0 magic-filter-1.0.12 multidict-6.7.1 propcache-0.5.2 pydantic-2.9.2 pydantic-core-2.23.4 soupsieve-2.9.1 typing-extensions-4.16.0 yarl-1.24.5
+run	UNKNOWN STEP	2026-07-24T08:20:03.9528769Z ##[group]Run git config user.name "github-actions[bot]"
+run	UNKNOWN STEP	2026-07-24T08:20:03.9529200Z ^[[36;1mgit config user.name "github-actions[bot]"^[[0m
+run	UNKNOWN STEP	2026-07-24T08:20:03.9529667Z ^[[36;1mgit config user.email "41898282+github-actions[bot]@users.noreply.github.com"^[[0m
+run	UNKNOWN STEP	2026-07-24T08:20:03.9579473Z shell: /usr/bin/bash -e {0}
+run	UNKNOWN STEP	2026-07-24T08:20:03.9579734Z env:
+run	UNKNOWN STEP	2026-07-24T08:20:03.9580016Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.14/x64
+run	UNKNOWN STEP	2026-07-24T08:20:03.9580502Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.14/x64/lib/pkgconfig
+run	UNKNOWN STEP	2026-07-24T08:20:03.9580951Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.14/x64
+run	UNKNOWN STEP	2026-07-24T08:20:03.9581332Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.14/x64
+run	UNKNOWN STEP	2026-07-24T08:20:03.9581708Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.14/x64
+run	UNKNOWN STEP	2026-07-24T08:20:03.9582110Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.14/x64/lib
+run	UNKNOWN STEP	2026-07-24T08:20:03.9582693Z ##[endgroup]
+run	UNKNOWN STEP	2026-07-24T08:20:03.9720890Z ##[group]Run python run_window.py
+run	UNKNOWN STEP	2026-07-24T08:20:03.9721189Z ^[[36;1mpython run_window.py^[[0m
+run	UNKNOWN STEP	2026-07-24T08:20:03.9766726Z shell: /usr/bin/bash -e {0}
+run	UNKNOWN STEP	2026-07-24T08:20:03.9766982Z env:
+run	UNKNOWN STEP	2026-07-24T08:20:03.9767265Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.14/x64
+run	UNKNOWN STEP	2026-07-24T08:20:03.9767701Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.14/x64/lib/pkgconfig
+run	UNKNOWN STEP	2026-07-24T08:20:03.9768130Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.14/x64
+run	UNKNOWN STEP	2026-07-24T08:20:03.9768508Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.14/x64
+run	UNKNOWN STEP	2026-07-24T08:20:03.9768887Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.14/x64
+run	UNKNOWN STEP	2026-07-24T08:20:03.9769265Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.14/x64/lib
+run	UNKNOWN STEP	2026-07-24T08:20:03.9769596Z   RUN_SECONDS: 20400
+run	UNKNOWN STEP	2026-07-24T08:20:03.9769815Z   COMMIT_DB: 1
+run	UNKNOWN STEP	2026-07-24T08:20:03.9770194Z   SEED: 0
+run	UNKNOWN STEP	2026-07-24T08:20:03.9770383Z   PYTHONUTF8: 1
+run	UNKNOWN STEP	2026-07-24T08:20:03.9770584Z ##[endgroup]
+run	UNKNOWN STEP	2026-07-24T08:20:06.4292290Z [main e21a7e3] chore: update posted.db [skip ci]
+run	UNKNOWN STEP	2026-07-24T08:20:06.4293063Z  1 file changed, 0 insertions(+), 0 deletions(-)
+run	UNKNOWN STEP	2026-07-24T08:20:07.6405246Z To https://github.com/nurillayevjamshid/xabarnoma-bot
+run	UNKNOWN STEP	2026-07-24T08:20:07.6405675Z    386ad74..e21a7e3  main -> main
+run	UNKNOWN STEP	2026-07-24T08:20:07.6447438Z 2026-07-24 08:20:07,644 [INFO] posted.db saqlandi
+run	UNKNOWN STEP	2026-07-24T08:20:07.6628333Z 2026-07-24 08:20:07,662 [INFO] Loop boshlandi, ~340 daqiqa ishlaydi
+run	UNKNOWN STEP	2026-07-24T08:20:07.6628779Z 2026-07-24 08:20:07,662 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T08:20:08.3575035Z 2026-07-24 08:20:08,357 [INFO] Topildi: 32 ta maqola
+run	UNKNOWN STEP	2026-07-24T08:20:08.3623090Z 2026-07-24 08:20:08,362 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T08:20:08.3623622Z 2026-07-24 08:20:08,362 [INFO] Keyingi yuborishgacha 2 daqiqa 30 soniya
+run	UNKNOWN STEP	2026-07-24T08:22:38.3895975Z 2026-07-24 08:22:38,389 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T08:22:39.0429723Z 2026-07-24 08:22:39,042 [INFO] Topildi: 32 ta maqola
+run	UNKNOWN STEP	2026-07-24T08:22:39.0478217Z 2026-07-24 08:22:39,047 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T08:22:39.0478689Z 2026-07-24 08:22:39,047 [INFO] Keyingi yuborishgacha 3 daqiqa 42 soniya
+run	UNKNOWN STEP	2026-07-24T08:26:21.1331581Z 2026-07-24 08:26:21,132 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T08:26:21.7513792Z 2026-07-24 08:26:21,751 [INFO] Topildi: 32 ta maqola
+run	UNKNOWN STEP	2026-07-24T08:26:21.7561562Z 2026-07-24 08:26:21,755 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T08:26:21.7564125Z 2026-07-24 08:26:21,756 [INFO] Keyingi yuborishgacha 3 daqiqa 7 soniya
+run	UNKNOWN STEP	2026-07-24T08:29:28.8502863Z 2026-07-24 08:29:28,849 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T08:29:29.5215292Z 2026-07-24 08:29:29,521 [INFO] Topildi: 32 ta maqola
+run	UNKNOWN STEP	2026-07-24T08:29:29.5262488Z 2026-07-24 08:29:29,526 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T08:29:29.5262962Z 2026-07-24 08:29:29,526 [INFO] Keyingi yuborishgacha 2 daqiqa 26 soniya
+run	UNKNOWN STEP	2026-07-24T08:31:55.6269000Z 2026-07-24 08:31:55,626 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T08:31:56.2825983Z 2026-07-24 08:31:56,282 [INFO] Topildi: 33 ta maqola
+run	UNKNOWN STEP	2026-07-24T08:31:58.0728561Z 2026-07-24 08:31:58,072 [INFO] Yuborildi: Markaziy Osiyoda investorlar uchun eng xavfsiz mamlakat — Qo
+run	UNKNOWN STEP	2026-07-24T08:31:58.0729415Z 2026-07-24 08:31:58,072 [INFO] Keyingi yuborishgacha 2 daqiqa 45 soniya
+run	UNKNOWN STEP	2026-07-24T08:34:43.0777321Z 2026-07-24 08:34:43,077 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T08:34:43.7208528Z 2026-07-24 08:34:43,720 [INFO] Topildi: 34 ta maqola
+run	UNKNOWN STEP	2026-07-24T08:34:46.4323418Z 2026-07-24 08:34:46,431 [INFO] Yuborildi: Eronda 1 avgustdan avtomobillar uchun gaz bepul bo‘ladi
+run	UNKNOWN STEP	2026-07-24T08:34:46.4324060Z 2026-07-24 08:34:46,432 [INFO] Keyingi yuborishgacha 2 daqiqa 46 soniya
+run	UNKNOWN STEP	2026-07-24T08:37:32.5256960Z 2026-07-24 08:37:32,525 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T08:37:33.3230507Z 2026-07-24 08:37:33,322 [INFO] Topildi: 34 ta maqola
+run	UNKNOWN STEP	2026-07-24T08:37:33.3281279Z 2026-07-24 08:37:33,327 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T08:37:33.3282017Z 2026-07-24 08:37:33,328 [INFO] Keyingi yuborishgacha 2 daqiqa 24 soniya
+run	UNKNOWN STEP	2026-07-24T08:39:57.4018158Z 2026-07-24 08:39:57,401 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T08:39:58.1025061Z 2026-07-24 08:39:58,102 [INFO] Topildi: 34 ta maqola
+run	UNKNOWN STEP	2026-07-24T08:39:58.1075641Z 2026-07-24 08:39:58,107 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T08:39:58.1076196Z 2026-07-24 08:39:58,107 [INFO] Keyingi yuborishgacha 3 daqiqa 50 soniya
+run	UNKNOWN STEP	2026-07-24T08:43:48.2088942Z 2026-07-24 08:43:48,208 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T08:43:48.8068177Z 2026-07-24 08:43:48,806 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T08:43:48.8122527Z 2026-07-24 08:43:48,812 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T08:43:48.8123244Z 2026-07-24 08:43:48,812 [INFO] Keyingi yuborishgacha 3 daqiqa 15 soniya
+run	UNKNOWN STEP	2026-07-24T08:47:03.8457712Z 2026-07-24 08:47:03,845 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T08:47:04.4653486Z 2026-07-24 08:47:04,465 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T08:47:04.4704642Z 2026-07-24 08:47:04,470 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T08:47:04.4705565Z 2026-07-24 08:47:04,470 [INFO] Keyingi yuborishgacha 3 daqiqa 9 soniya
+run	UNKNOWN STEP	2026-07-24T08:50:13.5590492Z 2026-07-24 08:50:13,558 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T08:50:14.1394757Z 2026-07-24 08:50:14,139 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T08:50:16.5646534Z 2026-07-24 08:50:16,564 [INFO] Yuborildi: Bolalikdagi vaʼda — jahon chempionligi bilan yakunlandi.
+run	UNKNOWN STEP	2026-07-24T08:50:16.6030385Z [main e8726da] chore: update posted.db [skip ci]
+run	UNKNOWN STEP	2026-07-24T08:50:16.6030943Z  8 files changed, 1 insertion(+), 1 deletion(-)
+run	UNKNOWN STEP	2026-07-24T08:50:16.6031297Z  create mode 100644 docs/img/09d0f776718ae508.jpg
+run	UNKNOWN STEP	2026-07-24T08:50:16.6031623Z  delete mode 100644 docs/img/0ab95b5f281a67dd.jpg
+run	UNKNOWN STEP	2026-07-24T08:50:16.6031925Z  create mode 100644 docs/img/221f078e4caaa437.jpg
+run	UNKNOWN STEP	2026-07-24T08:50:16.6032412Z  create mode 100644 docs/img/683c71d7ab6ad0c9.jpg
+run	UNKNOWN STEP	2026-07-24T08:50:16.6032731Z  delete mode 100644 docs/img/980924449dd37a37.jpg
+run	UNKNOWN STEP	2026-07-24T08:50:16.6033065Z  delete mode 100644 docs/img/e05eec0d6fc3d994.jpg
+run	UNKNOWN STEP	2026-07-24T08:50:18.1253502Z To https://github.com/nurillayevjamshid/xabarnoma-bot
+run	UNKNOWN STEP	2026-07-24T08:50:18.1253971Z    e21a7e3..e8726da  main -> main
+run	UNKNOWN STEP	2026-07-24T08:50:18.1296077Z 2026-07-24 08:50:18,129 [INFO] posted.db saqlandi
+run	UNKNOWN STEP	2026-07-24T08:50:18.1296719Z 2026-07-24 08:50:18,129 [INFO] Keyingi yuborishgacha 2 daqiqa 21 soniya
+run	UNKNOWN STEP	2026-07-24T08:52:39.2057556Z 2026-07-24 08:52:39,205 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T08:52:39.8031596Z 2026-07-24 08:52:39,802 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T08:52:39.8083929Z 2026-07-24 08:52:39,808 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T08:52:39.8084476Z 2026-07-24 08:52:39,808 [INFO] Keyingi yuborishgacha 2 daqiqa 42 soniya
+run	UNKNOWN STEP	2026-07-24T08:55:21.9046928Z 2026-07-24 08:55:21,904 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T08:55:22.5445725Z 2026-07-24 08:55:22,544 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T08:55:22.5497363Z 2026-07-24 08:55:22,549 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T08:55:22.5497970Z 2026-07-24 08:55:22,549 [INFO] Keyingi yuborishgacha 3 daqiqa 59 soniya
+run	UNKNOWN STEP	2026-07-24T08:59:21.5817382Z 2026-07-24 08:59:21,581 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T08:59:22.1612316Z 2026-07-24 08:59:22,160 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T08:59:22.1664778Z 2026-07-24 08:59:22,166 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T08:59:22.1665379Z 2026-07-24 08:59:22,166 [INFO] Keyingi yuborishgacha 2 daqiqa 33 soniya
+run	UNKNOWN STEP	2026-07-24T09:01:55.2676242Z 2026-07-24 09:01:55,267 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T09:01:55.9097144Z 2026-07-24 09:01:55,909 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T09:01:55.9149657Z 2026-07-24 09:01:55,914 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T09:01:55.9150399Z 2026-07-24 09:01:55,914 [INFO] Keyingi yuborishgacha 3 daqiqa 37 soniya
+run	UNKNOWN STEP	2026-07-24T09:05:32.9656790Z 2026-07-24 09:05:32,965 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T09:05:33.6258252Z 2026-07-24 09:05:33,625 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T09:05:33.6310536Z 2026-07-24 09:05:33,630 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T09:05:33.6311342Z 2026-07-24 09:05:33,630 [INFO] Keyingi yuborishgacha 3 daqiqa 17 soniya
+run	UNKNOWN STEP	2026-07-24T09:08:50.7221734Z 2026-07-24 09:08:50,721 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T09:08:51.3378957Z 2026-07-24 09:08:51,337 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T09:08:51.3430237Z 2026-07-24 09:08:51,342 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T09:08:51.3430768Z 2026-07-24 09:08:51,342 [INFO] Keyingi yuborishgacha 3 daqiqa 35 soniya
+run	UNKNOWN STEP	2026-07-24T09:12:26.4009181Z 2026-07-24 09:12:26,400 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T09:12:27.1188361Z 2026-07-24 09:12:27,118 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T09:12:27.1240464Z 2026-07-24 09:12:27,123 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T09:12:27.1240974Z 2026-07-24 09:12:27,123 [INFO] Keyingi yuborishgacha 3 daqiqa 6 soniya
+run	UNKNOWN STEP	2026-07-24T09:15:33.1417249Z 2026-07-24 09:15:33,141 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T09:15:33.8125613Z 2026-07-24 09:15:33,812 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T09:15:33.8176911Z 2026-07-24 09:15:33,817 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T09:15:33.8177476Z 2026-07-24 09:15:33,817 [INFO] Keyingi yuborishgacha 3 daqiqa 25 soniya
+run	UNKNOWN STEP	2026-07-24T09:18:58.8687629Z 2026-07-24 09:18:58,868 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T09:18:59.4549997Z 2026-07-24 09:18:59,454 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T09:19:01.0728405Z 2026-07-24 09:19:01,072 [INFO] Yuborildi: Rasman:
+run	UNKNOWN STEP	2026-07-24T09:19:01.0728894Z 2026-07-24 09:19:01,072 [INFO] Keyingi yuborishgacha 2 daqiqa 23 soniya
+run	UNKNOWN STEP	2026-07-24T09:21:24.1720981Z 2026-07-24 09:21:24,171 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T09:21:24.7566824Z 2026-07-24 09:21:24,756 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T09:21:24.7619465Z 2026-07-24 09:21:24,761 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T09:21:24.7937622Z [main ba54fb3] chore: update posted.db [skip ci]
+run	UNKNOWN STEP	2026-07-24T09:21:24.7938195Z  4 files changed, 1 insertion(+), 1 deletion(-)
+run	UNKNOWN STEP	2026-07-24T09:21:24.7938713Z  delete mode 100644 docs/img/4d7858e72fcdc02b.jpg
+run	UNKNOWN STEP	2026-07-24T09:21:24.7939252Z  create mode 100644 docs/img/8f322830aaaccb12.jpg
+run	UNKNOWN STEP	2026-07-24T09:21:25.9843481Z To https://github.com/nurillayevjamshid/xabarnoma-bot
+run	UNKNOWN STEP	2026-07-24T09:21:25.9844217Z    e8726da..ba54fb3  main -> main
+run	UNKNOWN STEP	2026-07-24T09:21:25.9885936Z 2026-07-24 09:21:25,988 [INFO] posted.db saqlandi
+run	UNKNOWN STEP	2026-07-24T09:21:25.9886448Z 2026-07-24 09:21:25,988 [INFO] Keyingi yuborishgacha 2 daqiqa 39 soniya
+run	UNKNOWN STEP	2026-07-24T09:24:05.0608623Z 2026-07-24 09:24:05,060 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T09:24:05.6610922Z 2026-07-24 09:24:05,660 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T09:24:05.6663162Z 2026-07-24 09:24:05,666 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T09:24:05.6663694Z 2026-07-24 09:24:05,666 [INFO] Keyingi yuborishgacha 2 daqiqa 40 soniya
+run	UNKNOWN STEP	2026-07-24T09:26:45.7493007Z 2026-07-24 09:26:45,748 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T09:26:46.4068355Z 2026-07-24 09:26:46,406 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T09:26:46.4120774Z 2026-07-24 09:26:46,411 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T09:26:46.4121503Z 2026-07-24 09:26:46,411 [INFO] Keyingi yuborishgacha 3 daqiqa 34 soniya
+run	UNKNOWN STEP	2026-07-24T09:30:20.4537434Z 2026-07-24 09:30:20,453 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T09:30:21.0783216Z 2026-07-24 09:30:21,078 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T09:30:23.6122990Z 2026-07-24 09:30:23,611 [INFO] Yuborildi: Ekaterinburglik chaqiriluvchi harbiy xizmatdan bo‘yin tovlas
+run	UNKNOWN STEP	2026-07-24T09:30:23.6123620Z 2026-07-24 09:30:23,612 [INFO] Keyingi yuborishgacha 3 daqiqa 5 soniya
+run	UNKNOWN STEP	2026-07-24T09:33:28.7128062Z 2026-07-24 09:33:28,712 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T09:33:29.3394001Z 2026-07-24 09:33:29,339 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T09:33:29.3459309Z 2026-07-24 09:33:29,345 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T09:33:29.3459865Z 2026-07-24 09:33:29,345 [INFO] Keyingi yuborishgacha 3 daqiqa 17 soniya
+run	UNKNOWN STEP	2026-07-24T09:36:46.4032064Z 2026-07-24 09:36:46,402 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T09:36:47.0252488Z 2026-07-24 09:36:47,024 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T09:36:48.4780041Z 2026-07-24 09:36:48,477 [INFO] Yuborildi: Ilgiz Tantashev JCh-2026 ning eng yaxshi 10 ta hakami qatori
+run	UNKNOWN STEP	2026-07-24T09:36:48.4780984Z 2026-07-24 09:36:48,477 [INFO] Keyingi yuborishgacha 3 daqiqa 46 soniya
+run	UNKNOWN STEP	2026-07-24T09:40:34.5296627Z 2026-07-24 09:40:34,529 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T09:40:35.1384462Z 2026-07-24 09:40:35,138 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T09:40:35.1438303Z 2026-07-24 09:40:35,143 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T09:40:35.1438778Z 2026-07-24 09:40:35,143 [INFO] Keyingi yuborishgacha 3 daqiqa 22 soniya
+run	UNKNOWN STEP	2026-07-24T09:43:57.1759329Z 2026-07-24 09:43:57,175 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T09:43:57.8649950Z 2026-07-24 09:43:57,864 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T09:43:57.8702577Z 2026-07-24 09:43:57,870 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T09:43:57.8704702Z 2026-07-24 09:43:57,870 [INFO] Keyingi yuborishgacha 2 daqiqa 5 soniya
+run	UNKNOWN STEP	2026-07-24T09:46:02.8857670Z 2026-07-24 09:46:02,885 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T09:46:03.4749542Z 2026-07-24 09:46:03,474 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T09:46:04.9619662Z 2026-07-24 09:46:04,961 [INFO] Yuborildi: AQSh Senati Rossiyaga qarshi "jahannam sanktsiyalari" qonun 
+run	UNKNOWN STEP	2026-07-24T09:46:04.9620302Z 2026-07-24 09:46:04,961 [INFO] Keyingi yuborishgacha 2 daqiqa 3 soniya
+run	UNKNOWN STEP	2026-07-24T09:48:08.0559344Z 2026-07-24 09:48:08,055 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T09:48:08.7813600Z 2026-07-24 09:48:08,781 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T09:48:08.7866249Z 2026-07-24 09:48:08,786 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T09:48:08.7866946Z 2026-07-24 09:48:08,786 [INFO] Keyingi yuborishgacha 3 daqiqa 53 soniya
+run	UNKNOWN STEP	2026-07-24T09:52:01.8297326Z 2026-07-24 09:52:01,829 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T09:52:02.4286905Z 2026-07-24 09:52:02,428 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T09:52:02.4338978Z 2026-07-24 09:52:02,433 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T09:52:02.4674758Z [main 832e4fa] chore: update posted.db [skip ci]
+run	UNKNOWN STEP	2026-07-24T09:52:02.4675187Z  8 files changed, 1 insertion(+), 1 deletion(-)
+run	UNKNOWN STEP	2026-07-24T09:52:02.4675540Z  delete mode 100644 docs/img/0701e48af4eb4220.jpg
+run	UNKNOWN STEP	2026-07-24T09:52:02.4675883Z  create mode 100644 docs/img/67e5a8e65c60ea8b.jpg
+run	UNKNOWN STEP	2026-07-24T09:52:02.4676185Z  create mode 100644 docs/img/778cc23e431ed574.jpg
+run	UNKNOWN STEP	2026-07-24T09:52:02.4676516Z  create mode 100644 docs/img/943dec1e61ec4c61.jpg
+run	UNKNOWN STEP	2026-07-24T09:52:02.4676804Z  delete mode 100644 docs/img/9751d06d553fb3f5.jpg
+run	UNKNOWN STEP	2026-07-24T09:52:02.4677091Z  delete mode 100644 docs/img/fc36b6a36c96f8b8.jpg
+run	UNKNOWN STEP	2026-07-24T09:52:03.8181670Z To https://github.com/nurillayevjamshid/xabarnoma-bot
+run	UNKNOWN STEP	2026-07-24T09:52:03.8182461Z    ba54fb3..832e4fa  main -> main
+run	UNKNOWN STEP	2026-07-24T09:52:03.8225558Z 2026-07-24 09:52:03,822 [INFO] posted.db saqlandi
+run	UNKNOWN STEP	2026-07-24T09:52:03.8226185Z 2026-07-24 09:52:03,822 [INFO] Keyingi yuborishgacha 3 daqiqa 16 soniya
+run	UNKNOWN STEP	2026-07-24T09:55:19.8457732Z 2026-07-24 09:55:19,845 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T09:55:20.5564989Z 2026-07-24 09:55:20,556 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T09:55:22.2404552Z 2026-07-24 09:55:22,240 [INFO] Yuborildi: Tramp Netanyaxu bilan uchrashuvlardan qochmoqda
+run	UNKNOWN STEP	2026-07-24T09:55:22.2405289Z 2026-07-24 09:55:22,240 [INFO] Keyingi yuborishgacha 3 daqiqa 2 soniya
+run	UNKNOWN STEP	2026-07-24T09:58:24.2703869Z 2026-07-24 09:58:24,270 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T09:58:24.8849221Z 2026-07-24 09:58:24,884 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T09:58:24.8901750Z 2026-07-24 09:58:24,890 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T09:58:24.8902574Z 2026-07-24 09:58:24,890 [INFO] Keyingi yuborishgacha 2 daqiqa 46 soniya
+run	UNKNOWN STEP	2026-07-24T10:01:10.9891013Z 2026-07-24 10:01:10,988 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:01:11.7202868Z 2026-07-24 10:01:11,719 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:01:11.7254581Z 2026-07-24 10:01:11,725 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T10:01:11.7255210Z 2026-07-24 10:01:11,725 [INFO] Keyingi yuborishgacha 2 daqiqa 22 soniya
+run	UNKNOWN STEP	2026-07-24T10:03:33.8262493Z 2026-07-24 10:03:33,825 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:03:34.4069699Z 2026-07-24 10:03:34,406 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:03:34.4124316Z 2026-07-24 10:03:34,412 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T10:03:34.4124814Z 2026-07-24 10:03:34,412 [INFO] Keyingi yuborishgacha 2 daqiqa 47 soniya
+run	UNKNOWN STEP	2026-07-24T10:06:21.4565088Z 2026-07-24 10:06:21,456 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:06:22.1356353Z 2026-07-24 10:06:22,135 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:06:23.6147163Z 2026-07-24 10:06:23,614 [INFO] Yuborildi: Germaniya gaz uchun 2020 yildagiga nisbatan besh baravar ko‘
+run	UNKNOWN STEP	2026-07-24T10:06:23.6147789Z 2026-07-24 10:06:23,614 [INFO] Keyingi yuborishgacha 2 daqiqa 15 soniya
+run	UNKNOWN STEP	2026-07-24T10:08:38.6823165Z 2026-07-24 10:08:38,681 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:08:39.3802640Z 2026-07-24 10:08:39,379 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:08:39.3854721Z 2026-07-24 10:08:39,385 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T10:08:39.3856902Z 2026-07-24 10:08:39,385 [INFO] Keyingi yuborishgacha 3 daqiqa 25 soniya
+run	UNKNOWN STEP	2026-07-24T10:12:04.4504776Z 2026-07-24 10:12:04,450 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:12:05.1775626Z 2026-07-24 10:12:05,177 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:12:05.1827498Z 2026-07-24 10:12:05,182 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T10:12:05.1828147Z 2026-07-24 10:12:05,182 [INFO] Keyingi yuborishgacha 3 daqiqa 34 soniya
+run	UNKNOWN STEP	2026-07-24T10:15:39.2616938Z 2026-07-24 10:15:39,261 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:15:40.1057842Z 2026-07-24 10:15:40,105 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:15:43.3376072Z 2026-07-24 10:15:43,337 [INFO] Yuborildi: Qo‘ng‘irotda soliq qarzdorliklari majburiy undirilmoqda
+run	UNKNOWN STEP	2026-07-24T10:15:43.3378753Z 2026-07-24 10:15:43,337 [INFO] Keyingi yuborishgacha 3 daqiqa 9 soniya
+run	UNKNOWN STEP	2026-07-24T10:18:52.4377691Z 2026-07-24 10:18:52,437 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:18:53.0444013Z 2026-07-24 10:18:53,044 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:18:53.0495654Z 2026-07-24 10:18:53,049 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T10:18:53.0496221Z 2026-07-24 10:18:53,049 [INFO] Keyingi yuborishgacha 2 daqiqa 51 soniya
+run	UNKNOWN STEP	2026-07-24T10:21:44.1369094Z 2026-07-24 10:21:44,136 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:21:44.8229611Z 2026-07-24 10:21:44,822 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:21:44.8281121Z 2026-07-24 10:21:44,827 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T10:21:44.8281648Z 2026-07-24 10:21:44,828 [INFO] Keyingi yuborishgacha 3 daqiqa 51 soniya
+run	UNKNOWN STEP	2026-07-24T10:25:35.8656038Z 2026-07-24 10:25:35,865 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:25:36.5020810Z 2026-07-24 10:25:36,501 [INFO] Topildi: 35 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:25:38.1885556Z 2026-07-24 10:25:38,188 [INFO] Yuborildi: “Eronda aql-zakovatdan boshqa deyarli hech narsa qolmagan”
+run	UNKNOWN STEP	2026-07-24T10:25:38.2347047Z [main 1f67efd] chore: update posted.db [skip ci]
+run	UNKNOWN STEP	2026-07-24T10:25:38.2347629Z  10 files changed, 1 insertion(+), 1 deletion(-)
+run	UNKNOWN STEP	2026-07-24T10:25:38.2348163Z  create mode 100644 docs/img/4414262c7bcfd884.jpg
+run	UNKNOWN STEP	2026-07-24T10:25:38.2348721Z  create mode 100644 docs/img/4d8a0194c6c13bb5.jpg
+run	UNKNOWN STEP	2026-07-24T10:25:38.2349232Z  create mode 100644 docs/img/651364ee32e6739c.jpg
+run	UNKNOWN STEP	2026-07-24T10:25:38.2349670Z  create mode 100644 docs/img/801ce5bce3867c84.jpg
+run	UNKNOWN STEP	2026-07-24T10:25:38.2349993Z  delete mode 100644 docs/img/b5621f504bdd9e85.jpg
+run	UNKNOWN STEP	2026-07-24T10:25:38.2350314Z  delete mode 100644 docs/img/b57399a55be72d63.jpg
+run	UNKNOWN STEP	2026-07-24T10:25:38.2350635Z  delete mode 100644 docs/img/c10c8dc1b35c9dce.jpg
+run	UNKNOWN STEP	2026-07-24T10:25:38.2350934Z  delete mode 100644 docs/img/d124bf34f34732cd.jpg
+run	UNKNOWN STEP	2026-07-24T10:25:39.6920875Z To https://github.com/nurillayevjamshid/xabarnoma-bot
+run	UNKNOWN STEP	2026-07-24T10:25:39.6921388Z    832e4fa..1f67efd  main -> main
+run	UNKNOWN STEP	2026-07-24T10:25:39.6965651Z 2026-07-24 10:25:39,696 [INFO] posted.db saqlandi
+run	UNKNOWN STEP	2026-07-24T10:25:39.6966418Z 2026-07-24 10:25:39,696 [INFO] Keyingi yuborishgacha 2 daqiqa 3 soniya
+run	UNKNOWN STEP	2026-07-24T10:27:42.7971544Z 2026-07-24 10:27:42,796 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:27:43.5042545Z 2026-07-24 10:27:43,503 [INFO] Topildi: 36 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:27:44.9062559Z 2026-07-24 10:27:44,906 [INFO] Yuborildi: Politico:
+run	UNKNOWN STEP	2026-07-24T10:27:44.9063400Z 2026-07-24 10:27:44,906 [INFO] Keyingi yuborishgacha 3 daqiqa 32 soniya
+run	UNKNOWN STEP	2026-07-24T10:31:17.0071259Z 2026-07-24 10:31:17,006 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:31:17.7869212Z 2026-07-24 10:31:17,786 [INFO] Topildi: 36 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:31:17.7923288Z 2026-07-24 10:31:17,792 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T10:31:17.7923841Z 2026-07-24 10:31:17,792 [INFO] Keyingi yuborishgacha 3 daqiqa 42 soniya
+run	UNKNOWN STEP	2026-07-24T10:34:59.8137539Z 2026-07-24 10:34:59,813 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:35:00.7391353Z 2026-07-24 10:35:00,738 [INFO] Topildi: 36 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:35:00.7443860Z 2026-07-24 10:35:00,744 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T10:35:00.7444554Z 2026-07-24 10:35:00,744 [INFO] Keyingi yuborishgacha 2 daqiqa 14 soniya
+run	UNKNOWN STEP	2026-07-24T10:37:14.7563886Z 2026-07-24 10:37:14,756 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:37:15.3857297Z 2026-07-24 10:37:15,385 [INFO] Topildi: 37 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:37:16.8344524Z 2026-07-24 10:37:16,834 [INFO] Yuborildi: "Rossiya Evropa uchun mavjudlik tahdidini keltirib chiqarmoq
+run	UNKNOWN STEP	2026-07-24T10:37:16.8345143Z 2026-07-24 10:37:16,834 [INFO] Keyingi yuborishgacha 2 daqiqa 52 soniya
+run	UNKNOWN STEP	2026-07-24T10:40:08.9337185Z 2026-07-24 10:40:08,933 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:40:09.5353333Z 2026-07-24 10:40:09,535 [INFO] Topildi: 37 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:40:10.8609386Z 2026-07-24 10:40:10,860 [INFO] Yuborildi: AQSh 60 ta yirik savdo hamkoridan keladigan importga yangi b
+run	UNKNOWN STEP	2026-07-24T10:40:10.8611043Z 2026-07-24 10:40:10,860 [INFO] Keyingi yuborishgacha 3 daqiqa 13 soniya
+run	UNKNOWN STEP	2026-07-24T10:43:23.8777687Z 2026-07-24 10:43:23,877 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:43:24.6693228Z 2026-07-24 10:43:24,669 [INFO] Topildi: 37 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:43:24.6748322Z 2026-07-24 10:43:24,674 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T10:43:24.6749014Z 2026-07-24 10:43:24,674 [INFO] Keyingi yuborishgacha 2 daqiqa 34 soniya
+run	UNKNOWN STEP	2026-07-24T10:45:58.6937696Z 2026-07-24 10:45:58,693 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:45:59.2628792Z 2026-07-24 10:45:59,262 [INFO] Topildi: 33 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:46:01.7400038Z 2026-07-24 10:46:01,739 [INFO] Yuborildi: Sankt-Peterburgda «Wildberries» kompaniyasining yana ikkita 
+run	UNKNOWN STEP	2026-07-24T10:46:01.7400661Z 2026-07-24 10:46:01,739 [INFO] Keyingi yuborishgacha 3 daqiqa 34 soniya
+run	UNKNOWN STEP	2026-07-24T10:49:35.8406041Z 2026-07-24 10:49:35,840 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:49:36.4385334Z 2026-07-24 10:49:36,438 [INFO] Topildi: 33 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:49:37.8580603Z 2026-07-24 10:49:37,857 [INFO] Yuborildi: AQShda Mercedes avtomobillari savdosi taqiqlanishi mumkin
+run	UNKNOWN STEP	2026-07-24T10:49:37.8590585Z 2026-07-24 10:49:37,857 [INFO] Keyingi yuborishgacha 3 daqiqa 11 soniya
+run	UNKNOWN STEP	2026-07-24T10:52:48.9590424Z 2026-07-24 10:52:48,958 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:52:49.5523000Z 2026-07-24 10:52:49,552 [INFO] Topildi: 33 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:52:49.5572814Z 2026-07-24 10:52:49,557 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T10:52:49.5573374Z 2026-07-24 10:52:49,557 [INFO] Keyingi yuborishgacha 2 daqiqa 13 soniya
+run	UNKNOWN STEP	2026-07-24T10:55:02.6553919Z 2026-07-24 10:55:02,655 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:55:03.3450001Z 2026-07-24 10:55:03,344 [INFO] Topildi: 33 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:55:06.1270105Z 2026-07-24 10:55:06,126 [WARNING] Rasm saqlanmadi, asl havola ishlatiladi: HTTP Error 500: Internal Server Error
+run	UNKNOWN STEP	2026-07-24T10:55:06.1303620Z 2026-07-24 10:55:06,130 [INFO] Yuborildi: Evropa Markaziy banki kelajakda muomalaga chiqarilishi rejal
+run	UNKNOWN STEP	2026-07-24T10:55:06.1304289Z 2026-07-24 10:55:06,130 [INFO] Keyingi yuborishgacha 3 daqiqa 51 soniya
+run	UNKNOWN STEP	2026-07-24T10:58:57.2113474Z 2026-07-24 10:58:57,210 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T10:58:57.8142894Z 2026-07-24 10:58:57,813 [INFO] Topildi: 33 ta maqola
+run	UNKNOWN STEP	2026-07-24T10:58:58.8085554Z 2026-07-24 10:58:58,808 [INFO] Yuborildi: Evropa Ittifoqi Googlega $1 mlrd jarima soldi
+run	UNKNOWN STEP	2026-07-24T10:58:58.8551892Z [main ab5c1fd] chore: update posted.db [skip ci]
+run	UNKNOWN STEP	2026-07-24T10:58:58.8552680Z  15 files changed, 1 insertion(+), 1 deletion(-)
+run	UNKNOWN STEP	2026-07-24T10:58:58.8553592Z  create mode 100644 docs/img/09d5a894a5dfae2f.jpg
+run	UNKNOWN STEP	2026-07-24T10:58:58.8554130Z  delete mode 100644 docs/img/0ac37d4f41e391ce.jpg
+run	UNKNOWN STEP	2026-07-24T10:58:58.8554592Z  delete mode 100644 docs/img/207c56a255840381.jpg
+run	UNKNOWN STEP	2026-07-24T10:58:58.8554886Z  delete mode 100644 docs/img/67ca765df220d86d.jpg
+run	UNKNOWN STEP	2026-07-24T10:58:58.8555174Z  create mode 100644 docs/img/7b012c15a1478ec9.jpg
+run	UNKNOWN STEP	2026-07-24T10:58:58.8555465Z  delete mode 100644 docs/img/8a149cd0a48fbb33.jpg
+run	UNKNOWN STEP	2026-07-24T10:58:58.8555757Z  create mode 100644 docs/img/8b16ebef6d098fb9.jpg
+run	UNKNOWN STEP	2026-07-24T10:58:58.8556043Z  create mode 100644 docs/img/a578631d1b8c638d.jpg
+run	UNKNOWN STEP	2026-07-24T10:58:58.8556357Z  delete mode 100644 docs/img/ce38d6045b0edad7.jpg
+run	UNKNOWN STEP	2026-07-24T10:58:58.8556654Z  delete mode 100644 docs/img/d13dba31700175ff.jpg
+run	UNKNOWN STEP	2026-07-24T10:58:58.8556944Z  delete mode 100644 docs/img/df37fffff1a003d1.jpg
+run	UNKNOWN STEP	2026-07-24T10:58:58.8557257Z  create mode 100644 docs/img/eb29653d61d1d363.jpg
+run	UNKNOWN STEP	2026-07-24T10:58:58.8557804Z  create mode 100644 docs/img/f015f955ff589d51.jpg
+run	UNKNOWN STEP	2026-07-24T10:59:00.3060216Z To https://github.com/nurillayevjamshid/xabarnoma-bot
+run	UNKNOWN STEP	2026-07-24T10:59:00.3060741Z    1f67efd..ab5c1fd  main -> main
+run	UNKNOWN STEP	2026-07-24T10:59:00.3104158Z 2026-07-24 10:59:00,310 [INFO] posted.db saqlandi
+run	UNKNOWN STEP	2026-07-24T10:59:00.3104619Z 2026-07-24 10:59:00,310 [INFO] Keyingi yuborishgacha 2 daqiqa 13 soniya
+run	UNKNOWN STEP	2026-07-24T11:01:13.4113949Z 2026-07-24 11:01:13,411 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T11:01:13.9825512Z 2026-07-24 11:01:13,982 [INFO] Topildi: 33 ta maqola
+run	UNKNOWN STEP	2026-07-24T11:01:13.9875601Z 2026-07-24 11:01:13,987 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T11:01:13.9876131Z 2026-07-24 11:01:13,987 [INFO] Keyingi yuborishgacha 3 daqiqa 10 soniya
+run	UNKNOWN STEP	2026-07-24T11:04:23.9890406Z 2026-07-24 11:04:23,988 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T11:04:24.6442782Z 2026-07-24 11:04:24,644 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T11:04:27.1509444Z 2026-07-24 11:04:27,150 [INFO] Yuborildi: Eron Bahrayn va Iordaniyadagi AQSh harbiy bazalariga zarba b
+run	UNKNOWN STEP	2026-07-24T11:04:27.1510097Z 2026-07-24 11:04:27,150 [INFO] Keyingi yuborishgacha 2 daqiqa 52 soniya
+run	UNKNOWN STEP	2026-07-24T11:07:19.2377306Z 2026-07-24 11:07:19,237 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T11:07:19.9045709Z 2026-07-24 11:07:19,904 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T11:07:19.9088415Z 2026-07-24 11:07:19,908 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T11:07:19.9089050Z 2026-07-24 11:07:19,908 [INFO] Keyingi yuborishgacha 3 daqiqa 59 soniya
+run	UNKNOWN STEP	2026-07-24T11:11:18.9221241Z 2026-07-24 11:11:18,921 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T11:11:19.5469137Z 2026-07-24 11:11:19,546 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T11:11:21.7099743Z 2026-07-24 11:11:21,709 [INFO] Yuborildi: AQSh va Eron o‘rtasida zarbalar almashinuvi 13-kecha ham dav
+run	UNKNOWN STEP	2026-07-24T11:11:21.7103104Z 2026-07-24 11:11:21,709 [INFO] Keyingi yuborishgacha 3 daqiqa 0 soniya
+run	UNKNOWN STEP	2026-07-24T11:14:21.7977516Z 2026-07-24 11:14:21,797 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T11:14:22.4955763Z 2026-07-24 11:14:22,495 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T11:14:22.4998886Z 2026-07-24 11:14:22,499 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T11:14:22.4999401Z 2026-07-24 11:14:22,499 [INFO] Keyingi yuborishgacha 2 daqiqa 24 soniya
+run	UNKNOWN STEP	2026-07-24T11:16:46.5496993Z 2026-07-24 11:16:46,549 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T11:16:47.1761557Z 2026-07-24 11:16:47,175 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T11:16:47.1804299Z 2026-07-24 11:16:47,180 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T11:16:47.1804935Z 2026-07-24 11:16:47,180 [INFO] Keyingi yuborishgacha 3 daqiqa 2 soniya
+run	UNKNOWN STEP	2026-07-24T11:19:49.2816547Z 2026-07-24 11:19:49,281 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T11:19:50.0232413Z 2026-07-24 11:19:50,022 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T11:19:50.0275432Z 2026-07-24 11:19:50,027 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T11:19:50.0275992Z 2026-07-24 11:19:50,027 [INFO] Keyingi yuborishgacha 3 daqiqa 30 soniya
+run	UNKNOWN STEP	2026-07-24T11:23:20.0892848Z 2026-07-24 11:23:20,088 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T11:23:20.6720355Z 2026-07-24 11:23:20,671 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T11:23:20.6761519Z 2026-07-24 11:23:20,675 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T11:23:20.6761999Z 2026-07-24 11:23:20,676 [INFO] Keyingi yuborishgacha 2 daqiqa 20 soniya
+run	UNKNOWN STEP	2026-07-24T11:25:40.7616615Z 2026-07-24 11:25:40,761 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T11:25:41.3900488Z 2026-07-24 11:25:41,389 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T11:25:41.3943028Z 2026-07-24 11:25:41,394 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T11:25:41.3943505Z 2026-07-24 11:25:41,394 [INFO] Keyingi yuborishgacha 2 daqiqa 12 soniya
+run	UNKNOWN STEP	2026-07-24T11:27:53.4083804Z 2026-07-24 11:27:53,408 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T11:27:54.0179865Z 2026-07-24 11:27:54,017 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T11:27:54.0222479Z 2026-07-24 11:27:54,022 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T11:27:54.0222946Z 2026-07-24 11:27:54,022 [INFO] Keyingi yuborishgacha 3 daqiqa 48 soniya
+run	UNKNOWN STEP	2026-07-24T11:31:42.1234901Z 2026-07-24 11:31:42,123 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T11:31:42.8367493Z 2026-07-24 11:31:42,836 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T11:31:44.2481099Z 2026-07-24 11:31:44,247 [INFO] Yuborildi: Shavkat Mirziyoevni tug‘ilgan kuni munosabati bilan bir qato
+run	UNKNOWN STEP	2026-07-24T11:31:44.2858788Z [main 3481584] chore: update posted.db [skip ci]
+run	UNKNOWN STEP	2026-07-24T11:31:44.2859273Z  8 files changed, 1 insertion(+), 1 deletion(-)
+run	UNKNOWN STEP	2026-07-24T11:31:44.2859790Z  create mode 100644 docs/img/67347c93b62cb3b6.jpg
+run	UNKNOWN STEP	2026-07-24T11:31:44.2860287Z  delete mode 100644 docs/img/8d2f93da9b7c1138.jpg
+run	UNKNOWN STEP	2026-07-24T11:31:44.2860762Z  delete mode 100644 docs/img/a47e56709cc87dba.jpg
+run	UNKNOWN STEP	2026-07-24T11:31:44.2861067Z  delete mode 100644 docs/img/add28743c75bbef9.jpg
+run	UNKNOWN STEP	2026-07-24T11:31:44.2861372Z  create mode 100644 docs/img/d709e1a4cde3c151.jpg
+run	UNKNOWN STEP	2026-07-24T11:31:44.2861670Z  create mode 100644 docs/img/dfe3cd6b0ecf877a.jpg
+run	UNKNOWN STEP	2026-07-24T11:31:45.7848767Z To https://github.com/nurillayevjamshid/xabarnoma-bot
+run	UNKNOWN STEP	2026-07-24T11:31:45.7849364Z    ab5c1fd..3481584  main -> main
+run	UNKNOWN STEP	2026-07-24T11:31:45.7893195Z 2026-07-24 11:31:45,789 [INFO] posted.db saqlandi
+run	UNKNOWN STEP	2026-07-24T11:31:45.7893861Z 2026-07-24 11:31:45,789 [INFO] Keyingi yuborishgacha 3 daqiqa 53 soniya
+run	UNKNOWN STEP	2026-07-24T11:35:38.8445450Z 2026-07-24 11:35:38,844 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T11:35:39.4050584Z 2026-07-24 11:35:39,404 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T11:35:39.4092853Z 2026-07-24 11:35:39,409 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T11:35:39.4093334Z 2026-07-24 11:35:39,409 [INFO] Keyingi yuborishgacha 3 daqiqa 42 soniya
+run	UNKNOWN STEP	2026-07-24T11:39:21.5097271Z 2026-07-24 11:39:21,509 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T11:39:22.1223190Z 2026-07-24 11:39:22,122 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T11:39:22.1265266Z 2026-07-24 11:39:22,126 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T11:39:22.1265741Z 2026-07-24 11:39:22,126 [INFO] Keyingi yuborishgacha 3 daqiqa 6 soniya
+run	UNKNOWN STEP	2026-07-24T11:42:28.1337393Z 2026-07-24 11:42:28,133 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T11:42:28.7915322Z 2026-07-24 11:42:28,791 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T11:42:28.7958198Z 2026-07-24 11:42:28,795 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T11:42:28.7958706Z 2026-07-24 11:42:28,795 [INFO] Keyingi yuborishgacha 3 daqiqa 55 soniya
+run	UNKNOWN STEP	2026-07-24T11:46:23.8534337Z 2026-07-24 11:46:23,853 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T11:46:24.5309805Z 2026-07-24 11:46:24,530 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T11:46:24.5352315Z 2026-07-24 11:46:24,535 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T11:46:24.5353012Z 2026-07-24 11:46:24,535 [INFO] Keyingi yuborishgacha 3 daqiqa 48 soniya
+run	UNKNOWN STEP	2026-07-24T11:50:12.5817816Z 2026-07-24 11:50:12,581 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T11:50:13.3313927Z 2026-07-24 11:50:13,331 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T11:50:13.3356174Z 2026-07-24 11:50:13,335 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T11:50:13.3357066Z 2026-07-24 11:50:13,335 [INFO] Keyingi yuborishgacha 3 daqiqa 39 soniya
+run	UNKNOWN STEP	2026-07-24T11:53:52.3577497Z 2026-07-24 11:53:52,357 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T11:53:53.0337167Z 2026-07-24 11:53:53,033 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T11:53:53.0379501Z 2026-07-24 11:53:53,037 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T11:53:53.0380160Z 2026-07-24 11:53:53,037 [INFO] Keyingi yuborishgacha 2 daqiqa 27 soniya
+run	UNKNOWN STEP	2026-07-24T11:56:20.1387250Z 2026-07-24 11:56:20,138 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T11:56:20.7729181Z 2026-07-24 11:56:20,772 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T11:56:20.7772053Z 2026-07-24 11:56:20,777 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T11:58:39.8141308Z 2026-07-24 11:56:20,777 [INFO] Keyingi yuborishgacha 2 daqiqa 19 soniya
+run	UNKNOWN STEP	2026-07-24T11:58:39.8141976Z 2026-07-24 11:58:39,813 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T11:58:40.5148564Z 2026-07-24 11:58:40,514 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T11:58:40.5191305Z 2026-07-24 11:58:40,518 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T11:58:40.5191808Z 2026-07-24 11:58:40,519 [INFO] Keyingi yuborishgacha 3 daqiqa 39 soniya
+run	UNKNOWN STEP	2026-07-24T12:02:19.5356958Z 2026-07-24 12:02:19,535 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:02:20.1384067Z 2026-07-24 12:02:20,138 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:02:20.1427120Z 2026-07-24 12:02:20,142 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T12:02:20.1493141Z 2026-07-24 12:02:20,149 [INFO] Keyingi yuborishgacha 2 daqiqa 9 soniya
+run	UNKNOWN STEP	2026-07-24T12:04:29.2217523Z 2026-07-24 12:04:29,221 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:04:29.9317048Z 2026-07-24 12:04:29,931 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:04:29.9360251Z 2026-07-24 12:04:29,935 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T12:04:29.9360969Z 2026-07-24 12:04:29,935 [INFO] Keyingi yuborishgacha 2 daqiqa 27 soniya
+run	UNKNOWN STEP	2026-07-24T12:06:56.9882946Z 2026-07-24 12:06:56,987 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:06:57.6413714Z 2026-07-24 12:06:57,641 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:06:57.6458984Z 2026-07-24 12:06:57,645 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T12:06:57.6459581Z 2026-07-24 12:06:57,645 [INFO] Keyingi yuborishgacha 2 daqiqa 42 soniya
+run	UNKNOWN STEP	2026-07-24T12:09:39.7467217Z 2026-07-24 12:09:39,746 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:09:40.3722886Z 2026-07-24 12:09:40,372 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:09:40.3766022Z 2026-07-24 12:09:40,376 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T12:09:40.3766579Z 2026-07-24 12:09:40,376 [INFO] Keyingi yuborishgacha 3 daqiqa 3 soniya
+run	UNKNOWN STEP	2026-07-24T12:12:43.4773451Z 2026-07-24 12:12:43,476 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:12:44.1524861Z 2026-07-24 12:12:44,152 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:12:44.1567385Z 2026-07-24 12:12:44,156 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T12:12:44.1568082Z 2026-07-24 12:12:44,156 [INFO] Keyingi yuborishgacha 2 daqiqa 37 soniya
+run	UNKNOWN STEP	2026-07-24T12:15:21.1896765Z 2026-07-24 12:15:21,189 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:15:21.8410258Z 2026-07-24 12:15:21,840 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:15:21.8452615Z 2026-07-24 12:15:21,845 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T12:15:21.8453107Z 2026-07-24 12:15:21,845 [INFO] Keyingi yuborishgacha 2 daqiqa 32 soniya
+run	UNKNOWN STEP	2026-07-24T12:17:53.9467760Z 2026-07-24 12:17:53,946 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:17:54.5654085Z 2026-07-24 12:17:54,565 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:17:54.5697912Z 2026-07-24 12:17:54,569 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T12:17:54.5698424Z 2026-07-24 12:17:54,569 [INFO] Keyingi yuborishgacha 3 daqiqa 53 soniya
+run	UNKNOWN STEP	2026-07-24T12:21:47.6708865Z 2026-07-24 12:21:47,670 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:21:48.3343598Z 2026-07-24 12:21:48,334 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:21:48.3386395Z 2026-07-24 12:21:48,338 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T12:21:48.3387095Z 2026-07-24 12:21:48,338 [INFO] Keyingi yuborishgacha 2 daqiqa 48 soniya
+run	UNKNOWN STEP	2026-07-24T12:24:36.4393066Z 2026-07-24 12:24:36,438 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:24:37.0716521Z 2026-07-24 12:24:37,071 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:24:37.0758306Z 2026-07-24 12:24:37,075 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T12:24:37.0759298Z 2026-07-24 12:24:37,075 [INFO] Keyingi yuborishgacha 2 daqiqa 52 soniya
+run	UNKNOWN STEP	2026-07-24T12:27:29.1646940Z 2026-07-24 12:27:29,164 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:27:29.7986679Z 2026-07-24 12:27:29,798 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:27:31.4068616Z 2026-07-24 12:27:31,406 [INFO] Yuborildi: Saida Mirziyoeva poytaxtda yangi istirohat bog‘lari barpo et
+run	UNKNOWN STEP	2026-07-24T12:27:31.4069255Z 2026-07-24 12:27:31,406 [INFO] Keyingi yuborishgacha 2 daqiqa 46 soniya
+run	UNKNOWN STEP	2026-07-24T12:30:17.5078129Z 2026-07-24 12:30:17,507 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:30:18.1421575Z 2026-07-24 12:30:18,141 [INFO] Topildi: 28 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:30:18.1464814Z 2026-07-24 12:30:18,146 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T12:30:18.1467015Z 2026-07-24 12:30:18,146 [INFO] Keyingi yuborishgacha 3 daqiqa 15 soniya
+run	UNKNOWN STEP	2026-07-24T12:33:33.2377444Z 2026-07-24 12:33:33,237 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:33:33.8408533Z 2026-07-24 12:33:33,840 [INFO] Topildi: 29 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:33:35.4498519Z 2026-07-24 12:33:35,449 [INFO] Yuborildi: Qozog‘iston va O‘zbekiston tadbirkorlari $172 mlnlik shartno
+run	UNKNOWN STEP	2026-07-24T12:33:35.4859169Z [main bb62a1a] chore: update posted.db [skip ci]
+run	UNKNOWN STEP	2026-07-24T12:33:35.4859613Z  5 files changed, 1 insertion(+), 1 deletion(-)
+run	UNKNOWN STEP	2026-07-24T12:33:35.4859965Z  create mode 100644 docs/img/07d60b2b8e6e9c36.jpg
+run	UNKNOWN STEP	2026-07-24T12:33:35.4860292Z  create mode 100644 docs/img/a1dd6f474cc9782a.jpg
+run	UNKNOWN STEP	2026-07-24T12:33:35.4860597Z  delete mode 100644 docs/img/a2c7be19b20badec.jpg
+run	UNKNOWN STEP	2026-07-24T12:33:36.9756507Z To https://github.com/nurillayevjamshid/xabarnoma-bot
+run	UNKNOWN STEP	2026-07-24T12:33:36.9757113Z    3481584..bb62a1a  main -> main
+run	UNKNOWN STEP	2026-07-24T12:33:36.9803880Z 2026-07-24 12:33:36,980 [INFO] posted.db saqlandi
+run	UNKNOWN STEP	2026-07-24T12:33:36.9804452Z 2026-07-24 12:33:36,980 [INFO] Keyingi yuborishgacha 2 daqiqa 30 soniya
+run	UNKNOWN STEP	2026-07-24T12:36:07.0818972Z 2026-07-24 12:36:07,081 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:36:07.6701815Z 2026-07-24 12:36:07,669 [INFO] Topildi: 29 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:36:09.4468742Z 2026-07-24 12:36:09,446 [INFO] Yuborildi: Bishkekda o‘tayotgan ShHT TIV kengashi yig‘ilishi doirasida 
+run	UNKNOWN STEP	2026-07-24T12:36:09.4469377Z 2026-07-24 12:36:09,446 [INFO] Keyingi yuborishgacha 3 daqiqa 18 soniya
+run	UNKNOWN STEP	2026-07-24T12:39:27.5085071Z 2026-07-24 12:39:27,508 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:39:28.1153229Z 2026-07-24 12:39:28,114 [INFO] Topildi: 29 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:39:31.4510933Z 2026-07-24 12:39:31,450 [INFO] Yuborildi: Bangladesh Prezidenti Shahobuddin Chuppu sog‘lig‘i sababli i
+run	UNKNOWN STEP	2026-07-24T12:39:31.4511591Z 2026-07-24 12:39:31,450 [INFO] Keyingi yuborishgacha 3 daqiqa 53 soniya
+run	UNKNOWN STEP	2026-07-24T12:43:24.5286631Z 2026-07-24 12:43:24,528 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:43:25.1491443Z 2026-07-24 12:43:25,148 [INFO] Topildi: 29 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:43:25.1536189Z 2026-07-24 12:43:25,153 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T12:43:25.1536755Z 2026-07-24 12:43:25,153 [INFO] Keyingi yuborishgacha 2 daqiqa 48 soniya
+run	UNKNOWN STEP	2026-07-24T12:46:13.1577356Z 2026-07-24 12:46:13,157 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:46:13.7493714Z 2026-07-24 12:46:13,749 [INFO] Topildi: 29 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:46:13.7537931Z 2026-07-24 12:46:13,753 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T12:46:13.7538754Z 2026-07-24 12:46:13,753 [INFO] Keyingi yuborishgacha 3 daqiqa 52 soniya
+run	UNKNOWN STEP	2026-07-24T12:50:05.7976947Z 2026-07-24 12:50:05,797 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:50:06.4491945Z 2026-07-24 12:50:06,448 [INFO] Topildi: 29 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:50:08.0067629Z 2026-07-24 12:50:08,006 [INFO] Yuborildi: Tramp: Hurmuz bo‘g‘ozidagi zarar Eronning muzlatilgan aktivl
+run	UNKNOWN STEP	2026-07-24T12:50:08.0068244Z 2026-07-24 12:50:08,006 [INFO] Keyingi yuborishgacha 2 daqiqa 9 soniya
+run	UNKNOWN STEP	2026-07-24T12:52:17.0297172Z 2026-07-24 12:52:17,029 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:52:17.5590295Z 2026-07-24 12:52:17,558 [INFO] Topildi: 29 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:52:17.5634154Z 2026-07-24 12:52:17,563 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T12:52:17.5635063Z 2026-07-24 12:52:17,563 [INFO] Keyingi yuborishgacha 3 daqiqa 35 soniya
+run	UNKNOWN STEP	2026-07-24T12:55:52.5879524Z 2026-07-24 12:55:52,587 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:55:53.3090248Z 2026-07-24 12:55:53,308 [INFO] Topildi: 29 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:55:53.3133873Z 2026-07-24 12:55:53,313 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T12:55:53.3145783Z 2026-07-24 12:55:53,313 [INFO] Keyingi yuborishgacha 2 daqiqa 53 soniya
+run	UNKNOWN STEP	2026-07-24T12:58:46.4148485Z 2026-07-24 12:58:46,414 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T12:58:47.0153895Z 2026-07-24 12:58:47,015 [INFO] Topildi: 29 ta maqola
+run	UNKNOWN STEP	2026-07-24T12:58:47.0198353Z 2026-07-24 12:58:47,019 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T13:02:31.1213017Z 2026-07-24 12:58:47,019 [INFO] Keyingi yuborishgacha 3 daqiqa 44 soniya
+run	UNKNOWN STEP	2026-07-24T13:02:31.1213678Z 2026-07-24 13:02:31,120 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T13:02:31.7052685Z 2026-07-24 13:02:31,704 [INFO] Topildi: 30 ta maqola
+run	UNKNOWN STEP	2026-07-24T13:02:33.0965950Z 2026-07-24 13:02:33,096 [INFO] Yuborildi: Eronning Kubadagi elchixonasi Tramp bayonotiga munosabat bil
+run	UNKNOWN STEP	2026-07-24T13:02:33.0966577Z 2026-07-24 13:02:33,096 [INFO] Keyingi yuborishgacha 3 daqiqa 46 soniya
+run	UNKNOWN STEP	2026-07-24T13:06:19.1978421Z 2026-07-24 13:06:19,197 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T13:06:19.8141827Z 2026-07-24 13:06:19,813 [INFO] Topildi: 30 ta maqola
+run	UNKNOWN STEP	2026-07-24T13:06:19.8187062Z 2026-07-24 13:06:19,818 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T13:06:19.8619268Z [main cc73bef] chore: update posted.db [skip ci]
+run	UNKNOWN STEP	2026-07-24T13:06:19.8619809Z  10 files changed, 1 insertion(+), 1 deletion(-)
+run	UNKNOWN STEP	2026-07-24T13:06:19.8620158Z  create mode 100644 docs/img/2e25a538140e047b.jpg
+run	UNKNOWN STEP	2026-07-24T13:06:19.8620488Z  delete mode 100644 docs/img/2e8d2088df617753.jpg
+run	UNKNOWN STEP	2026-07-24T13:06:19.8620805Z  create mode 100644 docs/img/471f908d9300709f.jpg
+run	UNKNOWN STEP	2026-07-24T13:06:19.8621155Z  create mode 100644 docs/img/741501163d2ef766.jpg
+run	UNKNOWN STEP	2026-07-24T13:06:19.8621646Z  delete mode 100644 docs/img/7c9bad3f35138bc3.jpg
+run	UNKNOWN STEP	2026-07-24T13:06:19.8622318Z  delete mode 100644 docs/img/9af5e1efd741fb67.jpg
+run	UNKNOWN STEP	2026-07-24T13:06:19.8622791Z  delete mode 100644 docs/img/af4331fd026480fc.jpg
+run	UNKNOWN STEP	2026-07-24T13:06:19.8623256Z  create mode 100644 docs/img/d25279fc646edb3f.jpg
+run	UNKNOWN STEP	2026-07-24T13:06:21.5146265Z To https://github.com/nurillayevjamshid/xabarnoma-bot
+run	UNKNOWN STEP	2026-07-24T13:06:21.5147013Z    bb62a1a..cc73bef  main -> main
+run	UNKNOWN STEP	2026-07-24T13:06:21.5191017Z 2026-07-24 13:06:21,518 [INFO] posted.db saqlandi
+run	UNKNOWN STEP	2026-07-24T13:06:21.5191481Z 2026-07-24 13:06:21,519 [INFO] Keyingi yuborishgacha 3 daqiqa 36 soniya
+run	UNKNOWN STEP	2026-07-24T13:09:57.5736979Z 2026-07-24 13:09:57,573 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T13:09:58.2087897Z 2026-07-24 13:09:58,208 [INFO] Topildi: 30 ta maqola
+run	UNKNOWN STEP	2026-07-24T13:09:58.2133256Z 2026-07-24 13:09:58,213 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T13:09:58.2133829Z 2026-07-24 13:09:58,213 [INFO] Keyingi yuborishgacha 2 daqiqa 35 soniya
+run	UNKNOWN STEP	2026-07-24T13:12:33.3147201Z 2026-07-24 13:12:33,314 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T13:12:33.9534420Z 2026-07-24 13:12:33,953 [INFO] Topildi: 31 ta maqola
+run	UNKNOWN STEP	2026-07-24T13:12:36.2974827Z 2026-07-24 13:12:36,297 [INFO] Yuborildi: Tramp: «Energetika vaziri Kris Rayt Venesuelani boshqarmoqda
+run	UNKNOWN STEP	2026-07-24T13:12:36.2975454Z 2026-07-24 13:12:36,297 [INFO] Keyingi yuborishgacha 3 daqiqa 50 soniya
+run	UNKNOWN STEP	2026-07-24T13:16:26.3515133Z 2026-07-24 13:16:26,351 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T13:16:27.0112781Z 2026-07-24 13:16:27,011 [INFO] Topildi: 31 ta maqola
+run	UNKNOWN STEP	2026-07-24T13:16:27.0159584Z 2026-07-24 13:16:27,015 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T13:16:27.0160059Z 2026-07-24 13:16:27,015 [INFO] Keyingi yuborishgacha 2 daqiqa 20 soniya
+run	UNKNOWN STEP	2026-07-24T13:18:47.1171486Z 2026-07-24 13:18:47,116 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T13:18:47.7403105Z 2026-07-24 13:18:47,740 [INFO] Topildi: 31 ta maqola
+run	UNKNOWN STEP	2026-07-24T13:18:47.7449875Z 2026-07-24 13:18:47,744 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T13:18:47.7450359Z 2026-07-24 13:18:47,744 [INFO] Keyingi yuborishgacha 2 daqiqa 16 soniya
+run	UNKNOWN STEP	2026-07-24T13:21:03.7510516Z 2026-07-24 13:21:03,750 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T13:21:04.3967414Z 2026-07-24 13:21:04,396 [INFO] Topildi: 32 ta maqola
+run	UNKNOWN STEP	2026-07-24T13:21:06.0432050Z 2026-07-24 13:21:06,042 [INFO] Yuborildi: Kiev viloyatiga berilgan raketa zarbasi oqibatida olti kishi
+run	UNKNOWN STEP	2026-07-24T13:21:06.0432903Z 2026-07-24 13:21:06,043 [INFO] Keyingi yuborishgacha 3 daqiqa 33 soniya
+run	UNKNOWN STEP	2026-07-24T13:24:39.1441292Z 2026-07-24 13:24:39,143 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T13:24:39.8354657Z 2026-07-24 13:24:39,835 [INFO] Topildi: 32 ta maqola
+run	UNKNOWN STEP	2026-07-24T13:24:41.7004825Z 2026-07-24 13:24:41,700 [INFO] Yuborildi: Chilining tog‘li hududlarida rekord darajadagi qor yog‘ishi 
+run	UNKNOWN STEP	2026-07-24T13:24:41.7005477Z 2026-07-24 13:24:41,700 [INFO] Keyingi yuborishgacha 3 daqiqa 22 soniya
+run	UNKNOWN STEP	2026-07-24T13:28:03.7843802Z 2026-07-24 13:28:03,784 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T13:28:04.4379159Z 2026-07-24 13:28:04,437 [INFO] Topildi: 32 ta maqola
+run	UNKNOWN STEP	2026-07-24T13:28:04.4428102Z 2026-07-24 13:28:04,442 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T13:28:04.4428596Z 2026-07-24 13:28:04,442 [INFO] Keyingi yuborishgacha 2 daqiqa 45 soniya
+run	UNKNOWN STEP	2026-07-24T13:30:49.4851035Z 2026-07-24 13:30:49,484 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T13:30:50.0501231Z 2026-07-24 13:30:50,049 [INFO] Topildi: 32 ta maqola
+run	UNKNOWN STEP	2026-07-24T13:30:50.0550009Z 2026-07-24 13:30:50,054 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T13:30:50.0550489Z 2026-07-24 13:30:50,054 [INFO] Keyingi yuborishgacha 3 daqiqa 11 soniya
+run	UNKNOWN STEP	2026-07-24T13:34:01.1556321Z 2026-07-24 13:34:01,155 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T13:34:01.8594522Z 2026-07-24 13:34:01,859 [INFO] Topildi: 32 ta maqola
+run	UNKNOWN STEP	2026-07-24T13:34:01.8642749Z 2026-07-24 13:34:01,864 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T13:34:01.8643242Z 2026-07-24 13:34:01,864 [INFO] Keyingi yuborishgacha 2 daqiqa 15 soniya
+run	UNKNOWN STEP	2026-07-24T13:36:16.9337766Z 2026-07-24 13:36:16,933 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T13:36:17.5170266Z 2026-07-24 13:36:17,516 [INFO] Topildi: 31 ta maqola
+run	UNKNOWN STEP	2026-07-24T13:36:21.3177253Z 2026-07-24 13:36:21,317 [INFO] Yuborildi: Ispaniyada yirik o‘rmon yong‘inlari Madrid hududiga yoyildi.
+run	UNKNOWN STEP	2026-07-24T13:36:21.3177880Z 2026-07-24 13:36:21,317 [INFO] Keyingi yuborishgacha 3 daqiqa 26 soniya
+run	UNKNOWN STEP	2026-07-24T13:39:47.3278780Z 2026-07-24 13:39:47,327 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T13:39:47.9427604Z 2026-07-24 13:39:47,942 [INFO] Topildi: 31 ta maqola
+run	UNKNOWN STEP	2026-07-24T13:39:47.9474386Z 2026-07-24 13:39:47,947 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T13:39:47.9827655Z [main 0d25e9d] chore: update posted.db [skip ci]
+run	UNKNOWN STEP	2026-07-24T13:39:47.9828271Z  10 files changed, 1 insertion(+), 1 deletion(-)
+run	UNKNOWN STEP	2026-07-24T13:39:47.9828795Z  create mode 100644 docs/img/6371b6e6501b69ab.jpg
+run	UNKNOWN STEP	2026-07-24T13:39:47.9829324Z  create mode 100644 docs/img/6b276d4446cb44ef.jpg
+run	UNKNOWN STEP	2026-07-24T13:39:47.9829812Z  delete mode 100644 docs/img/af6e9c1ee0d2e760.jpg
+run	UNKNOWN STEP	2026-07-24T13:39:47.9830199Z  create mode 100644 docs/img/b654027f972b8c00.jpg
+run	UNKNOWN STEP	2026-07-24T13:39:47.9830577Z  create mode 100644 docs/img/cdcd26ea282bcbcf.jpg
+run	UNKNOWN STEP	2026-07-24T13:39:47.9830902Z  delete mode 100644 docs/img/cef346ff0dfa2246.jpg
+run	UNKNOWN STEP	2026-07-24T13:39:47.9831200Z  delete mode 100644 docs/img/e3bf622b21f78de0.jpg
+run	UNKNOWN STEP	2026-07-24T13:39:47.9831498Z  delete mode 100644 docs/img/f6e98d8e2fff2fe8.jpg
+run	UNKNOWN STEP	2026-07-24T13:39:49.5283820Z To https://github.com/nurillayevjamshid/xabarnoma-bot
+run	UNKNOWN STEP	2026-07-24T13:39:49.5284250Z    cc73bef..0d25e9d  main -> main
+run	UNKNOWN STEP	2026-07-24T13:39:49.5328385Z 2026-07-24 13:39:49,532 [INFO] posted.db saqlandi
+run	UNKNOWN STEP	2026-07-24T13:39:49.5328829Z 2026-07-24 13:39:49,532 [INFO] Keyingi yuborishgacha 3 daqiqa 41 soniya
+run	UNKNOWN STEP	2026-07-24T13:43:30.5977382Z 2026-07-24 13:43:30,597 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T13:43:31.1703380Z 2026-07-24 13:43:31,170 [INFO] Topildi: 31 ta maqola
+run	UNKNOWN STEP	2026-07-24T13:43:31.1751935Z 2026-07-24 13:43:31,175 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T13:43:31.1752785Z 2026-07-24 13:43:31,175 [INFO] Keyingi yuborishgacha 3 daqiqa 54 soniya
+run	UNKNOWN STEP	2026-07-24T13:47:25.1799641Z 2026-07-24 13:47:25,179 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T13:47:25.7629833Z 2026-07-24 13:47:25,762 [INFO] Topildi: 31 ta maqola
+run	UNKNOWN STEP	2026-07-24T13:47:25.7676106Z 2026-07-24 13:47:25,767 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T13:47:25.7676788Z 2026-07-24 13:47:25,767 [INFO] Keyingi yuborishgacha 2 daqiqa 20 soniya
+run	UNKNOWN STEP	2026-07-24T13:49:45.7698853Z 2026-07-24 13:49:45,769 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T13:49:46.3548357Z 2026-07-24 13:49:46,354 [INFO] Topildi: 31 ta maqola
+run	UNKNOWN STEP	2026-07-24T13:49:46.3594941Z 2026-07-24 13:49:46,359 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T13:49:46.3595423Z 2026-07-24 13:49:46,359 [INFO] Keyingi yuborishgacha 3 daqiqa 1 soniya
+run	UNKNOWN STEP	2026-07-24T13:52:47.4408858Z 2026-07-24 13:52:47,440 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T13:52:48.0460685Z 2026-07-24 13:52:48,045 [INFO] Topildi: 32 ta maqola
+run	UNKNOWN STEP	2026-07-24T13:52:49.6220031Z 2026-07-24 13:52:49,621 [INFO] Yuborildi: Xitoy EIning 14 ta kompaniyasini eksport nazorati ro‘yxatiga
+run	UNKNOWN STEP	2026-07-24T13:52:49.6221001Z 2026-07-24 13:52:49,621 [INFO] Keyingi yuborishgacha 3 daqiqa 19 soniya
+run	UNKNOWN STEP	2026-07-24T13:56:08.7132448Z 2026-07-24 13:56:08,712 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T13:56:09.3520317Z 2026-07-24 13:56:09,351 [INFO] Topildi: 32 ta maqola
+run	UNKNOWN STEP	2026-07-24T13:56:09.3568580Z 2026-07-24 13:56:09,356 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T13:56:09.3570850Z 2026-07-24 13:56:09,356 [INFO] Keyingi yuborishgacha 2 daqiqa 33 soniya
+run	UNKNOWN STEP	2026-07-24T13:58:42.4057248Z 2026-07-24 13:58:42,405 [INFO] Yangiliklar yig'ilmoqda...
+run	UNKNOWN STEP	2026-07-24T13:58:42.9837160Z 2026-07-24 13:58:42,983 [INFO] Topildi: 32 ta maqola
+run	UNKNOWN STEP	2026-07-24T13:58:42.9884448Z 2026-07-24 13:58:42,988 [INFO] Yangi yuborilmagan post yo'q
+run	UNKNOWN STEP	2026-07-24T13:58:42.9885144Z 2026-07-24 13:58:42,988 [INFO] Keyingi yuborishgacha 3 daqiqa 37 soniya
+run	UNKNOWN STEP	2026-07-24T14:00:07.9987259Z [main 3030392] chore: update posted.db [skip ci]
+run	UNKNOWN STEP	2026-07-24T14:00:07.9987856Z  4 files changed, 1 insertion(+), 1 deletion(-)
+run	UNKNOWN STEP	2026-07-24T14:00:07.9988387Z  delete mode 100644 docs/img/c6f3d9887f143013.jpg
+run	UNKNOWN STEP	2026-07-24T14:00:07.9988930Z  create mode 100644 docs/img/f960ac7db3e2b382.jpg
+run	UNKNOWN STEP	2026-07-24T14:00:09.3888033Z To https://github.com/nurillayevjamshid/xabarnoma-bot
+run	UNKNOWN STEP	2026-07-24T14:00:09.3888583Z    0d25e9d..3030392  main -> main
+run	UNKNOWN STEP	2026-07-24T14:00:09.3931321Z 2026-07-24 14:00:09,392 [INFO] posted.db saqlandi
+run	UNKNOWN STEP	2026-07-24T14:00:09.3931813Z 2026-07-24 14:00:09,393 [INFO] Loop tugadi
+run	UNKNOWN STEP	2026-07-24T14:00:09.6993561Z ##[group]Run git add posted.db docs
+run	UNKNOWN STEP	2026-07-24T14:00:09.6993901Z ^[[36;1mgit add posted.db docs^[[0m
+run	UNKNOWN STEP	2026-07-24T14:00:09.6994191Z ^[[36;1mif git diff --cached --quiet; then^[[0m
+run	UNKNOWN STEP	2026-07-24T14:00:09.6994493Z ^[[36;1m  echo "No changes to posted.db"^[[0m
+run	UNKNOWN STEP	2026-07-24T14:00:09.6994761Z ^[[36;1melse^[[0m
+run	UNKNOWN STEP	2026-07-24T14:00:09.6995029Z ^[[36;1m  git commit -m "chore: update posted.db [skip ci]"^[[0m
+run	UNKNOWN STEP	2026-07-24T14:00:09.6995391Z ^[[36;1m  git pull --rebase --autostash || true^[[0m
+run	UNKNOWN STEP	2026-07-24T14:00:09.6995681Z ^[[36;1m  git push || true^[[0m
+run	UNKNOWN STEP	2026-07-24T14:00:09.6995907Z ^[[36;1mfi^[[0m
+run	UNKNOWN STEP	2026-07-24T14:00:09.7042964Z shell: /usr/bin/bash -e {0}
+run	UNKNOWN STEP	2026-07-24T14:00:09.7043241Z env:
+run	UNKNOWN STEP	2026-07-24T14:00:09.7043518Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.14/x64
+run	UNKNOWN STEP	2026-07-24T14:00:09.7043963Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.14/x64/lib/pkgconfig
+run	UNKNOWN STEP	2026-07-24T14:00:09.7044389Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.14/x64
+run	UNKNOWN STEP	2026-07-24T14:00:09.7044802Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.14/x64
+run	UNKNOWN STEP	2026-07-24T14:00:09.7045178Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.14/x64
+run	UNKNOWN STEP	2026-07-24T14:00:09.7045549Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.14/x64/lib
+run	UNKNOWN STEP	2026-07-24T14:00:09.7045872Z ##[endgroup]
+run	UNKNOWN STEP	2026-07-24T14:00:09.7161041Z No changes to posted.db
+run	UNKNOWN STEP	2026-07-24T14:00:09.7254497Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+run	UNKNOWN STEP	2026-07-24T14:00:09.7255652Z Post job cleanup.
+run	UNKNOWN STEP	2026-07-24T14:00:09.8490151Z Cache hit occurred on the primary key setup-python-Linux-x64-24.04-Ubuntu-python-3.13.14-pip-7ec29e5a561398ff67bcb3c5605f228bb31680d40339284b8ad43f669ea9101a, not saving cache.
+run	UNKNOWN STEP	2026-07-24T14:00:09.8492809Z (node:5302) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+run	UNKNOWN STEP	2026-07-24T14:00:09.8493904Z (Use `node --trace-deprecation ...` to show where the warning was created)
+run	UNKNOWN STEP	2026-07-24T14:00:09.8666666Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+run	UNKNOWN STEP	2026-07-24T14:00:09.8667820Z Post job cleanup.
+run	UNKNOWN STEP	2026-07-24T14:00:09.9594379Z [command]/usr/bin/git version
+run	UNKNOWN STEP	2026-07-24T14:00:09.9633135Z git version 2.54.0
+run	UNKNOWN STEP	2026-07-24T14:00:09.9672057Z Temporarily overriding HOME='/home/runner/work/_temp/62050edf-f270-413a-a644-6e90cbc0b051' before making global git config changes
+run	UNKNOWN STEP	2026-07-24T14:00:09.9673588Z Adding repository directory to the temporary git global config as a safe directory
+run	UNKNOWN STEP	2026-07-24T14:00:09.9679864Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/xabarnoma-bot/xabarnoma-bot
+run	UNKNOWN STEP	2026-07-24T14:00:09.9727240Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+run	UNKNOWN STEP	2026-07-24T14:00:09.9767680Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+run	UNKNOWN STEP	2026-07-24T14:00:10.0034369Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+run	UNKNOWN STEP	2026-07-24T14:00:10.0067026Z http.https://github.com/.extraheader
+run	UNKNOWN STEP	2026-07-24T14:00:10.0116339Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+run	UNKNOWN STEP	2026-07-24T14:00:10.0117766Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+run	UNKNOWN STEP	2026-07-24T14:00:10.0387867Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+run	UNKNOWN STEP	2026-07-24T14:00:10.0428627Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+run	UNKNOWN STEP	2026-07-24T14:00:10.0843303Z Cleaning up orphan processes
+run	UNKNOWN STEP	2026-07-24T14:00:10.1158466Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

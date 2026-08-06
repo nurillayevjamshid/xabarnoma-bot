@@ -14,7 +14,11 @@ FOOTER = "➖ Bizga obuna bo'ling: @tezkorofficial_uz"
 MIN_INTERVAL_SEC = int(os.getenv("MIN_INTERVAL_SEC", 2 * 60))
 MAX_INTERVAL_SEC = int(os.getenv("MAX_INTERVAL_SEC", 4 * 60))
 
-DB_PATH = os.getenv("DB_PATH", "posted.db")
+# On Vercel, the filesystem is read-only except for /tmp
+if os.getenv("VERCEL"):
+    DB_PATH = "/tmp/posted.db"
+else:
+    DB_PATH = os.getenv("DB_PATH", "posted.db")
 
 TELEGRAM_CHANNELS = ["aniquz", "Geointriga_uz"]
 

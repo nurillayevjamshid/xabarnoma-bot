@@ -4,6 +4,7 @@ from http.server import BaseHTTPRequestHandler
 from main import pick_and_publish
 from aiogram import Bot
 from config import BOT_TOKEN
+from dedup import init_db
 
 log = logging.getLogger("xabarnoma")
 
@@ -20,6 +21,7 @@ class handler(BaseHTTPRequestHandler):
         ch.setLevel(logging.INFO)
         log.addHandler(ch)
         
+        init_db()
         bot = Bot(token=BOT_TOKEN)
         try:
             # Run the pick_and_publish logic once
