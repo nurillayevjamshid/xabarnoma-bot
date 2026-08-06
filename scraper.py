@@ -44,6 +44,7 @@ async def _telegram_channel(session, username: str) -> list[Article]:
     url_re = re.compile(r'https?://\S+', re.I)
     bare_url_re = re.compile(r'\b\w+\.\w+\.[a-z]{2,}\S*', re.I)
     cta_re = re.compile(r"ko['’ʻʼ‘`]?proq|batafsil|podrob|chitat|davomi", re.I)
+    social_re = re.compile(r"telegram\s*\|\s*facebook\s*\|\s*x\s*\|\s*instagram", re.I)
     arrow_re = re.compile(r"[👉👇➡▶🔗]")
     trailing_cta_re = re.compile(
         r"(?<=[.!?…»”\"])\s+(ko['’ʻʼ‘`]?proq|batafsil|davomi|podrobnee|chitat(\s+dalee)?)"
@@ -91,10 +92,13 @@ async def _telegram_channel(session, username: str) -> list[Article]:
             if not any(c.isalpha() for c in ln):
                 return False
             # Remove footer CTA lines
-            if cta_re.search(ln) and (arrow_re.search(ln) or len(ln) <= 45):
+            if cta_re.search(ln) and (arrow_re.search(ln) or len(ln) <= 55):
+                return False
+            # Remove social media footer line
+            if social_re.search(ln):
                 return False
             # Remove channel handles and short links
-            if handle_re.fullmatch(ln) or (handle_re.search(ln) and len(ln) < 20):
+            if handle_re.fullmatch(ln) or (handle_re.search(ln) and len(ln) < 25):
                 return False
             if "t.me/" in ln.lower():
                 return False

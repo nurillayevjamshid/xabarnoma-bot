@@ -20,7 +20,7 @@ if os.getenv("VERCEL"):
 else:
     DB_PATH = os.getenv("DB_PATH", "posted.db")
 
-TELEGRAM_CHANNELS = ["aniquz", "Geointriga_uz"]
+TELEGRAM_CHANNELS = ["uz24newsuz"]
 
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
