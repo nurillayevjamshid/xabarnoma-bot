@@ -98,7 +98,10 @@ async def _telegram_channel(session, username: str) -> list[Article]:
             if social_re.search(ln):
                 return False
             # Remove channel handles and short links
-            if handle_re.fullmatch(ln) or (handle_re.search(ln) and len(ln) < 30):
+            if handle_re.fullmatch(ln) or (handle_re.search(ln) and len(ln) < 35):
+                return False
+            # Remove specific channel mentions like uza_uz or daryo_live
+            if any(x in ln.lower() for x in ["uza_uz", "daryo_live", "uz24newsuz"]):
                 return False
             if "t.me/" in ln.lower():
                 return False
