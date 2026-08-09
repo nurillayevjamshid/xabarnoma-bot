@@ -27,9 +27,12 @@ def _conn():
 
 
 def _norm_title(t: str) -> str:
-    return hashlib.md5(
-        "".join(ch.lower() for ch in t if ch.isalnum()).encode("utf-8")
-    ).hexdigest()
+    # Remove all whitespace, special characters, and convert to lower
+    # This makes the hash resistant to minor spacing or punctuation changes
+    normalized = "".join(ch.lower() for ch in t if ch.isalnum())
+    # Take only first 100 chars to avoid hash collisions on very long titles 
+    # but still keep it unique enough
+    return hashlib.md5(normalized[:200].encode("utf-8")).hexdigest()
 
 
 def is_posted(url: str, title: str) -> bool:
