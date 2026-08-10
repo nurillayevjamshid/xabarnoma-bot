@@ -163,7 +163,8 @@ async def _telegram_channel(session, username: str) -> list[Article]:
     return out
 
 
-async def fetch_all(max_per_channel: int = 0) -> list[Article]:
+async def fetch_all(max_per_channel: int = 5) -> list[Article]:
+    """Vercel-da tezroq ishlashi uchun har kanaldan faqat oxirgi 5 ta postni olamiz."""
     connector = aiohttp.TCPConnector(limit=10, ssl=False)
     async with aiohttp.ClientSession(connector=connector) as session:
         tasks = [_telegram_channel(session, ch) for ch in TELEGRAM_CHANNELS]
@@ -171,8 +172,7 @@ async def fetch_all(max_per_channel: int = 0) -> list[Article]:
     articles: list[Article] = []
     for r in results:
         if isinstance(r, list):
-            if max_per_channel > 0:
-                articles.extend(r[:max_per_channel])
-            else:
-                articles.extend(r)
+            # Telegram preview sahifasida postlar teskari tartibda bo'lishi mumkin,
+            # bizga faqat eng oxirgilari kerak.
+            articles.extend(r[-max_per_channel:] if len(r) > max_per_channel else r)
     return articles

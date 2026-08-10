@@ -28,20 +28,33 @@ async def pick_and_publish(bot: Bot) -> bool:
 
     # Eng eski postdan boshlab tekshiramiz (chiqarilgan vaqt bo'yicha xronologik).
     articles.sort(key=lambda a: a.published)
-    for art in articles:
+    
+    # Vercel-da DB o'chib ketgani uchun, juda eski postlarni yubormaslik kerak.
+    # Oxirgi 10 ta maqolani tekshiramiz.
+    recent_articles = articles[-15:] if len(articles) > 15 else articles
+    
+    for art in recent_articles:
         if is_posted(art.url, art.title):
-            log.debug(f"Skip (already posted): {art.title[:30]}")
             continue
+            
         log.info(f"Publishing: {art.title[:60]}")
-        ok = await publish(bot, art)
-        if ok:
+        try:
+            ok = await publish(bot, art)
+            if ok:
+                mark_posted(art.url, art.title)
+                append_post(art)
+                log.info(f"Successfully sent: {art.title[:60]}")
+                return True
+            else:
+                # Agar yuborishda xato bo'lsa, uni 'posted' deb belgilaymizki, 
+                # keyingi safar bot tiqilib qolmasin.
+                mark_posted(art.url, art.title)
+                log.error(f"Skipping failed post: {art.title[:60]}")
+        except Exception as e:
             mark_posted(art.url, art.title)
-            append_post(art)
-            log.info(f"Successfully sent: {art.title[:60]}")
-            return True
-        else:
-            log.error(f"Failed to publish: {art.title[:60]}")
-    log.info("No new unposted articles found.")
+            log.error(f"Critical error publishing, skipping: {e}")
+            
+    log.info("No new unposted articles found in recent list.")
     return False
 
 

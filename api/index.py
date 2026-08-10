@@ -18,14 +18,22 @@ class handler(BaseHTTPRequestHandler):
         import io
         log_capture = io.StringIO()
         ch = logging.StreamHandler(log_capture)
-        ch.setLevel(logging.INFO)
+        ch.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
         log.addHandler(ch)
         
-        init_db()
-        bot = Bot(token=BOT_TOKEN)
         try:
-            # Run the pick_and_publish logic once
-            success = loop.run_until_complete(pick_and_publish(bot))
+            init_db()
+            bot = Bot(token=BOT_TOKEN)
+            
+            # Set a timeout for the entire operation (Vercel limit is usually 10s for Hobby)
+            async def run_with_timeout():
+                try:
+                    return await asyncio.wait_for(pick_and_publish(bot), timeout=25)
+                except asyncio.TimeoutError:
+                    log.error("Operation timed out after 25 seconds")
+                    return False
+
+            success = loop.run_until_complete(run_with_timeout())
             
             self.send_response(200)
             self.send_header('Content-type', 'text/plain; charset=utf-8')
@@ -33,16 +41,17 @@ class handler(BaseHTTPRequestHandler):
             
             output = log_capture.getvalue()
             if success:
-                self.wfile.write(f"Success: New post published.\n\nLogs:\n{output}".encode())
+                self.wfile.write(f"STATUS: SUCCESS\n\nLOGS:\n{output}".encode())
             else:
-                self.wfile.write(f"No new posts to publish.\n\nLogs:\n{output}".encode())
+                self.wfile.write(f"STATUS: NO_NEW_POSTS_OR_TIMEOUT\n\nLOGS:\n{output}".encode())
                 
         except Exception as e:
             self.send_response(500)
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            self.wfile.write(f"Error: {str(e)}".encode())
+            self.wfile.write(f"CRITICAL ERROR: {str(e)}\n\nLOGS:\n{log_capture.getvalue()}".encode())
         finally:
+            log.removeHandler(ch)
             loop.run_until_complete(bot.session.close())
             loop.close()
 
