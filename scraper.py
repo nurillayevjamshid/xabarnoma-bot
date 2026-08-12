@@ -51,6 +51,23 @@ async def _telegram_channel(session, username: str) -> list[Article]:
         r"\s*[👉👇➡▶🔗:…\-–—.!]*\s*$",
         re.I,
     )
+    advertisement_button_re = re.compile(
+        r"(?:davom(?:i|ini)?\s*(?:shu\s*y?erda|ko['’ʻʼ‘`]?r(?:ish|ing)|o['’ʻʼ‘`]?qish)|"
+        r"batafsil\s*(?:o['’ʻʼ‘`]?qish|shu\s*yerda)?|"
+        r"ko['’ʻʼ‘`]?proq\s*(?:bilish|o['’ʻʼ‘`]?qish)?)",
+        re.I,
+    )
+
+    def _has_advertisement_button(post: BeautifulSoup) -> bool:
+        """Tashqi reklama yoki klikbeyt sahifasiga olib boruvchi tugmali postlarni aniqlaydi."""
+        button_text = " ".join(
+            button.get_text(" ", strip=True)
+            for button in post.select(".tgme_widget_message_inline_button")
+        )
+        if not button_text:
+            return False
+        normalized = to_latin(button_text).lower()
+        return bool(advertisement_button_re.search(normalized))
 
     for post in posts:
         msg = post.select_one("div.tgme_widget_message")
@@ -61,6 +78,11 @@ async def _telegram_channel(session, username: str) -> list[Article]:
             continue
         text_el = post.select_one("div.tgme_widget_message_text")
         if not text_el:
+            continue
+
+        # “Davomini ko‘rish”, “Davomi shu yerda” singari tugmali reklama
+        # postlari qayta yuborilmaydi.
+        if _has_advertisement_button(post):
             continue
 
         # Link preview widgetni olib tashlash

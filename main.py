@@ -46,13 +46,14 @@ async def pick_and_publish(bot: Bot) -> bool:
                 log.info(f"Successfully sent: {art.title[:60]}")
                 return True
             else:
-                # Agar yuborishda xato bo'lsa, uni 'posted' deb belgilaymizki, 
-                # keyingi safar bot tiqilib qolmasin.
-                mark_posted(art.url, art.title)
-                log.error(f"Skipping failed post: {art.title[:60]}")
-        except Exception as e:
-            mark_posted(art.url, art.title)
-            log.error(f"Critical error publishing, skipping: {e}")
+                # Video yoki media vaqtincha yuklanmasa, postni yuborilgan deb
+                # belgilamaymiz. Boshqa postlar davom etadi, ushbu post esa
+                # keyingi siklda qayta sinab ko'riladi.
+                log.error(f"Yuborilmadi, keyingi siklda qayta uriniladi: {art.title[:60]}")
+                continue
+        except Exception as error:
+            log.exception(f"Yuborishda xatolik, keyingi postga o'tilmoqda: {error}")
+            continue
             
     log.info("No new unposted articles found in recent list.")
     return False
