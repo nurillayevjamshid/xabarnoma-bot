@@ -43,7 +43,7 @@ jobs:
 
       - name: Run bot loop
         env:
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          BOT_TOKEN: "8224265387:AAHM2D9-lcedRnkfFsLc1Xoru-Uo2MFcIYA"
           CHANNEL_ID: "@tezkorofficial_uz"
           RUN_SECONDS: "20400"   # ~5 soat 40 daqiqa, keyin tozalanib chiqadi
           COMMIT_DB: "1"
