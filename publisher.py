@@ -6,6 +6,7 @@ from aiogram.enums import ParseMode
 from html import escape
 from config import CHANNEL_ID, FOOTER
 from scraper import Article
+from translit import to_latin
 
 
 log = logging.getLogger("xabarnoma")
@@ -27,19 +28,18 @@ def _first_paragraph(text: str) -> str:
 
 
 def _build_caption(article: Article) -> str:
-    title = escape(article.title.strip())
-    summary = _first_paragraph(article.body)
-    summary = escape(summary)
+    title = escape(to_latin(article.title.strip()))
+    summary = escape(to_latin(_first_paragraph(article.body)))
     footer = FOOTER.strip()
 
-    head = f"<b>{title}</b>\n\n"
+    head = f"🔴 <b>{title}</b>\n\n"
     tail = f"\n\n{footer}"
-    available = CAPTION_LIMIT - len(head) - len(tail) - 5
+    available = CAPTION_LIMIT - len(head) - len(tail) - len("<blockquote>") - len("</blockquote>") - 5
 
     if len(summary) > available:
         summary = summary[:available].rsplit(" ", 1)[0] + "..."
 
-    return f"{head}{summary}\n\n{footer}"
+    return f"{head}<blockquote>{summary}</blockquote>\n\n{footer}"
 
 
 async def _send_text(bot: Bot, caption: str) -> None:
