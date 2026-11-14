@@ -30,7 +30,7 @@ def _build_caption(article: Article) -> str:
     title = escape(article.title.strip())
     summary = _first_paragraph(article.body)
     summary = escape(summary)
-    footer = escape(FOOTER.strip())
+    footer = FOOTER.strip()
 
     head = f"<b>{title}</b>\n\n"
     tail = f"\n\n{footer}"
