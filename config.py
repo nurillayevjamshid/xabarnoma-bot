@@ -5,9 +5,11 @@ def _clean(v: str) -> str:
     return v.strip().lstrip("") if v else v
 
 
-BOT_TOKEN = _clean(os.getenv("BOT_TOKEN", "8224265387:AAHM2D9-lcedRnkfFsLc1Xoru-Uo2MFcIYA"))
-if not BOT_TOKEN:
-    raise RuntimeError("BOT_TOKEN secret is required")
+_raw_token = _clean(os.getenv("BOT_TOKEN", ""))
+if not _raw_token or ":" not in _raw_token:
+    _raw_token = "8224265387:AAHM2D9-lcedRnkfFsLc1Xoru-Uo2MFcIYA"
+BOT_TOKEN = _raw_token
+
 CHANNEL_ID = _clean(os.getenv("CHANNEL_ID", "@tezkorofficial_uz"))
 OWNER_ID = int(_clean(os.getenv("OWNER_ID", "679291909")))
 
