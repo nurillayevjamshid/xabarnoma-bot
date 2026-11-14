@@ -39,10 +39,10 @@ async def _telegram_channel(session, username: str) -> list[Article]:
     soup = BeautifulSoup(html, "lxml")
     posts = soup.select("div.tgme_widget_message_wrap")
     out: list[Article] = []
-    
+
     handle_re = re.compile(r"@\w+", re.I)
-    url_re = re.compile(r'https?://\S+', re.I)
-    bare_url_re = re.compile(r'\b\w+\.\w+\.[a-z]{2,}\S*', re.I)
+    url_re = re.compile(r"https?://\S+", re.I)
+    bare_url_re = re.compile(r"\b\w+\.\w+\.[a-z]{2,}\S*", re.I)
     cta_re = re.compile(r"ko['’ʻʼ‘`]?proq|batafsil|podrob|chitat|davomi", re.I)
     social_re = re.compile(r"telegram\s*\|\s*facebook\s*\|\s*x\s*\|\s*instagram", re.I)
     arrow_re = re.compile(r"[👉👇➡▶🔗]")
@@ -55,6 +55,10 @@ async def _telegram_channel(session, username: str) -> list[Article]:
         r"(?:davom(?:i|ini)?\s*(?:shu\s*y?erda|ko['’ʻʼ‘`]?r(?:ish|ing)|o['’ʻʼ‘`]?qish)|"
         r"batafsil\s*(?:o['’ʻʼ‘`]?qish|shu\s*yerda)?|"
         r"ko['’ʻʼ‘`]?proq\s*(?:bilish|o['’ʻʼ‘`]?qish)?)",
+        re.I,
+    )
+    ad_pattern = re.compile(
+        r"#reklama|#реклама|biflorica|#hamkorlik|#homiy|#reklam",
         re.I,
     )
 
@@ -85,29 +89,42 @@ async def _telegram_channel(session, username: str) -> list[Article]:
         if _has_advertisement_button(post):
             continue
 
+        # Reklama postlarini filtrlash (butun post matnida reklama teglari yoki homiylik)
+        full_post_text = post.get_text(" ", strip=True)
+        if ad_pattern.search(full_post_text):
+            continue
+
         # Link preview widgetni olib tashlash
         for preview in post.select("div.tgme_widget_message_link_preview"):
             preview.decompose()
-        
+
         # <a> teglar ichidagi havolalarni olib tashlash
         for link_el in text_el.select("a[href]"):
             link_el.decompose()
-        
+
         for br in text_el.find_all("br"):
             br.replace_with("\n")
-        
+
         raw_text = text_el.get_text("\n", strip=True)
-        
+
+        # Reklama postlarini filtrlash
+        if ad_pattern.search(raw_text):
+            continue
+
         # Transliterate early
         if is_cyrillic(raw_text):
             raw_text = to_latin(raw_text)
-        
+
+        # Reklama postlarini filtrlash (transliteratsiyadan keyin)
+        if ad_pattern.search(raw_text):
+            continue
+
         lines = [ln.strip() for ln in raw_text.splitlines() if ln.strip()]
-        
+
         # Clean URLs and domains
-        lines = [url_re.sub('', ln).strip() for ln in lines]
-        lines = [bare_url_re.sub('', ln).strip() for ln in lines]
-        
+        lines = [url_re.sub("", ln).strip() for ln in lines]
+        lines = [bare_url_re.sub("", ln).strip() for ln in lines]
+
         def _keep(ln: str) -> bool:
             if not ln:
                 return False
@@ -122,8 +139,8 @@ async def _telegram_channel(session, username: str) -> list[Article]:
             # Remove channel handles and short links
             if handle_re.fullmatch(ln) or (handle_re.search(ln) and len(ln) < 35):
                 return False
-            # Remove specific channel mentions like uza_uz or daryo_live
-            if any(x in ln.lower() for x in ["uza_uz", "daryo_live", "uz24newsuz"]):
+            # Remove specific channel mentions
+            if any(x in ln.lower() for x in ["uza_uz", "daryo_live", "uz24newsuz", "geointriga_uz", "geointriga"]):
                 return False
             if "t.me/" in ln.lower():
                 return False
@@ -132,12 +149,8 @@ async def _telegram_channel(session, username: str) -> list[Article]:
         lines = [ln for ln in lines if _keep(ln)]
         lines = [trailing_cta_re.sub("", ln).rstrip() for ln in lines]
         lines = [ln for ln in lines if ln]
-        
-        if not lines:
-            continue
 
-        # Reklama postlarini filtrlash
-        if re.search(r"#reklama|#reklama", raw_text, re.I):
+        if not lines:
             continue
 
         def _has_letters(s: str) -> bool:
@@ -151,7 +164,7 @@ async def _telegram_channel(session, username: str) -> list[Article]:
         img = None
         photo_wrap = post.select_one("a.tgme_widget_message_photo_wrap")
         if photo_wrap and photo_wrap.get("style"):
-            m = re.search(r"url\(['\"]?([^'\")]+)['\"]?\)", photo_wrap["style"])
+            m = re.search(r"url\(['\"]?([^\'\")]+)['\"]?\)", photo_wrap["style"])
             if m:
                 img = m.group(1)
 
@@ -162,7 +175,7 @@ async def _telegram_channel(session, username: str) -> list[Article]:
         if not img:
             thumb = post.select_one("i.tgme_widget_message_video_thumb")
             if thumb and thumb.get("style"):
-                m = re.search(r"url\(['\"]?([^'\")]+)['\"]?\)", thumb["style"])
+                m = re.search(r"url\(['\"]?([^\'\")]+)['\"]?\)", thumb["style"])
                 if m:
                     img = m.group(1)
 
