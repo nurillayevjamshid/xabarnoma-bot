@@ -16,15 +16,16 @@ SENTENCE_SPLIT = re.compile(r"(?<=[.!?…])\s+(?=[A-Z«„\"„'O‘O'A-Za-z])")
 
 
 def _first_paragraph(text: str) -> str:
-    """Matndan birinchi to'liq paragrafni oladi."""
-    text = " ".join(text.split())
-    parts = text.split("\n\n")
-    for p in parts:
-        p = p.strip()
-        if len(p) > 30:
-            return p
-    # Agar paragraf topilmasa, birinchi 500 belgini qaytar
-    return text[:500].rsplit(" ", 1)[0] + "..." if len(text) > 500 else text
+    """Matnni paragraflarga ajratadi, har birini tozalab \n\n bilan birlashtiradi."""
+    if not text:
+        return ""
+    paragraphs = re.split(r'\n+', text)
+    cleaned = []
+    for p in paragraphs:
+        clean_p = " ".join(p.split())
+        if clean_p:
+            cleaned.append(clean_p)
+    return "\n\n".join(cleaned)
 
 
 def _build_caption(article: Article) -> str:
@@ -34,12 +35,18 @@ def _build_caption(article: Article) -> str:
 
     head = f"🔴 <b>{title}</b>\n\n"
     tail = f"\n\n{footer}"
-    available = CAPTION_LIMIT - len(head) - len(tail) - len("<blockquote>") - len("</blockquote>") - 5
+    prefix = f"{head}<blockquote>"
+    suffix = f"</blockquote>{tail}"
 
-    if len(summary) > available:
-        summary = summary[:available].rsplit(" ", 1)[0] + "..."
+    max_body_len = CAPTION_LIMIT - len(prefix) - len(suffix)
 
-    return f"{head}<blockquote>{summary}</blockquote>\n\n{footer}"
+    if len(summary) > max_body_len:
+        summary = summary[:max_body_len - 3].rsplit(" ", 1)[0]
+        if "&" in summary and ";" not in summary.rsplit("&", 1)[1]:
+            summary = summary.rsplit("&", 1)[0]
+        summary += "..."
+
+    return f"{prefix}{summary}{suffix}"
 
 
 async def _send_text(bot: Bot, caption: str) -> None:
