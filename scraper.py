@@ -43,18 +43,18 @@ async def _telegram_channel(session, username: str) -> list[Article]:
     handle_re = re.compile(r"@\w+", re.I)
     url_re = re.compile(r"https?://\S+", re.I)
     bare_url_re = re.compile(r"\b\w+\.\w+\.[a-z]{2,}\S*", re.I)
-    cta_re = re.compile(r"ko['’ʻʼ‘`]?proq|batafsil|podrob|chitat|davomi", re.I)
+    cta_re = re.compile(r"ko['’ʻʼ‘\u0060]?proq|batafsil|podrob|chitat|davomi", re.I)
     social_re = re.compile(r"telegram\s*\|\s*facebook\s*\|\s*x\s*\|\s*instagram", re.I)
     arrow_re = re.compile(r"[👉👇➡▶🔗]")
     trailing_cta_re = re.compile(
-        r"(?<=[.!?…»”\"])\s+(ko['’ʻʼ‘`]?proq|batafsil|davomi|podrobnee|chitat(\s+dalee)?)"
+        r"(?<=[.!?…»”\"])\s+(ko['’ʻʼ‘\u0060]?proq|batafsil|davomi|podrobnee|chitat(\s+dalee)?)"
         r"\s*[👉👇➡▶🔗:…\-–—.!]*\s*$",
         re.I,
     )
     advertisement_button_re = re.compile(
-        r"(?:davom(?:i|ini)?\s*(?:shu\s*y?erda|ko['’ʻʼ‘`]?r(?:ish|ing)|o['’ʻʼ‘`]?qish)|"
-        r"batafsil\s*(?:o['’ʻʼ‘`]?qish|shu\s*yerda)?|"
-        r"ko['’ʻʼ‘`]?proq\s*(?:bilish|o['’ʻʼ‘`]?qish)?)",
+        r"(?:davom(?:i|ini)?\s*(?:shu\s*y?erda|ko['’ʻʼ‘\u0060]?r(?:ish|ing)|o['’ʻʼ‘\u0060]?qish)|"
+        r"batafsil\s*(?:o['’ʻʼ‘\u0060]?qish|shu\s*yerda)?|"
+        r"ko['’ʻʼ‘\u0060]?proq\s*(?:bilish|o['’ʻʼ‘\u0060]?qish)?)",
         re.I,
     )
     ad_pattern = re.compile(
@@ -105,7 +105,7 @@ async def _telegram_channel(session, username: str) -> list[Article]:
         for br in text_el.find_all("br"):
             br.replace_with("\n")
 
-        raw_text = text_el.get_text("\n", strip=True)
+        raw_text = text_el.get_text()
 
         # Reklama postlarini filtrlash
         if ad_pattern.search(raw_text):
@@ -118,12 +118,6 @@ async def _telegram_channel(session, username: str) -> list[Article]:
         # Reklama postlarini filtrlash (transliteratsiyadan keyin)
         if ad_pattern.search(raw_text):
             continue
-
-        lines = [ln.strip() for ln in raw_text.splitlines() if ln.strip()]
-
-        # Clean URLs and domains
-        lines = [url_re.sub("", ln).strip() for ln in lines]
-        lines = [bare_url_re.sub("", ln).strip() for ln in lines]
 
         def _keep(ln: str) -> bool:
             if not ln:
@@ -146,19 +140,35 @@ async def _telegram_channel(session, username: str) -> list[Article]:
                 return False
             return True
 
-        lines = [ln for ln in lines if _keep(ln)]
-        lines = [trailing_cta_re.sub("", ln).rstrip() for ln in lines]
-        lines = [ln for ln in lines if ln]
+        # Matnni paragraflar bo'yicha ajratamiz (ikki va undan ortiq \n - yangi paragraf)
+        raw_paragraphs = re.split(r'\n\s*\n+', raw_text)
+        paragraphs = []
+        for p in raw_paragraphs:
+            p_lines = [ln.strip() for ln in p.splitlines() if ln.strip()]
+            p_lines = [url_re.sub("", ln).strip() for ln in p_lines]
+            p_lines = [bare_url_re.sub("", ln).strip() for ln in p_lines]
+            p_lines = [ln for ln in p_lines if _keep(ln)]
+            p_lines = [trailing_cta_re.sub("", ln).rstrip() for ln in p_lines if ln]
+            if not p_lines:
+                continue
+            # Agar satrlar ro'yxat/punkt (▪️, •, -, —) bilan boshlansa, \n bilan saqlanadi
+            if any(l.startswith(("▪️", "•", "-", "—")) for l in p_lines):
+                p_text = "\n".join(p_lines)
+            else:
+                p_text = " ".join(p_lines)
+            if p_text:
+                paragraphs.append(p_text)
 
-        if not lines:
+        if not paragraphs:
             continue
 
         def _has_letters(s: str) -> bool:
             return any(c.isalpha() for c in s)
 
-        title_idx = next((i for i, ln in enumerate(lines) if _has_letters(ln) and len(ln) > 5), 0)
-        title = lines[title_idx]
-        body_parts = lines[title_idx + 1:]
+        title = paragraphs[0]
+        # Sarlavha boshidagi ortiqcha bayroq/belgilarni olib tashlaymiz
+        title = re.sub(r'^[^w"«\'\s]+', '', title).strip()
+        body_parts = paragraphs[1:]
         body = "\n\n".join(body_parts) if body_parts else title
 
         img = None
