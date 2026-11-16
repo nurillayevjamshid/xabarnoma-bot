@@ -15,22 +15,24 @@ CAPTION_LIMIT = 1024
 SENTENCE_SPLIT = re.compile(r"(?<=[.!?…])\s+(?=[A-Z«„\"„'O‘O'A-Za-z])")
 
 
-def _first_paragraph(text: str) -> str:
-    """Matnni paragraflarga ajratadi, har birini tozalab \n\n bilan birlashtiradi."""
+def _format_body(text: str) -> str:
+    """Matn paragraflarini saqlab tozalaydi."""
     if not text:
         return ""
-    paragraphs = re.split(r'\n+', text)
+    paragraphs = [p.strip() for p in re.split(r'\n\s*\n+', text) if p.strip()]
     cleaned = []
     for p in paragraphs:
-        clean_p = " ".join(p.split())
-        if clean_p:
-            cleaned.append(clean_p)
+        lines = [ln.strip() for ln in p.splitlines() if ln.strip()]
+        if any(l.startswith(("▪️", "•", "-", "—")) for l in lines):
+            cleaned.append("\n".join(lines))
+        else:
+            cleaned.append(" ".join(lines))
     return "\n\n".join(cleaned)
 
 
 def _build_caption(article: Article) -> str:
     title = escape(to_latin(article.title.strip()))
-    summary = escape(to_latin(_first_paragraph(article.body)))
+    summary = escape(to_latin(_format_body(article.body)))
     footer = FOOTER.strip()
 
     head = f"📌 <b>{title}</b>\n\n"
