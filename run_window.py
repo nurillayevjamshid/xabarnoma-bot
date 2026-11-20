@@ -63,9 +63,8 @@ async def seed_baseline():
 
 
 def _commit_db():
-    """posted.db va sayt fayllarini git'ga saqlaydi. Masofada parallel commit
-    bo'lsa, qayta asoslashda BIZNING (eng yangi) fayllar ustun turadi —
-    konflikt tufayli push to'xtab qolmasin."""
+    """posted.db va sayt fayllarini git'ga saqlaydi. Masofada parallel commit bo'lsa,
+    qayta asoslashda BIZNING (eng yangi) fayllar ustun turadi — konflikt tufayli push to'xtab qolmasin."""
     try:
         subprocess.run(["git", "add", DB_PATH, "docs"], check=True)
         if subprocess.run(["git", "diff", "--cached", "--quiet"]).returncode == 0:
@@ -93,7 +92,6 @@ async def main():
     migrate_images()  # eski CDN rasm havolalarini repoga ko'chirish
     if COMMIT_DB:
         _commit_db()  # ko'chirilgan rasmlar darhol saytga chiqsin
-
     if SEED:
         await seed_baseline()
         if COMMIT_DB:
@@ -102,16 +100,19 @@ async def main():
     bot = Bot(token=BOT_TOKEN)
     deadline = time.monotonic() + RUN_SECONDS
     last_commit = time.monotonic()
-
     log.info(f"Loop boshlandi, ~{RUN_SECONDS // 60} daqiqa ishlaydi")
+
     try:
         while time.monotonic() < deadline:
             try:
-                await pick_and_publish(bot)
+                ok = await pick_and_publish(bot)
+                if ok and COMMIT_DB:
+                    _commit_db()
+                    last_commit = time.monotonic()
             except Exception as e:
                 log.exception(f"Tsikl xatosi: {e}")
 
-            # Davriy ravishda posted.db ni saqlaymiz (crash bo'lsa ham yo'qolmasin)
+            # Davriy ravishda posted.db ni saqlaymiz (agar yangi post bo'lmagan bo'lsa ham)
             if COMMIT_DB and time.monotonic() - last_commit >= COMMIT_INTERVAL:
                 _commit_db()
                 last_commit = time.monotonic()
