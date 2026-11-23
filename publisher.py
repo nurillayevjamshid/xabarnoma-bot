@@ -1,4 +1,5 @@
 import re
+import asyncio
 import logging
 from aiogram import Bot
 from aiogram.types import URLInputFile
@@ -76,7 +77,16 @@ async def publish(bot: Bot, article: Article) -> bool:
             )
             return True
         except Exception as error:
-            log.warning(f"Video yuborilmadi; keyingi siklda qayta uriniladi: {error}")
+            log.warning(f"Video yuborishda xatolik/timeout: {error}")
+            # Telegram ba'zida 500 yoki HTTP timeout qaytarsa ham, videoni fonda yuklab kanalga chiqarib qo'yadi.
+            await asyncio.sleep(5)
+            try:
+                from dedup import is_in_telegram_channel
+                if is_in_telegram_channel(article.title, force_refresh=True):
+                    log.info(f"Video kanalga yetib borgani tasdiqlandi: {article.title[:60]}")
+                    return True
+            except Exception as e:
+                log.warning(f"Live channel tekshirishda xatolik: {e}")
             return False
 
     # Rasm bo'lsa, rasm bilan yuborishga urinamiz.
@@ -98,6 +108,14 @@ async def publish(bot: Bot, article: Article) -> bool:
         return True
     except Exception as e:
         log.error(f"Yuborib bo'lmadi: {e}")
+        # Matn yuborishda ham timeout bo'lsa, kanalni tekshirib ko'ramiz
+        try:
+            from dedup import is_in_telegram_channel
+            if is_in_telegram_channel(article.title, force_refresh=True):
+                log.info(f"Matnli post kanalga yetib borgani tasdiqlandi: {article.title[:60]}")
+                return True
+        except Exception:
+            pass
         return False
 
 
