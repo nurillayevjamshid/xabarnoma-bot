@@ -2,6 +2,7 @@ import asyncio
 import random
 import time
 import logging
+from collections import defaultdict
 from aiogram import Bot
 from config import BOT_TOKEN, MIN_INTERVAL_SEC, MAX_INTERVAL_SEC, OWNER_ID
 from dedup import init_db, is_posted, mark_posted, cleanup_old
@@ -16,6 +17,8 @@ logging.basicConfig(
 log = logging.getLogger("xabarnoma")
 
 CLEANUP_INTERVAL = 24 * 60 * 60  # 24 soat
+_RETRY_COUNTS: dict[str, int] = defaultdict(int)
+MAX_RETRIES = 2
 
 
 async def pick_and_publish(bot: Bot) -> bool:
@@ -29,8 +32,7 @@ async def pick_and_publish(bot: Bot) -> bool:
     # Eng eski postdan boshlab tekshiramiz (chiqarilgan vaqt bo'yicha xronologik).
     articles.sort(key=lambda a: a.published)
     
-    # Vercel-da DB o'chib ketgani uchun, juda eski postlarni yubormaslik kerak.
-    # Oxirgi 10 ta maqolani tekshiramiz.
+    # Oxirgi 15 ta maqolani tekshiramiz.
     recent_articles = articles[-15:] if len(articles) > 15 else articles
     
     for art in recent_articles:
@@ -44,15 +46,28 @@ async def pick_and_publish(bot: Bot) -> bool:
                 mark_posted(art.url, art.title)
                 append_post(art)
                 log.info(f"Successfully sent: {art.title[:60]}")
+                _RETRY_COUNTS.pop(art.url, None)
                 return True
             else:
-                # Video yoki media vaqtincha yuklanmasa, postni yuborilgan deb
-                # belgilamaymiz. Boshqa postlar davom etadi, ushbu post esa
-                # keyingi siklda qayta sinab ko'riladi.
-                log.error(f"Yuborilmadi, keyingi siklda qayta uriniladi: {art.title[:60]}")
+                _RETRY_COUNTS[art.url] += 1
+                if _RETRY_COUNTS[art.url] >= MAX_RETRIES:
+                    log.warning(
+                        f"Post {MAX_RETRIES} marta xato berdi. Cheksiz takrorlanmasligi uchun yuborilgan deb belgilandi: {art.title[:60]}"
+                    )
+                    mark_posted(art.url, art.title)
+                    _RETRY_COUNTS.pop(art.url, None)
+                else:
+                    log.error(f"Yuborilmadi ({_RETRY_COUNTS[art.url]}/{MAX_RETRIES}), keyingi siklda qayta uriniladi: {art.title[:60]}")
                 continue
         except Exception as error:
             log.exception(f"Yuborishda xatolik, keyingi postga o'tilmoqda: {error}")
+            _RETRY_COUNTS[art.url] += 1
+            if _RETRY_COUNTS[art.url] >= MAX_RETRIES:
+                log.warning(
+                    f"Post {MAX_RETRIES} marta xato berdi (exception). Yuborilgan deb belgilandi: {art.title[:60]}"
+                )
+                mark_posted(art.url, art.title)
+                _RETRY_COUNTS.pop(art.url, None)
             continue
             
     log.info("No new unposted articles found in recent list.")
